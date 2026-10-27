@@ -1,0 +1,173 @@
+TRƯỜNG ĐH TÀI CHÍNH – NGÂN HÀNG HÀ NỘI
+VIỆN CÔNG NGHỆ THÔNG TIN
+Hà Nội, ngày 27 tháng 10 năm 2026
+ĐỀ CƯƠNG NGHIÊN CỨU
+Tên đề tài: Xây dựng và thử nghiệm mô hình đánh giá khoảng cách kỹ năng và đề xuất lộ trình học bổ sung cho sinh viên định hướng Frontend tại Viện CNTT FBU
+Nhóm sinh viên: Nguyễn Duy Hưng (trưởng nhóm), Nguyễn Hải Đăng
+Lớp: D.12.48.01        Viện: Công nghệ thông tin
+Giảng viên hướng dẫn: Nguyễn Thanh Tuyên
+A. PHẦN MỞ ĐẦU
+1. Bối cảnh nghiên cứu
+Trong chương trình đào tạo ngành Công nghệ thông tin, các học phần lập trình web trang bị cho sinh viên kiến thức nền tảng về HTML/CSS, JavaScript và các công nghệ phía trình duyệt. Tuy nhiên, giữa nội dung được học trên lớp và yêu cầu thực tế của vị trí lập trình viên Frontend tại doanh nghiệp vẫn còn một khoảng cách nhất định: doanh nghiệp tuyển thực tập sinh và nhân viên mới theo các nhóm kỹ năng cụ thể (ngôn ngữ, framework, công cụ, khả năng gỡ lỗi), trong khi sinh viên chủ yếu biết năng lực của mình qua điểm tổng kết từng học phần. Điểm tổng kết cho biết sinh viên đạt hay không đạt một môn học, nhưng không chỉ ra sinh viên đang yếu ở kỹ năng thành phần nào và cần học bổ sung theo thứ tự ra sao.
+Cùng với đó, các hệ thống học tập thích ứng và các nền tảng đánh giá kỹ năng trực tuyến trên thế giới đã phát triển nhiều cách tiếp cận: theo dõi mức kiến thức của người học, biểu diễn quan hệ tiên quyết giữa các kỹ năng, xác định khoảng cách giữa năng lực hiện tại và năng lực yêu cầu, từ đó đề xuất lộ trình học cá nhân hóa. Đây là cơ sở để nhóm lựa chọn hướng nghiên cứu: kế thừa các cách tiếp cận đã có, xây dựng một mô hình đánh giá khoảng cách kỹ năng và đề xuất lộ trình học bổ sung trong phạm vi hẹp là sinh viên định hướng Frontend tại Viện CNTT FBU, đồng thời kiểm chứng ban đầu chất lượng của mô hình bằng bằng chứng thực nghiệm.
+2. Tính cấp thiết của đề tài
+Nhu cầu tuyển dụng vị trí Frontend tại Việt Nam hiện vẫn lớn. Khảo sát nhanh của nhóm trên 12 tin tuyển dụng vị trí Frontend tại Hà Nội đăng trên TopCV (thu thập ngày 19/10/2026, gồm 4 tin fresher/thực tập sinh và 8 tin yêu cầu kinh nghiệm) cho thấy: 100% tin yêu cầu HTML/CSS và JavaScript, 92% yêu cầu React, 75% yêu cầu kỹ năng kết nối API và sử dụng Git, 50% nhắc tới kỹ năng gỡ lỗi và kiểm thử. Một tin tuyển fresher ghi rõ đối tượng là “sinh viên năm ≥ 2” và liệt kê gần như đầy đủ các nhóm kỹ năng trên; một chương trình fresher của doanh nghiệp lớn phải dành 3 tháng đào tạo lại JavaScript/HTML/CSS trước khi giao việc cho nhân viên mới. Điều đó cho thấy khoảng cách giữa năng lực sinh viên và yêu cầu tuyển dụng là có thật, và doanh nghiệp đang phải tự gánh chi phí bù đắp khoảng cách này.
+Về phía sinh viên, khó khăn nằm ở chỗ các em chưa có cách tự xác định mình đang thiếu kỹ năng nào trong các nhóm kỹ năng mà doanh nghiệp yêu cầu. Việc tự học bổ sung vì thế thường mang tính cảm tính: học theo xu hướng, bỏ qua các kiến thức nền tảng là tiền đề của nội dung nâng cao, dẫn tới học nhiều nhưng không chắc. Nếu có một công cụ đo được mức hiện tại theo từng nhóm kỹ năng, xác định khoảng cách so với mức yêu cầu của một vị trí đầu vào cụ thể và gợi ý thứ tự học bổ sung có xét quan hệ tiên quyết, sinh viên sẽ định vị được mình đang ở đâu và cần học gì trước.
+3. Tổng quan tình hình nghiên cứu
+Nhóm đã đọc và tổng hợp các tài liệu liên quan trực tiếp tới ba khâu của đề tài: xác định khoảng cách kỹ năng, biểu diễn quan hệ tiên quyết giữa các kỹ năng, và đề xuất lộ trình học. Bảng 1 trình bày các tài liệu chính, theo đúng các nội dung thầy hướng dẫn yêu cầu: vấn đề đã nghiên cứu, phương pháp và dữ liệu, kết quả chính, hạn chế, và phần nhóm kế thừa cùng việc dự kiến làm thêm.
+Bảng 1. Bảng tổng quan tài liệu
+Tài liệu và nguồn	Vấn đề đã nghiên cứu	Phương pháp và dữ liệu	Kết quả chính	Hạn chế / còn bỏ ngỏ	Nhóm kế thừa và dự kiến làm thêm
+Liu và cộng sự (2019), “Exploiting Cognitive Structure for Adaptive Learning”, KDD 2019	Đề xuất nội dung học tiếp theo cần xét đồng thời người học đang biết gì và kiến thức nào phải học trước	Mô hình CSEAL: theo dõi mức kiến thức từ lịch sử làm bài, điều hướng trên cấu trúc tiên quyết, chọn nội dung bằng học tăng cường; thử trên dữ liệu làm bài thực tế	CSEAL cho tiến bộ tốt hơn các phương pháp so sánh trong môi trường thử nghiệm	Không thử trực tiếp trên sinh viên Frontend; kết quả phụ thuộc mô phỏng	Kế thừa cách tách “mức kiến thức” khỏi “quan hệ tiên quyết” rồi kết hợp khi xếp lộ trình; không triển khai học tăng cường
+Wang và cộng sự (2025), “LLM-powered Multi-agent Framework for Goal-oriented Learning in Intelligent Tutoring System” (GenMentor), WWW 2025	Người học có mục tiêu nghề nghiệp nhưng không biết cần bổ sung kỹ năng nào, học theo trình tự nào	Các tác nhân LLM ánh xạ mục tiêu sang kỹ năng yêu cầu, xác định khoảng cách, lập lộ trình theo hồ sơ người học; đánh giá tự động kết hợp đánh giá của con người và nghiên cứu thực nghiệm với người học đi làm	Được đánh giá tích cực về mức phù hợp với mục tiêu và độ trúng đích của tài nguyên học	Đánh giá chủ yếu về sự phù hợp và trải nghiệm; chưa là bằng chứng chắc chắn về mức tăng năng lực	Kế thừa kiến trúc mục tiêu – kỹ năng – khoảng cách – lộ trình và cách đánh giá riêng từng khâu; thay LLM bằng quy tắc minh bạch
+Le và Abel (2025), “How Well Do LLMs Predict Prerequisite Skills?”, arXiv:2507.18479	Quan hệ tiên quyết do chuyên gia xây dựng tốn công, khó mở rộng; liệu dự đoán tự động được không	Bộ dữ liệu ESCO-PrereqSkill: 3.196 kỹ năng và các liên kết tiên quyết do chuyên gia xác định; thử 13 mô hình LLM zero-shot, đối chiếu đáp án chuyên gia	Một số mô hình dự đoán khá sát chuyên gia, cho thấy tiềm năng hỗ trợ xây dựng quan hệ tiên quyết quy mô lớn	ESCO là khung chung của thị trường lao động châu Âu, không riêng cho Frontend; vẫn cần chuyên gia kiểm chứng	Tham khảo cách biểu diễn quan hệ tiên quyết và đối chiếu với tham chiếu chuyên gia cho phạm vi Frontend của nhóm
+De Coi và cộng sự (2007), “A Model for Competence Gap Analysis”, WEBIST 2007	Mô hình hóa năng lực để đối sánh (bán) tự động giữa năng lực yêu cầu của vị trí và năng lực hiện có của người học/người lao động	Đề xuất mô hình năng lực mở rộng, có xét điều kiện tiên quyết trong chương trình đào tạo; phân tích các cách mô hình hóa trước đó	Đưa ra khung mô hình cho phép tính khoảng cách năng lực phục vụ nhân sự và học tập điện tử	Mô hình ở mức khái niệm, không gắn bộ kỹ năng nghề cụ thể, không có công cụ đo đi kèm	Kế thừa định nghĩa khoảng cách kỹ năng = mức yêu cầu trừ mức hiện tại, làm cơ sở cho công thức Gap(s)
+Anderson và Krathwohl (chủ biên, 2001), “A Taxonomy for Learning, Teaching, and Assessing”	Phân loại mục tiêu học tập theo mức nhận thức để thiết kế câu hỏi và đánh giá	Thang Bloom cải tiến: Nhớ, Hiểu, Vận dụng, Phân tích, Đánh giá, Sáng tạo	Khung tham chiếu phổ biến khi phân bổ mức nhận thức cho câu hỏi đánh giá	Chỉ là khung phân loại, không cho sẵn câu hỏi hay mức yêu cầu nghề nghiệp	Dùng để gán mức nhận thức cho từng câu hỏi trong ngân hàng câu hỏi
+roadmap.sh, “Frontend Developer Roadmap” (trực tuyến, truy cập 10/2026)	Lộ trình tự học Frontend theo chủ đề, do cộng đồng phát triển web duy trì	Sơ đồ các chủ đề kỹ năng, thứ tự học gợi ý và tài liệu cho từng chủ đề	Nguồn tham khảo phổ biến về nội dung và trình tự kỹ năng Frontend	Không phải nghiên cứu khoa học; không có mức yêu cầu đo được, không có công cụ đánh giá	Đối chiếu nội dung kỹ năng và quan hệ tiên quyết khi xây dựng khung kỹ năng bản đầu
+ITViec (2026), “Báo cáo lương IT và thị trường tuyển dụng IT Việt Nam” (trực tuyến)	Thực trạng nhu cầu tuyển dụng và yêu cầu kỹ năng của thị trường IT Việt Nam	Tổng hợp từ dữ liệu tuyển dụng trên nền tảng ITViec	Nhu cầu tuyển dụng lập trình web/Frontend duy trì ở mức cao	Số liệu ở cấp thị trường chung, không chi tiết tới từng kỹ năng của vị trí đầu vào	Căn cứ bối cảnh cho tính cấp thiết; yêu cầu chi tiết theo kỹ năng nhóm tự thu thập từ tin tuyển dụng cụ thể
+
+Từ các tài liệu trên, có thể thấy người ta đã giải quyết được khá nhiều phần của bài toán: đã có mô hình khái niệm về khoảng cách năng lực, đã có các hệ thống đề xuất lộ trình học xét cả mức kiến thức và quan hệ tiên quyết, và đã có cách tổ chức một hệ thống hoàn chỉnh đi từ mục tiêu nghề nghiệp tới lộ trình học. Nhóm sẽ sử dụng lại các phần này: định nghĩa khoảng cách kỹ năng, nguyên tắc tách hồ sơ người học khỏi quan hệ tiên quyết, kiến trúc mục tiêu – kỹ năng – khoảng cách – lộ trình, và cách đánh giá riêng từng khâu.
+Phần việc cụ thể còn lại cho nhóm là ở chỗ áp dụng và kiểm chứng trong một bối cảnh hẹp: hiện chưa có công trình nào trong số trên xây dựng khung kỹ năng cho vị trí thực tập sinh Frontend gắn với chương trình đào tạo và điều kiện tự học của sinh viên tại Viện CNTT FBU, kèm một công cụ đo và quy tắc gợi ý minh bạch mà sinh viên có thể tự kiểm chứng được. Đề tài vì vậy không đặt mục tiêu tạo ra thuật toán mới, mà kiểm chứng xem một mô hình đánh giá và gợi ý dựa trên quy tắc — được xây dựng có căn cứ và được thẩm định — xác định điểm yếu và đề xuất nội dung học phù hợp đến đâu khi đối chiếu với đánh giá độc lập của người có chuyên môn.
+Ghi chú về hai điểm các nguồn vênh nhau. Về thử nghiệm của CSEAL: bản tóm tắt của giảng viên mô tả thử nghiệm trên hai môi trường mô phỏng, trong khi abstract của chính bài báo nói thử nghiệm trên dữ liệu làm bài thực tế; đề cương trích theo abstract và ghi nhận điểm vênh, không khẳng định thêm. Về GenMentor: con số 20 người phỏng vấn chỉ xuất hiện trong bản tóm tắt của giảng viên, không có trong abstract, nên đề cương chỉ ghi “nghiên cứu thực nghiệm với người học đi làm” theo đúng abstract.
+4. Mục đích, mục tiêu nghiên cứu và câu hỏi nghiên cứu
+Mục đích nghiên cứu: xây dựng và thử nghiệm ban đầu một mô hình đánh giá khoảng cách kỹ năng và đề xuất lộ trình học bổ sung cho sinh viên định hướng Frontend tại Viện CNTT FBU, gồm bốn thành phần: khung kỹ năng làm căn cứ đánh giá, công cụ đo mức hiện tại, cách xác định khoảng cách kỹ năng, và quy tắc lựa chọn – sắp xếp nội dung học bổ sung. Kết quả của giai đoạn nghiên cứu này là nền tảng để nhóm phát triển website hoàn chỉnh trong khóa luận tốt nghiệp.
+Mục tiêu cụ thể:
+•	Xác lập khung kỹ năng cho vị trí thực tập sinh Frontend, có chỉ báo cụ thể và có nguồn căn cứ cho từng kỹ năng.
+•	Xây dựng công cụ đánh giá (ngân hàng câu hỏi theo ma trận và bài tập thực hành kèm rubric) đo được mức hiện tại của sinh viên theo từng nhóm kỹ năng.
+•	Xây dựng quy tắc chẩn đoán khoảng cách kỹ năng và quy tắc đề xuất lộ trình học bổ sung có xét quan hệ tiên quyết và điều kiện học của sinh viên.
+•	Kiểm chứng ban đầu chất lượng chẩn đoán và mức phù hợp của lộ trình bằng thẩm định chuyên gia và thử nghiệm trên một nhóm sinh viên giới hạn.
+Câu hỏi nghiên cứu:
+•	Cần những kỹ năng và mức yêu cầu nào để đánh giá sinh viên hướng tới vị trí Frontend đầu vào (mức thực tập sinh)?
+•	Công cụ đánh giá đề xuất xác định điểm yếu của sinh viên phù hợp đến đâu với đánh giá độc lập của người có chuyên môn trên bài thực hành?
+•	Lộ trình đề xuất có phù hợp với điểm yếu, quan hệ tiên quyết và điều kiện học của từng sinh viên không?
+Câu hỏi mở rộng (chỉ thực hiện ở mức thăm dò nếu đủ nguồn lực): sau thời gian học bổ sung theo lộ trình, kết quả đánh giá của sinh viên thay đổi như thế nào?
+5. Nhiệm vụ nghiên cứu
+•	Tổng hợp tài liệu và phân tích yêu cầu tuyển dụng để đề xuất khung kỹ năng bản đầu kèm chỉ báo và mức yêu cầu.
+•	Thiết kế ma trận đánh giá; biên soạn ngân hàng câu hỏi, bài thực hành và rubric; tổ chức thẩm định chuyên gia theo quy trình thống nhất và chỉnh sửa theo góp ý.
+•	Xây dựng quy tắc tính khoảng cách kỹ năng và quy tắc sắp xếp lộ trình; kiểm tra quy tắc bằng các hồ sơ người học mẫu có điểm yếu khác nhau.
+•	Tổ chức thử nghiệm ban đầu trên nhóm sinh viên giới hạn: đo mức hiện tại, đối chiếu chẩn đoán với đánh giá độc lập trên bài thực hành, đánh giá mức phù hợp của các lộ trình được đề xuất.
+•	Phân tích kết quả, nêu rõ giới hạn của mô hình và đề xuất hướng phát triển website trong khóa luận.
+6. Đối tượng và phạm vi nghiên cứu
+Đối tượng nghiên cứu: một phương pháp đánh giá khoảng cách kỹ năng và xây dựng lộ trình học bổ sung, cụ thể là khung kỹ năng, công cụ đo, quy tắc chẩn đoán và quy tắc gợi ý của phương pháp đó.
+Người tham gia thử nghiệm: sinh viên Viện CNTT FBU năm 3–4 đã học xong các học phần nền tảng theo quy định (trong đó có học phần Phát triển ứng dụng Web), có định hướng Frontend, tham gia tự nguyện với dữ liệu ẩn danh; quy mô dự kiến 20–30 sinh viên.
+Người tham gia thẩm định: giảng viên giảng dạy các học phần thuộc lĩnh vực Web hoặc người có kinh nghiệm chuyên môn về phát triển Frontend, ngoài giảng viên hướng dẫn; dự kiến 1–2 người.
+Phạm vi: một mức vị trí đầu vào được chọn là thực tập sinh Frontend (không gộp yêu cầu của mức fresher); một tập kỹ năng xác định gồm 6 nhóm kỹ năng; thử nghiệm quy mô giới hạn tại Viện CNTT FBU. Trong giai đoạn NCKH, nhóm chỉ xây dựng công cụ hỗ trợ ở mức tối thiểu để vận hành quy trình đo – chẩn đoán – gợi ý và thu thập dữ liệu; website hoàn chỉnh sẽ được phát triển trong khóa luận trên nền kết quả nghiên cứu này.
+7. Phương pháp nghiên cứu
+7.1. Nghiên cứu tài liệu và phân tích yêu cầu tuyển dụng.
+Nhóm tổng hợp tài liệu theo Bảng 1. Với yêu cầu tuyển dụng, nhóm thu thập các tin tuyển dụng vị trí Frontend mức thực tập sinh/fresher trên các trang tuyển dụng (đã thu thập 12 tin trên TopCV tại Hà Nội, tháng 10/2026) và lập bảng nguồn cho từng tin gồm: nguồn đăng, thời điểm thu thập, tiêu chí chọn tin, loại vị trí và các yêu cầu được mã hóa theo 6 nhóm kỹ năng. Nhóm xác định rõ đây là tập dữ liệu thăm dò phục vụ việc hình thành khung kỹ năng ban đầu, không coi là đại diện cho toàn bộ thị trường; khi chốt khung, nhóm dự kiến bổ sung số tin lên khoảng 20 và đối chiếu thêm với chương trình đào tạo các học phần Web của Viện.
+Bảng nguồn ghi rõ loại vị trí của từng tin. 12 tin đã thu thập gồm 4 tin fresher/thực tập sinh và 8 tin yêu cầu kinh nghiệm; khi chốt khung cho mức thực tập sinh, nhóm đối chiếu riêng tập tin thực tập/fresher với tập tin yêu cầu kinh nghiệm, để tránh áp ngưỡng của mức cao hơn cho mức đầu vào. Khi mở rộng lên khoảng 20 tin, hai người mã hóa độc lập theo khung Bảng 3, khác biệt được đối chiếu và thống nhất trước khi chốt khung. File thu thập của nhóm ghi link và ngày thu thập của từng tin; nhóm đối chiếu file này với Bảng 2 trước buổi họp 28/10 để bổ sung phụ lục bảng nguồn chi tiết nếu giảng viên yêu cầu.
+Bảng 2. Bảng nguồn tin tuyển dụng (tập thăm dò)
+Nguồn	Thời điểm thu thập	Số tin và loại vị trí	Kết quả mã hóa chính	Phương pháp mã hóa
+TopCV, vị trí Frontend tại Hà Nội	19/10/2026	12 tin: 4 fresher/thực tập sinh, 8 yêu cầu kinh nghiệm	HTML/CSS và JavaScript 100%; React 92%; kết nối API và Git 75%; gỡ lỗi và kiểm thử 50%	Mã hóa yêu cầu theo 6 nhóm kỹ năng (Bảng 3); ghi rõ loại vị trí từng tin; khi mở rộng lên ~20 tin, 2 người mã hóa độc lập, đối chiếu khác biệt
+
+7.2. Xây dựng khung kỹ năng và mức yêu cầu.
+Mỗi nhóm kỹ năng được chia thành các kỹ năng con kèm chỉ báo có thể quan sát được. Mức yêu cầu và trọng số của từng nhóm được xác lập ban đầu từ ba nguồn: tần suất và mức nhấn trong tập tin tuyển dụng đã mã hóa, thứ tự và cấu trúc nội dung trong lộ trình roadmap.sh, và ý kiến của người thẩm định. Nhóm ghi rõ: tần suất xuất hiện trong tin tuyển dụng không tự động trở thành trọng số. Ở giai đoạn này, trọng số và ngưỡng đạt (tham số ban đầu 70/100) được coi là tham số thử nghiệm; nhóm sẽ kiểm tra độ nhạy bằng cách thay đổi trọng số trong khoảng ±5 điểm phần trăm và ngưỡng trong các mức 65/70/75 trên dữ liệu thử nghiệm, rồi báo cáo mức thay đổi của kết quả chẩn đoán và lộ trình.
+Bảng 3. Khung kỹ năng bản đầu (6 nhóm, 18 kỹ năng con) với chỉ báo và nguồn căn cứ
+Nhóm kỹ năng (trọng số tham số ban đầu)	Kỹ năng con	Chỉ báo có thể quan sát	Nguồn căn cứ chính
+HTML/CSS & Responsive UI (15%)	HTML ngữ nghĩa và form	Dùng đúng thẻ ngữ nghĩa (header, nav, main, article) và thuộc tính form cơ bản thay cho thẻ div chung chung	roadmap.sh; tin tuyển dụng; chương trình học phần Web
+	Layout Flexbox/Grid	Dựng được bố cục nhiều cột, căn chỉnh và phân bổ không gian bằng Flexbox và Grid	roadmap.sh; tin tuyển dụng
+	Responsive và media query	Trang hiển thị đúng trên màn hình điện thoại và máy tính nhờ media query và đơn vị linh hoạt	roadmap.sh; tin tuyển dụng
+JavaScript & DOM (25%)	Ngôn ngữ JavaScript hiện đại (ES6+)	Dùng được let/const, arrow function, template literal, destructuring, spread	roadmap.sh; tin tuyển dụng
+	Scope, closure và this	Dự đoán đúng kết quả đoạn mã liên quan tới phạm vi biến, closure và ngữ cảnh this	roadmap.sh; chương trình học phần Web
+	DOM và xử lý sự kiện	Thao tác được phần tử trang và gắn xử lý sự kiện để tạo tương tác cơ bản	roadmap.sh; tin tuyển dụng
+React cơ bản (20%)	Component, props và state	Tách được giao diện thành các component, truyền dữ liệu qua props, quản lý state đơn giản	roadmap.sh; tin tuyển dụng
+	Hooks (useState, useEffect)	Dùng useState cho trạng thái cục bộ và useEffect đúng mảng phụ thuộc khi lấy dữ liệu	roadmap.sh; tin tuyển dụng
+	Keys và render có điều kiện	Render danh sách với key ổn định và hiển thị có điều kiện đúng logic	roadmap.sh; chương trình học phần Web
+Kết nối API & bất đồng bộ (15%)	Promise và async/await	Viết và đọc được mã bất đồng bộ bằng Promise và async/await, xử lý thứ tự thực thi	roadmap.sh; tin tuyển dụng
+	fetch và xử lý lỗi	Gọi API bằng fetch/axios, xử lý trạng thái loading và lỗi trả về	tin tuyển dụng; roadmap.sh
+	REST và JSON cơ bản	Hiểu phương thức HTTP, mã trạng thái và cấu trúc dữ liệu JSON của một API REST	tin tuyển dụng; roadmap.sh
+Git/GitHub & DevTools (10%)	add, commit, status	Thực hiện được quy trình add – commit và kiểm tra trạng thái kho mã nguồn	roadmap.sh; tin tuyển dụng
+	branch và merge	Tạo nhánh, chuyển nhánh và gộp nhánh khi làm việc nhóm	roadmap.sh; tin tuyển dụng
+	remote, pull/push, xử lý conflict cơ bản	Đồng bộ mã nguồn với kho từ xa và xử lý được xung đột đơn giản	tin tuyển dụng; kinh nghiệm làm việc nhóm
+Debug & kiểm thử (15%)	Đọc lỗi console và dùng DevTools	Đọc được thông báo lỗi trên console và dùng DevTools để khoanh vùng lỗi	tin tuyển dụng; chương trình học phần Web
+	Truy vết logic	Lần theo luồng chạy của chương trình để tìm nguyên nhân sai kết quả	chương trình học phần Web; roadmap.sh
+	Khái niệm unit test	Hiểu mục đích của kiểm thử đơn vị và đọc được một test case đơn giản	tin tuyển dụng; roadmap.sh
+
+Trọng số trong Bảng 3 là giá trị tham số ban đầu để vận hành thử quy tắc (cách xác lập và kiểm tra độ nhạy đã nêu ở mục 7.2), chưa phải kết luận cuối cùng của nghiên cứu.
+7.3. Thẩm định chuyên gia theo quy trình.
+Nhóm tự xây dựng dự thảo khung kỹ năng, ma trận đánh giá, ngân hàng câu hỏi, rubric và quy tắc gợi ý từ các nguồn đã lựa chọn, sau đó tổ chức lấy ý kiến người có chuyên môn theo một phiếu thẩm định thống nhất. Phiếu thẩm định đánh giá từng mục theo các tiêu chí: tính phù hợp của kỹ năng và chỉ báo, độ khó của câu hỏi, mức nhận thức Bloom gán cho câu hỏi, tính rõ ràng của câu hỏi và của rubric. Kết quả được tổng hợp theo từng mục: mục được giữ nguyên, mục sửa theo góp ý, mục không tiếp thu kèm giải trình của nhóm. Các mục thay đổi lớn được gửi kiểm tra lại trước khi đưa vào thử nghiệm. Giảng viên hướng dẫn góp ý về hướng nghiên cứu và quy trình, không đồng thời là người duy nhất xác nhận chất lượng cuối cùng của công cụ.
+7.4. Mô hình hóa bằng quy tắc minh bạch.
+Với mỗi nhóm kỹ năng s, mức hiện tại C(s) là tỉ lệ câu trả lời đúng của nhóm đó quy về thang 100; mức yêu cầu R(s) là tham số thử nghiệm (ban đầu 70); khoảng cách Gap(s) = max(0, R(s) − C(s)). Quy tắc sắp xếp lộ trình gồm hai bước: trước hết xếp các nội dung theo tầng tiên quyết (nội dung là tiền đề phải học trước), trong cùng một tầng thì ưu tiên nhóm kỹ năng có Gap(s) × trọng số w(s) lớn hơn. Số giờ học gợi ý được ước lượng từ thời lượng học liệu và thời gian làm bài tập, nhân hệ số điều chỉnh theo mức độ thiếu hụt. Mọi quy tắc đều công khai để có thể giải thích và kiểm chứng.
+7.5. Thử nghiệm ban đầu và phân tích.
+Sinh viên tham gia làm bài đánh giá (một đề trắc nghiệm và một bài thực hành nhỏ), nhận chẩn đoán và lộ trình đề xuất. Để kiểm chứng chất lượng chẩn đoán, bài thực hành được một người có chuyên môn chấm độc lập theo rubric mà không biết trước kết quả của hệ thống; nhóm so sánh danh sách điểm yếu do hệ thống chỉ ra với nhận xét độc lập này theo từng nhóm kỹ năng. Nếu tổ chức được giai đoạn học bổ sung 7–10 ngày, sinh viên làm lại bài đánh giá bằng đề song song: hai đề A và B được xây dựng cùng một ma trận đặc tả và được làm đảo chéo (nhóm 1 làm A trước – B sau, nhóm 2 làm B trước – A sau) nhằm cân bằng ảnh hưởng của thứ tự đề và chênh lệch độ khó còn lại giữa hai đề. Nhóm lưu ý đây không phải thiết kế đối chứng giữa hai phương pháp học, nên kết quả thay đổi điểm chỉ được báo cáo như bằng chứng thăm dò, kèm phân tích các yếu tố có thể ảnh hưởng như mức độ tuân thủ lộ trình và hiệu ứng làm quen với dạng đề. Các công cụ phân tích gồm thống kê mô tả, hệ số Cronbach alpha cho từng nhóm kỹ năng, và kiểm định cặp (paired t-test hoặc Wilcoxon) khi so sánh trước – sau; đây là công cụ phân tích, không phải tiêu chí thành công.
+Về mức kết luận chẩn đoán: mỗi kỹ năng con chỉ có khoảng 3–4 câu trong một đề nên chưa đủ bằng chứng để khẳng định chắc chắn “lỗ hổng” ở cấp kỹ năng con; kết luận chính thức được đưa ra ở cấp nhóm kỹ năng, còn ở cấp kỹ năng con chỉ kết luận khi bằng chứng câu hỏi nhất quán và khớp với bài thực hành, trường hợp còn lại ghi “cần kiểm tra thêm”.
+Bảng 4. Ma trận đánh giá tóm tắt (áp dụng cho mỗi đề A và B)
+Nhóm kỹ năng	Số câu mỗi đề	Phân bổ độ khó	Mức Bloom chủ đạo	Bằng chứng bổ sung
+HTML/CSS & Responsive UI	10	3 dễ / 4 trung bình / 3 khó	Nhớ – Hiểu – Vận dụng	Bài thực hành: dựng trang theo mẫu
+JavaScript & DOM	10	3 dễ / 4 trung bình / 3 khó	Hiểu – Vận dụng	Bài thực hành: xử lý tương tác trang
+React cơ bản	10	3 dễ / 4 trung bình / 3 khó	Hiểu – Vận dụng	Bài thực hành: component có state
+Kết nối API & bất đồng bộ	10	3 dễ / 4 trung bình / 3 khó	Hiểu – Vận dụng – Phân tích	Bài thực hành: gọi API và hiển thị dữ liệu
+Git/GitHub & DevTools	10	3 dễ / 4 trung bình / 3 khó	Nhớ – Hiểu	Câu hỏi tình huống quy trình làm việc nhóm
+Debug & kiểm thử	10	3 dễ / 4 trung bình / 3 khó	Vận dụng – Phân tích	Bài thực hành: tìm và sửa lỗi trong mã cho sẵn
+
+Mỗi đề gồm 60 câu trắc nghiệm và 1 bài thực hành nhỏ. Hai đề A và B là hai dạng song song xây dựng trên cùng ma trận: mỗi câu ở đề B là câu “sinh đôi” của một câu ở đề A (cùng kỹ năng con, cùng độ khó, cùng mức Bloom, cùng dạng câu; khác bối cảnh, đoạn mã và vị trí đáp án đúng). Trong mỗi nhóm kỹ năng, 10 câu được chia cho 3 kỹ năng con theo tỉ lệ 3–4–3.
+Câu hỏi mẫu, bài thực hành và rubric.
+Câu hỏi mẫu 1 (nhóm JavaScript & DOM, mức Vận dụng): Đoạn mã dùng fetch lấy danh sách sản phẩm nhưng giao diện không hiển thị khi máy chủ trả lỗi 500. Phương án xử lý đúng nhất là gì? A. Bỏ qua lỗi và giữ giao diện trống. B. Kiểm tra response.ok, hiển thị thông báo lỗi và giữ dữ liệu cũ (nếu có). C. Gọi lại API vô hạn đến khi thành công. D. Ẩn toàn bộ trang khi có lỗi. Đáp án đúng: B.
+Câu hỏi mẫu 2 (nhóm React cơ bản, mức Phân tích): Một component danh sách lọc theo từ khóa đang lưu cả danh sách gốc và danh sách đã lọc trong hai state riêng, gây lệch dữ liệu khi danh sách gốc thay đổi. Cách sửa phù hợp nhất là gì? A. Thêm state thứ ba đồng bộ hai state. B. Chỉ lưu danh sách gốc trong state, tính danh sách lọc khi render. C. Dùng ref thay state cho cả hai. D. Tải lại trang sau mỗi lần lọc. Đáp án đúng: B.
+Bài thực hành mẫu: xây dựng ứng dụng danh sách sản phẩm có ô tìm kiếm và bộ lọc theo danh mục, lấy dữ liệu từ API mẫu, hiển thị trạng thái đang tải và thông báo khi lỗi, bố cục đáp ứng trên điện thoại và máy tính. Nộp kèm mã nguồn, ảnh chụp giao diện và nhật ký commit Git.
+Bảng 5. Rubric chấm bài thực hành (thang 0–3 cho mỗi tiêu chí)
+Tiêu chí	0 – Chưa đạt	1 – Cơ bản	2 – Khá	3 – Tốt
+Tính đúng chức năng	Không chạy hoặc sai yêu cầu chính	Chạy được phần chính, còn lỗi nhỏ	Đủ chức năng, xử lý được trường hợp thường gặp	Đủ chức năng, xử lý cả trường hợp biên và lỗi
+Cấu trúc mã	Mã rối, không tách hàm/component	Có tách phần nhưng chưa hợp lý	Tách hợp lý, đặt tên rõ ràng	Tách hợp lý, dễ bảo trì, có chú thích khi cần
+Xử lý lỗi, Git và kiểm thử	Không xử lý lỗi, commit lộn xộn	Có xử lý lỗi cơ bản, commit còn chung chung	Xử lý lỗi và trạng thái tải tốt, commit rõ ràng	Xử lý lỗi đầy đủ, commit rõ ràng, có kiểm thử chạy qua
+
+Rubric được chấm độc lập bởi hai người chấm trên cùng tiêu chí; trường hợp chênh lệch từ 2 điểm trở lên ở một tiêu chí sẽ được đối chiếu và thống nhất trước khi ghi điểm cuối. Người chấm thực hành không biết trước kết quả chẩn đoán của hệ thống, đúng như cách đối chiếu mù đã nêu ở mục 7.5.
+Minh họa quy tắc gợi ý bằng hai hồ sơ người học:
+Bảng 6. Hai hồ sơ minh họa cho quy tắc chẩn đoán và gợi ý
+Hồ sơ	Điểm C(s) theo nhóm kỹ năng	Chẩn đoán của hệ thống	Lộ trình đề xuất
+Hồ sơ A: sinh viên nắm HTML/CSS khá nhưng hổng nền tảng JavaScript	HTML/CSS: 80; JS & DOM: 40; React: 35; API: 45; Git: 75; Debug: 50	Lỗ hổng ở JS & DOM và React; API dưới ngưỡng. React yếu một phần vì thiếu nền tảng JavaScript (quan hệ tiên quyết)	Bước 1 (tầng tiên quyết): học bổ sung JS & DOM — học liệu ES6+ và scope/closure kèm 3 bài tập, khoảng 6 giờ. Bước 2: React (component, hooks) khoảng 5 giờ. Bước 3: API & bất đồng bộ khoảng 3 giờ. Tổng khoảng 14 giờ trong 7–10 ngày
+Hồ sơ B: sinh viên code khá nhưng yếu quy trình làm việc nhóm và gỡ lỗi	HTML/CSS: 55; JS & DOM: 78; React: 72; API: 68; Git: 30; Debug: 42	Lỗ hổng nền tảng ở Git/DevTools; Debug dưới ngưỡng; HTML/CSS phần responsive cần củng cố	Git độc lập với các nhóm còn lại nên không vi phạm tiên quyết: Bước 1: Git/GitHub (branch/merge, xử lý conflict) khoảng 4 giờ. Bước 2: Debug (đọc lỗi console, truy vết) khoảng 4 giờ. Bước 3: Responsive khoảng 2 giờ. Tổng khoảng 10 giờ trong 7–10 ngày
+
+Hai hồ sơ cho thấy cùng một quy tắc cho ra hai lộ trình khác nhau: hồ sơ A phải học theo thứ tự tiên quyết (JavaScript trước React) dù điểm React thấp hơn, còn hồ sơ B được xếp theo độ ưu tiên của khoảng cách vì các nhóm kỹ năng còn lại không ràng buộc tiên quyết với nhau. Tính khả thi được xét theo tổng thời lượng so với quỹ thời gian 7–10 ngày của giai đoạn học bổ sung.
+Bảng 7. Kế hoạch kiểm chứng gắn với từng câu hỏi nghiên cứu
+Câu hỏi	Nội dung kiểm chứng	Dữ liệu và bằng chứng báo cáo	Cách phân tích
+CH1	Khung kỹ năng và mức yêu cầu có căn cứ và được chấp nhận về nội dung	Nguồn căn cứ của từng kỹ năng (Bảng 3); kết quả thẩm định: tỉ lệ mục đạt = số mục được đánh giá “Phù hợp/Rất phù hợp” chia cho tổng số mục được đánh giá, tính theo mục (không tính theo lượt đánh giá hay số người); danh sách các mục đã sửa sau thẩm định. Quy ước đạt khi tỉ lệ này ≥ 80%	Tổng hợp phiếu thẩm định theo từng mục; giải trình các ý kiến không tiếp thu
+CH2	Chất lượng chẩn đoán điểm yếu của công cụ	Tỉ lệ thống nhất giữa danh sách nhóm kỹ năng yếu do hệ thống chỉ ra và nhận xét độc lập của người có chuyên môn trên bài thực hành, tính theo từng nhóm kỹ năng; các trường hợp bất đồng và nguyên nhân; độ khó, độ phân biệt của câu hỏi và Cronbach alpha từng nhóm kỹ năng	Đối chiếu mù (người chấm không biết kết quả hệ thống); thống kê mô tả theo nhóm kỹ năng
+CH3	Mức phù hợp của lộ trình đề xuất	Tỉ lệ lộ trình không vi phạm quan hệ tiên quyết; đánh giá mức phù hợp của người có chuyên môn trên các hồ sơ cụ thể; tổng thời lượng lộ trình so với quỹ thời gian học của sinh viên	Kiểm tra tự động theo đồ thị tiên quyết; tổng hợp phiếu đánh giá lộ trình
+Mở rộng (thăm dò)	Thay đổi sau học bổ sung	Chênh lệch điểm trước – sau theo nhóm kỹ năng; tỉ lệ hoàn thành lộ trình; kết quả bài thực hành sau. Báo cáo kèm giới hạn suy luận: thiết kế đảo chéo đề chỉ cân bằng thứ tự đề, không phải đối chứng phương pháp học	Kiểm định cặp (paired t-test hoặc Wilcoxon) kèm cỡ hiệu ứng; thống kê mô tả
+
+8. Kết cấu của báo cáo nghiên cứu
+Báo cáo nghiên cứu dự kiến gồm ba chương:
+•	Chương 1: Cơ sở lý luận về đánh giá khoảng cách kỹ năng và đề xuất lộ trình học bổ sung.
+•	Chương 2: Xây dựng và thử nghiệm mô hình đánh giá khoảng cách kỹ năng và đề xuất lộ trình học bổ sung cho sinh viên định hướng Frontend tại Viện CNTT FBU.
+•	Chương 3: Kiến nghị và kết luận.
+B. NỘI DUNG
+CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ ĐÁNH GIÁ KHOẢNG CÁCH KỸ NĂNG VÀ ĐỀ XUẤT LỘ TRÌNH HỌC BỔ SUNG
+1.1. Kỹ năng, khung kỹ năng và mức yêu cầu đối với vị trí thực tập sinh Frontend
+1.2. Khoảng cách kỹ năng và các cách xác định khoảng cách kỹ năng
+1.3. Quan hệ tiên quyết giữa các kỹ năng và nguyên tắc sắp xếp lộ trình học bổ sung
+1.4. Đánh giá chất lượng của công cụ đo: thẩm định nội dung, độ tin cậy và đối chiếu với đánh giá độc lập
+CHƯƠNG 2: XÂY DỰNG VÀ THỬ NGHIỆM MÔ HÌNH ĐÁNH GIÁ KHOẢNG CÁCH KỸ NĂNG VÀ ĐỀ XUẤT LỘ TRÌNH HỌC BỔ SUNG CHO SINH VIÊN ĐỊNH HƯỚNG FRONTEND TẠI VIỆN CNTT FBU
+2.1. Xây dựng khung kỹ năng và mức yêu cầu
+2.2. Xây dựng công cụ đánh giá: ma trận đánh giá, ngân hàng câu hỏi và bài thực hành kèm rubric
+2.3. Quy tắc chẩn đoán khoảng cách kỹ năng và quy tắc đề xuất lộ trình học bổ sung
+2.4. Thử nghiệm ban đầu và kết quả kiểm chứng
+CHƯƠNG 3: KIẾN NGHỊ VÀ KẾT LUẬN
+3.1. Kiến nghị, gồm hướng phát triển website hoàn chỉnh trong khóa luận tốt nghiệp trên nền mô hình đã kiểm chứng
+3.2. Hạn chế của nghiên cứu
+3.3. Kết luận
+Tiến độ thực hiện dự kiến
+Bảng 8. Tiến độ theo tuần đến ngày 15/3/2027 (ưu tiên sản phẩm nghiên cứu)
+Tuần	Công việc chính	Sản phẩm cần hoàn thành	Phụ trách
+Tuần 1–2 (19/10 – 01/11/2026)	Đọc tài liệu, lập bảng tổng quan; chốt đề cương với giảng viên hướng dẫn (họp ngày 28/10); chốt khung kỹ năng bản đầu	Đề cương đã chốt; Bảng tổng quan tài liệu; Khung kỹ năng bản đầu	Hưng (chính), Đăng
+Tuần 3–4 (02/11 – 15/11/2026)	Hoàn thiện bảng nguồn và mã hóa tin tuyển dụng; lập ma trận đánh giá chi tiết; bắt đầu biên soạn câu hỏi	Bảng nguồn tin tuyển dụng; Ma trận đánh giá; Bản thảo câu hỏi đợt 1	Hưng, Đăng
+Tuần 5–7 (16/11 – 06/12/2026)	Hoàn thiện 120 câu hỏi (đề A/B), 2 bài thực hành và rubric, danh mục học liệu; tổ chức thẩm định chuyên gia và sửa theo góp ý	Bộ công cụ đánh giá đã qua thẩm định và chỉnh sửa	Hưng (nhóm 2, 4, 6), Đăng (nhóm 1, 3, 5)
+Tuần 8–10 (07/12 – 27/12/2026)	Cài đặt quy tắc chẩn đoán và gợi ý ở mức công cụ thử nghiệm tối thiểu; kiểm tra quy tắc bằng các hồ sơ mẫu (giảm tải vào tuần thi học kỳ)	Công cụ thử nghiệm chạy được quy trình đo – chẩn đoán – gợi ý; Báo cáo kiểm tra quy tắc	Hưng (quy tắc), Đăng (giao diện thử nghiệm)
+Tuần 11–12 (28/12/2026 – 10/01/2027)	Thử câu hỏi trên nhóm nhỏ để rà soát độ khó; tuyển sinh viên tham gia thử nghiệm	Danh sách câu hỏi đã rà soát; Danh sách 20–30 sinh viên tham gia	Hưng, Đăng
+Tuần 13–15 (11/01 – 31/01/2027)	Thử nghiệm chính: tiền kiểm, học bổ sung 7–10 ngày, hậu kiểm đảo chéo đề; chấm độc lập bài thực hành; đánh giá các lộ trình cụ thể	Bộ dữ liệu thử nghiệm ẩn danh; Kết quả đối chiếu chẩn đoán; Phiếu đánh giá lộ trình	Hưng (hệ thống), Đăng (hỗ trợ sinh viên, khảo sát)
+Tuần 16–17 (01/02 – 14/02/2027)	Nghỉ Tết Nguyên đán; khóa dữ liệu và làm sạch dữ liệu	Bộ dữ liệu sạch sẵn sàng phân tích	Hưng, Đăng
+Tuần 18–19 (15/02 – 28/02/2027)	Phân tích kết quả kiểm chứng theo từng câu hỏi nghiên cứu; viết báo cáo dự thảo	Bản dự thảo báo cáo NCKH	Hưng (thống kê), Đăng (biểu đồ, viết báo cáo)
+Tuần 20–21 (01/03 – 15/03/2027)	Chỉnh sửa báo cáo theo góp ý; chuẩn bị slide và hồ sơ nghiệm thu; tổng kết hướng phát triển website cho khóa luận	Báo cáo hoàn chỉnh và hồ sơ bàn giao trước 15/03/2027	Hưng, Đăng
+
+C. DANH MỤC TÀI LIỆU THAM KHẢO
+[1] Liu, Q., Tong, S., Liu, C., Zhao, H., Chen, E., Ma, H., & Wang, S. (2019). Exploiting Cognitive Structure for Adaptive Learning. In Proceedings of the 25th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '19), 9 pages. https://dl.acm.org/doi/10.1145/3292500.3330922
+[2] Wang, T., Zhan, Y., et al. (2025). LLM-powered Multi-agent Framework for Goal-oriented Learning in Intelligent Tutoring System. In Proceedings of the ACM Web Conference 2025 (WWW 2025), Industry Track. https://arxiv.org/abs/2501.15749
+[3] Le, N. L., & Abel, M.-H. (2025). How Well Do LLMs Predict Prerequisite Skills? Zero-Shot Comparison to Expert-Defined Concepts. https://arxiv.org/abs/2507.18479
+[4] De Coi, J. L., Herder, E., Koesling, A., Lofi, C., Olmedilla, D., Papapetrou, O., & Siberski, W. (2007). A Model for Competence Gap Analysis. In Proceedings of the 3rd International Conference on Web Information Systems and Technologies (WEBIST 2007). https://www.scitepress.org/papers/2007/12726/12726.pdf
+[5] Anderson, L. W., & Krathwohl, D. R. (Eds.). (2001). A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives. New York: Longman. https://quincycollege.edu/wp-content/uploads/Anderson-and-Krathwohl_Revised-Blooms-Taxonomy.pdf
+[6] roadmap.sh. Frontend Developer Roadmap. https://roadmap.sh/frontend
+[7] ITViec. Báo cáo lương IT và thị trường tuyển dụng IT Việt Nam. https://itviec.com/bao-cao/luong-it-va-thi-truong-tuyen-dung-it-vietnam
+[8] TopCV. Các tin tuyển dụng vị trí Frontend Developer tại Hà Nội. https://www.topcv.vn
+GIẢNG VIÊN HƯỚNG DẪN
+Nguyễn Thanh Tuyên	ĐẠI DIỆN NHÓM NGHIÊN CỨU
+Nguyễn Duy Hưng
+
