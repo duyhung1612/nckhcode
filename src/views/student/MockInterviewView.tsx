@@ -53,7 +53,7 @@ export const MockInterviewView: React.FC = () => {
   if (!currentQ) return <div className="card-panel">Đang tải bộ câu hỏi phỏng vấn...</div>;
 
   return (
-    <div className="interview-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div className="interview-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
       {/* Header */}
       <div className="admin-header-card">
         <div>

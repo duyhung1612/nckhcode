@@ -346,7 +346,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
 
       {/* VIEW 3: INTERACTIVE CODE CHALLENGES */}
       {viewMode === 'challenges' && (
-        <div className="challenges-workspace card-panel" style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '24px' }}>
+        <div className="challenges-workspace card-panel" style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '18px' }}>
           <div className="challenges-sidebar">
             <h4 style={{ color: '#38bdf8', marginBottom: '12px', fontSize: '14px', textTransform: 'uppercase' }}>
               Danh sách Bài tập Thực chiến:

@@ -51,67 +51,54 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="app-header">
-      {/* Brand & Research Identification */}
-      <div className="header-brand-section">
-        <div className="brand-logo-badge">
-          <GraduationCap size={24} color="#38bdf8" />
+      {/* Top row: Brand on left, Profile & Theme on right */}
+      <div className="header-top-row">
+        <div className="header-brand-section">
+          <div className="brand-logo-badge">
+            <GraduationCap size={22} color="#38bdf8" />
+          </div>
+          <div className="brand-text">
+            <div className="university-badge">VIỆN CNTT – TRƯỜNG ĐH TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)</div>
+            <h1 className="project-title">
+              Mô hình Đánh giá Khoảng cách Kỹ năng & Đề xuất Lộ trình Frontend
+            </h1>
+          </div>
         </div>
-        <div className="brand-text">
-          <div className="university-badge">VIỆN CNTT – TRƯỜNG ĐH TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)</div>
-          <h1 className="project-title">
-            Mô hình Đánh giá Khoảng cách Kỹ năng & Đề xuất Lộ trình Frontend
-          </h1>
-        </div>
-      </div>
 
-      {/* Profile Selector for Research Simulation & Theme Switcher */}
-      <div className="header-right-actions">
-        <div className="profile-selector-box">
-          <UserCheck size={16} color="#94a3b8" />
-          <span className="profile-label">Hồ sơ:</span>
-          <select
-            className="student-dropdown"
-            value={currentStudent.id}
-            onChange={(e) => {
-              const selected = students.find(s => s.id === e.target.value);
-              if (selected) {
-                StorageModel.setCurrentStudentId(selected.id);
-                onStudentChange(selected);
-              }
-            }}
+        <div className="header-right-actions">
+          <div className="profile-selector-box">
+            <UserCheck size={15} color="#94a3b8" />
+            <span className="profile-label">Hồ sơ:</span>
+            <select
+              className="student-dropdown"
+              value={currentStudent.id}
+              onChange={(e) => {
+                const selected = students.find(s => s.id === e.target.value);
+                if (selected) {
+                  StorageModel.setCurrentStudentId(selected.id);
+                  onStudentChange(selected);
+                }
+              }}
+            >
+              {students.map(s => (
+                <option key={s.id} value={s.id}>
+                  {s.code} - {s.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle-btn"
+            title={`Chuyển sang chế độ ${theme === 'dark' ? 'Sáng' : 'Tối'}`}
           >
-            {students.map(s => (
-              <option key={s.id} value={s.id}>
-                {s.code} - {s.name}
-              </option>
-            ))}
-          </select>
+            {theme === 'dark' ? <Sun size={15} color="#f59e0b" /> : <Moon size={15} color="#38bdf8" />}
+            <span className="theme-toggle-label">
+              {theme === 'dark' ? 'Giao diện Tối' : 'Giao diện Sáng'}
+            </span>
+          </button>
         </div>
-
-        {/* Theme Toggle Button */}
-        <button
-          onClick={toggleTheme}
-          className="theme-toggle-btn"
-          title={`Chuyển sang chế độ ${theme === 'dark' ? 'Sáng' : 'Tối'}`}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'rgba(30, 41, 59, 0.7)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '8px',
-            color: '#f8fafc',
-            padding: '8px 12px',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            marginLeft: '8px'
-          }}
-        >
-          {theme === 'dark' ? <Sun size={16} color="#f59e0b" /> : <Moon size={16} color="#38bdf8" />}
-          <span style={{ fontSize: '12px', marginLeft: '6px', fontWeight: 600 }}>
-            {theme === 'dark' ? 'Giao diện Tối' : 'Giao diện Sáng'}
-          </span>
-        </button>
       </div>
 
       {/* Main Navigation Bar */}

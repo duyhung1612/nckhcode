@@ -58,7 +58,7 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
   const customMatchResult = JobMatchingController.matchStudentWithJob(customJobSimulated, scores);
 
   return (
-    <div className="job-matcher-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div className="job-matcher-container" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
       {/* Top Banner */}
       <div className="admin-header-card">
         <div>
@@ -70,24 +70,24 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
         </div>
 
         {/* Tab Switcher */}
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '6px' }}>
           <button
             className={`pill-btn ${activeTab === 'topcv' ? 'active' : ''}`}
             onClick={() => setActiveTab('topcv')}
           >
-            <Briefcase size={14} /> 12 Tin Tuyển Dụng TopCV Mẫu
+            <Briefcase size={13} /> 12 Tin Tuyển Dụng TopCV Mẫu
           </button>
           <button
             className={`pill-btn ${activeTab === 'customJd' ? 'active' : ''}`}
             onClick={() => setActiveTab('customJd')}
           >
-            <FileText size={14} /> Quét JD Bất Kỳ (Custom Scanner)
+            <FileText size={13} /> Quét JD Bất Kỳ (Custom Scanner)
           </button>
         </div>
       </div>
 
       {activeTab === 'topcv' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '18px' }}>
           {/* Left: Job Postings List */}
           <div className="card-panel">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -232,7 +232,7 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
         </div>
       ) : (
         /* CUSTOM JD SCANNER TAB */
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '18px' }}>
           <div className="card-panel">
             <h3 style={{ fontSize: '16px', color: '#ffffff', marginBottom: '8px' }}>Dán nội dung Job Description (JD) cần phân tích:</h3>
             <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '14px' }}>

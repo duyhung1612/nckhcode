@@ -153,7 +153,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
       </svg>
 
       {/* Chú giải biểu đồ (Legend) */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '12px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '10px', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
           <span style={{ width: '14px', height: '14px', borderRadius: '3px', background: 'rgba(14, 165, 233, 0.7)' }}></span>
           <span style={{ color: '#e2e8f0' }}>Năng lực hiện tại C(s)</span>

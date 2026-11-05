@@ -65,12 +65,12 @@ export const ComparativeStudyView: React.FC = () => {
   const totalHoursB = roadmapB.reduce((sum, step) => sum + step.estimatedHours, 0);
 
   return (
-    <div className="comparative-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div className="comparative-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
       {/* Header Banner */}
       <div className="admin-header-card">
         <div>
           <div className="badge-pill admin-badge">KIỂM ĐỊNH HỌC THUẬT NCKH • BẢNG 6</div>
-          <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', marginTop: '6px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f8fafc', marginTop: '4px' }}>
             Thực nghiệm Đối chiếu Hai Hồ sơ Tiêu biểu (Hồ sơ A vs Hồ sơ B)
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px' }}>
