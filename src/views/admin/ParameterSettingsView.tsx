@@ -144,7 +144,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
             <h3>2. Kết quả Báo cáo Độ nhạy trên Hồ sơ: {student?.name}</h3>
           </div>
           <p className="panel-sub">
-            Bảng đối sánh số lượng kỹ năng bị xác định là "yếu" khi biến thiên ngưỡng đạt $R(s)$.
+            Bảng đối sánh số lượng kỹ năng bị xác định là "yếu" khi biến thiên ngưỡng đạt R(s).
           </p>
 
           <table className="research-table">

@@ -110,100 +110,87 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
         </div>
       </div>
 
-      {/* Visual Mode Selector Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', margin: '8px 0 16px 0' }}>
-        <button
-          onClick={() => setVisualMode('both')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 14px',
-            borderRadius: '6px',
-            border: visualMode === 'both' ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.08)',
-            background: visualMode === 'both' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(15, 23, 42, 0.6)',
-            color: visualMode === 'both' ? '#38bdf8' : '#94a3b8',
-            fontSize: '12px',
-            fontWeight: 600,
-            cursor: 'pointer'
-          }}
-        >
-          <LayoutGrid size={14} /> Toàn cảnh (Radar + DAG)
-        </button>
-        <button
-          onClick={() => setVisualMode('radar')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 14px',
-            borderRadius: '6px',
-            border: visualMode === 'radar' ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.08)',
-            background: visualMode === 'radar' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(15, 23, 42, 0.6)',
-            color: visualMode === 'radar' ? '#38bdf8' : '#94a3b8',
-            fontSize: '12px',
-            fontWeight: 600,
-            cursor: 'pointer'
-          }}
-        >
-          <Target size={14} /> Biểu đồ Radar
-        </button>
-        <button
-          onClick={() => setVisualMode('dag')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 14px',
-            borderRadius: '6px',
-            border: visualMode === 'dag' ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.08)',
-            background: visualMode === 'dag' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(15, 23, 42, 0.6)',
-            color: visualMode === 'dag' ? '#38bdf8' : '#94a3b8',
-            fontSize: '12px',
-            fontWeight: 600,
-            cursor: 'pointer'
-          }}
-        >
-          <Network size={14} /> Sơ đồ Tiên quyết DAG
-        </button>
-      </div>
-
       {/* Main Diagnostic Body */}
       <div className="report-main-grid">
         {/* Left: SVG Radar Chart */}
-        {(visualMode === 'both' || visualMode === 'radar') && (
-          <div className="card-panel radar-panel">
-            <div className="panel-header">
+        <div className="card-panel radar-panel">
+          <div className="panel-header radar-card-header">
+            <div className="panel-header-left">
               <Target size={18} color="#38bdf8" />
-              <h3>Biểu đồ Mạng nhện Năng lực (Competency Radar)</h3>
+              <h3 style={{ margin: 0 }}>Biểu đồ Mạng nhện Năng lực (Competency Radar)</h3>
             </div>
-            <p className="panel-sub">
-              Vùng xanh thể hiện mức năng lực hiện tại $C(s)$. Vạch cam đứt là chuẩn đầu vào thực tập sinh $R(s) = 70\%$.
-            </p>
 
-            <RadarChart skillScores={report.skillScores} size={420} />
-
-            <div className="pedagogical-callout">
-              <h4>💡 Giải trình chẩn đoán sư phạm:</h4>
-              {weakSkills.some(s => s.skillGroupId === 'G2') && weakSkills.some(s => s.skillGroupId === 'G3') ? (
-                <p>
-                  Sinh viên có điểm <strong>React ({report.skillScores.find(s => s.skillGroupId === 'G3')?.currentScore}%)</strong> thấp 
-                  một phần lớn do bị hổng nền tảng <strong>JavaScript & DOM ({report.skillScores.find(s => s.skillGroupId === 'G2')?.currentScore}%)</strong>. 
-                  Theo quan hệ tiên quyết, hệ thống sẽ yêu cầu củng cố JavaScript trước khi luyện tập chuyên sâu về React Hooks.
-                </p>
-              ) : weakSkills.some(s => s.skillGroupId === 'G5') ? (
-                <p>
-                  Sinh viên có tư duy lập trình khá tốt nhưng thiếu hụt kỹ năng <strong>Git/GitHub & DevTools ({report.skillScores.find(s => s.skillGroupId === 'G5')?.currentScore}%)</strong>. 
-                  Vì Git là kỹ năng độc lập, sinh viên có thể nhanh chóng bổ sung nhánh và quy trình làm việc nhóm trong 4 giờ đầu tiên.
-                </p>
-              ) : (
-                <p>
-                  Mức độ thiếu hụt phân bổ đều ở một số kỹ năng thành phần. Lộ trình học sẽ ưu tiên các nhóm có tích số trọng số nhân khoảng cách lớn nhất.
-                </p>
-              )}
+            {/* Cụm Switcher góc trên bên phải của Card */}
+            <div className="chart-switcher-group">
+              <button
+                className={`chart-switcher-btn ${visualMode === 'both' ? 'active' : ''}`}
+                onClick={() => setVisualMode('both')}
+                title="Hiển thị cả Biểu đồ Radar và Sơ đồ Tiên quyết DAG"
+              >
+                <LayoutGrid size={13} /> Toàn cảnh (Radar + DAG)
+              </button>
+              <button
+                className={`chart-switcher-btn ${visualMode === 'radar' ? 'active' : ''}`}
+                onClick={() => setVisualMode('radar')}
+                title="Chỉ hiển thị Biểu đồ Radar"
+              >
+                <Target size={13} /> Biểu đồ Radar
+              </button>
+              <button
+                className={`chart-switcher-btn ${visualMode === 'dag' ? 'active' : ''}`}
+                onClick={() => {
+                  setVisualMode('dag');
+                  setTimeout(() => {
+                    document.getElementById('prerequisite-dag-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 60);
+                }}
+                title="Tập trung xem Sơ đồ Tiên quyết DAG"
+              >
+                <Network size={13} /> Sơ đồ Tiên quyết DAG
+              </button>
             </div>
           </div>
-        )}
+
+          <p className="panel-sub">
+            Vùng xanh thể hiện mức năng lực hiện tại C(s). Vạch cam nét đứt là chuẩn đầu vào thực tập sinh R(s) = 70%.
+          </p>
+
+          {visualMode !== 'dag' ? (
+            <>
+              <RadarChart skillScores={report.skillScores} size={420} />
+
+              <div className="pedagogical-callout">
+                <h4>💡 Giải trình chẩn đoán sư phạm:</h4>
+                {weakSkills.some(s => s.skillGroupId === 'G2') && weakSkills.some(s => s.skillGroupId === 'G3') ? (
+                  <p>
+                    Sinh viên có điểm <strong>React ({report.skillScores.find(s => s.skillGroupId === 'G3')?.currentScore}%)</strong> thấp 
+                    một phần lớn do bị hổng nền tảng <strong>JavaScript & DOM ({report.skillScores.find(s => s.skillGroupId === 'G2')?.currentScore}%)</strong>. 
+                    Theo quan hệ tiên quyết, hệ thống sẽ yêu cầu củng cố JavaScript trước khi luyện tập chuyên sâu về React Hooks.
+                  </p>
+                ) : weakSkills.some(s => s.skillGroupId === 'G5') ? (
+                  <p>
+                    Sinh viên có tư duy lập trình khá tốt nhưng thiếu hụt kỹ năng <strong>Git/GitHub & DevTools ({report.skillScores.find(s => s.skillGroupId === 'G5')?.currentScore}%)</strong>. 
+                    Vì Git là kỹ năng độc lập, sinh viên có thể nhanh chóng bổ sung nhánh và quy trình làm việc nhóm trong 4 giờ đầu tiên.
+                  </p>
+                ) : (
+                  <p>
+                    Mức độ thiếu hụt phân bổ đều ở một số kỹ năng thành phần. Lộ trình học sẽ ưu tiên các nhóm có tích số trọng số nhân khoảng cách lớn nhất.
+                  </p>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="dag-focus-placeholder">
+              <Network size={36} color="#38bdf8" />
+              <p>
+                <strong>Đang kích hoạt chế độ xem Sơ đồ Tiên quyết DAG bên dưới.</strong>
+              </p>
+              <p className="sub-text">
+                Biểu đồ Radar được thu gọn để tối ưu không gian kiểm tra quan hệ phụ thuộc tiên quyết giữa các khối kiến thức.
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Right: Detailed Skill Gap Breakdown */}
         <div className="card-panel gaps-panel">
@@ -275,7 +262,9 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
 
       {/* Embedded Prerequisite DAG Graph */}
       {(visualMode === 'both' || visualMode === 'dag') && (
-        <DagGraphViewer skillScores={report.skillScores} />
+        <div id="prerequisite-dag-section">
+          <DagGraphViewer skillScores={report.skillScores} />
+        </div>
       )}
 
       {/* Official Certificate Modal */}
