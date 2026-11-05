@@ -5,7 +5,7 @@ VIỆN CÔNG NGHỆ THÔNG TIN
 Tên đề tài: Xây dựng và thử nghiệm mô hình đánh giá khoảng cách kỹ năng
            và đề xuất lộ trình học bổ sung cho sinh viên định hướng Frontend tại Viện CNTT FBU
 Nhóm sinh viên nghiên cứu: Nguyễn Duy Hưng (Trưởng nhóm), Nguyễn Hải Đăng
-Giảng viên hướng dẫn: ThS. Nguyễn Thanh Tuyên
+Giảng viên hướng dẫn: TS. Nguyễn Thanh Tuyên
 ================================================================================
 
 BỘ TÀI LIỆU TOÀN VĂN: NGÂN HÀNG CÂU HỎI ĐÁNH GIÁ & PHỎNG VẤN FRONTEND
