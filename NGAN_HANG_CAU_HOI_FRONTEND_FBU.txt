@@ -1,0 +1,1627 @@
+================================================================================
+TRƯỜNG ĐẠI HỌC TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)
+VIỆN CÔNG NGHỆ THÔNG TIN
+ĐỀ TÀI NGHIÊN CỨU KHOA HỌC SINH VIÊN 2026–2027
+Tên đề tài: Xây dựng và thử nghiệm mô hình đánh giá khoảng cách kỹ năng
+           và đề xuất lộ trình học bổ sung cho sinh viên định hướng Frontend tại Viện CNTT FBU
+Nhóm sinh viên nghiên cứu: Nguyễn Duy Hưng (Trưởng nhóm), Nguyễn Hải Đăng
+Giảng viên hướng dẫn: ThS. Nguyễn Thanh Tuyên
+================================================================================
+
+BỘ TÀI LIỆU TOÀN VĂN: NGÂN HÀNG CÂU HỎI ĐÁNH GIÁ & PHỎNG VẤN FRONTEND
+Tổng số câu hỏi trắc nghiệm ma trận: 120 câu (Đề A: 60 câu, Đề B sinh đôi: 60 câu)
+Tổng số câu hỏi phỏng vấn kỹ thuật chuyên sâu: 9 câu
+--------------------------------------------------------------------------------
+
+================================================================================
+PHẦN 1: ĐỀ A – BỘ CÂU HỎI ĐÁNH GIÁ TIỀN KIỂM (PRE-TEST) [60 CÂU]
+Cấu trúc ma trận: 6 Nhóm kỹ năng x 10 câu (3 Dễ / 4 Trung bình / 3 Khó)
+================================================================================
+
+
+--------------------------------------------------------------------------------
+NHÓM 1: G1 - HTML/CSS & RESPONSIVE UI (Trọng số ban đầu: 15%)
+Mô tả: Nền tảng giao diện web, thẻ ngữ nghĩa, bố cục Flexbox/Grid và thiết kế tương thích đa thiết bị.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G1_01 | Nhóm: G1 (G1.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Thẻ HTML5 ngữ nghĩa nào dưới đây phù hợp nhất để chứa các liên kết điều hướng chính của trang web?
+Các phương án lựa chọn:
+   A. <div class="menu">
+   B. <nav>
+   C. <section>
+   D. <aside>
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thẻ <nav> trong HTML5 được thiết kế chuyên biệt đại diện cho vùng chứa các liên kết điều hướng chính.
+
+[Câu 2] Mã ID: QA_G1_02 | Nhóm: G1 (G1.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Thuộc tính nào của thẻ <input> dùng để liên kết với thẻ <label> nhằm tối ưu khả năng tiếp cận (Accessibility)?
+Các phương án lựa chọn:
+   A. name
+   B. id
+   C. type
+   D. value
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thẻ <label for="xyz"> liên kết trực tiếp với thẻ <input id="xyz"> qua thuộc tính id.
+
+[Câu 3] Mã ID: QA_G1_03 | Nhóm: G1 (G1.2) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: Trong Flexbox, thuộc tính nào trên phần tử cha dùng để căn chỉnh các item theo trục chính (main axis)?
+Các phương án lựa chọn:
+   A. align-items
+   B. justify-content
+   C. align-content
+   D. flex-direction
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: justify-content chịu trách nhiệm căn chỉnh các flex items dọc theo trục chính (main axis).
+
+[Câu 4] Mã ID: QA_G1_04 | Nhóm: G1 (G1.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Giá trị nào của display cho phép thiết lập bố cục lưới hai chiều đồng thời theo cả hàng và cột?
+Các phương án lựa chọn:
+   A. display: flex
+   B. display: grid
+   C. display: inline-block
+   D. display: table-cell
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: CSS Grid là hệ thống bố cục 2 chiều (hàng và cột), trong khi Flexbox chủ yếu là 1 chiều.
+
+[Câu 5] Mã ID: QA_G1_05 | Nhóm: G1 (G1.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Để căn một phần tử con ra chính giữa màn hình cả chiều ngang lẫn dọc bằng Flexbox, đoạn CSS nào trên phần tử cha là chính xác?
+Đoạn mã code:
+----------------
+.parent {
+  display: flex;
+  /* Cần thêm 2 thuộc tính nào? */
+}
+----------------
+Các phương án lựa chọn:
+   A. justify-content: center; align-items: center;
+   B. text-align: center; vertical-align: middle;
+   C. margin: 0 auto; align-content: center;
+   D. place-items: flex-center;
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: justify-content: center (căn giữa trục ngang) và align-items: center (căn giữa trục dọc).
+
+[Câu 6] Mã ID: QA_G1_06 | Nhóm: G1 (G1.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Đơn vị rem trong CSS được tính toán dựa trên giá trị nào?
+Các phương án lựa chọn:
+   A. font-size của phần tử cha trực tiếp
+   B. font-size của phần tử gốc <html>
+   C. Độ rộng của khung nhìn (viewport width)
+   D. Chiều cao của phần tử hiện tại
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: rem (root em) luôn tham chiếu tới kích thước phông chữ (font-size) của phần tử gốc (thẻ html).
+
+[Câu 7] Mã ID: QA_G1_07 | Nhóm: G1 (G1.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Để áp dụng kiểu dáng cho các thiết bị có chiều rộng màn hình tối đa 768px (Mobile & Tablet dọc), cú pháp media query nào đúng?
+Các phương án lựa chọn:
+   A. @media (min-width: 768px) { ... }
+   B. @media (max-width: 768px) { ... }
+   C. @media screen and (device-width: 768px) { ... }
+   D. @media only (screen-size <= 768px) { ... }
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: @media (max-width: 768px) áp dụng quy tắc từ 0px đến 768px.
+
+[Câu 8] Mã ID: QA_G1_08 | Nhóm: G1 (G1.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: Thẻ meta viewport nào sau đây là chuẩn mực bắt buộc để trang web hiển thị responsive đúng tỷ lệ trên thiết bị di động?
+Các phương án lựa chọn:
+   A. <meta name="viewport" content="width=1024, initial-scale=1.0">
+   B. <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   C. <meta name="viewport" content="user-scalable=no">
+   D. <meta name="viewport" content="height=device-height">
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: width=device-width đặt độ rộng trang theo kích thước màn hình thiết bị và initial-scale=1.0 đặt mức thu phóng ban đầu.
+
+[Câu 9] Mã ID: QA_G1_09 | Nhóm: G1 (G1.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Đoạn mã CSS Grid: grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) có hành vi như thế nào khi co giãn màn hình?
+Các phương án lựa chọn:
+   A. Luôn cố định 4 cột trên mọi kích thước màn hình
+   B. Tự động tính số cột vừa với khung chứa, mỗi cột tối thiểu 250px và co giãn đều
+   C. Tạo vô hạn cột và gây thanh cuộn ngang khi màn hình < 250px
+   D. Chỉ hoạt động khi có thẻ media query hỗ trợ
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: auto-fit kết hợp minmax tạo ra lưới tự động tính số cột, không cần media query mà vẫn responsive.
+
+[Câu 10] Mã ID: QA_G1_10 | Nhóm: G1 (G1.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Khi xây dựng một bài viết trên blog có phần tiêu đề, tác giả, ngày đăng và các bình luận độc lập, cấu trúc HTML nào ngữ nghĩa nhất?
+Các phương án lựa chọn:
+   A. <div class="post"> có các thẻ <span>
+   B. <article> chứa <header>, các đoạn <p> nội dung và các thẻ <article> con cho bình luận
+   C. <section> chứa thẻ <aside> cho toàn bộ nội dung bài
+   D. <main> lồng bên trong thẻ <footer>
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: <article> dùng cho nội dung độc lập tự trọn vẹn, các bình luận cũng là các <article> con lồng bên trong.
+
+
+--------------------------------------------------------------------------------
+NHÓM 2: G2 - JAVASCRIPT & DOM (Trọng số ban đầu: 25%)
+Mô tả: Ngôn ngữ lập trình cốt lõi, cú pháp ES6+, quản lý phạm vi biến, closure, this context và tương tác DOM sự kiện.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G2_01 | Nhóm: G2 (G2.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Từ khóa nào trong JavaScript ES6 dùng để khai báo hằng số không thể gán lại giá trị?
+Các phương án lựa chọn:
+   A. var
+   B. let
+   C. const
+   D. static
+>>> ĐÁP ÁN ĐÚNG: [ C ]
+>>> GIẢI THÍCH: const được dùng để khai báo một biến có phạm vi khối (block-scoped) và không thể gán lại bằng toán tử gán.
+
+[Câu 2] Mã ID: QA_G2_02 | Nhóm: G2 (G2.1) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: Kết quả in ra console của đoạn mã sau là gì?
+const user = { name: "An", age: 20 };
+const { name, age } = user;
+console.log(name, age);
+Các phương án lựa chọn:
+   A. undefined undefined
+   B. An 20
+   C. { name: "An", age: 20 }
+   D. Lỗi cú pháp SyntaxError
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Đây là cú pháp Destructuring Assignment của ES6 giúp trích xuất các thuộc tính từ object vào các biến riêng biệt.
+
+[Câu 3] Mã ID: QA_G2_03 | Nhóm: G2 (G2.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Phương thức chuẩn nào của Document dùng để gắn một hàm lắng nghe sự kiện (event listener) vào phần tử HTML?
+Các phương án lựa chọn:
+   A. element.attachEvent()
+   B. element.addEventListener()
+   C. element.listen()
+   D. element.setEventHandler()
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: addEventListener() là phương thức chuẩn của W3C DOM để đăng ký xử lý sự kiện.
+
+[Câu 4] Mã ID: QA_G2_04 | Nhóm: G2 (G2.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Điểm khác biệt quan trọng nhất giữa Arrow Function và Regular Function trong JavaScript là gì?
+Các phương án lựa chọn:
+   A. Arrow function chạy chậm hơn function thường
+   B. Arrow function không có ngữ cảnh this riêng mà kế thừa từ phạm vi bao quanh (lexical this)
+   C. Arrow function không thể nhận tham số đầu vào
+   D. Arrow function có thể dùng làm hàm khởi tạo constructor với từ khóa new
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Arrow functions không định nghĩa ngữ cảnh this của riêng mình, this được bind theo ngữ cảnh bao bọc (lexical scoping).
+
+[Câu 5] Mã ID: QA_G2_05 | Nhóm: G2 (G2.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Đoạn mã sau in ra giá trị gì?
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+Các phương án lựa chọn:
+   A. 0 1 2
+   B. 3 3 3
+   C. undefined undefined undefined
+   D. Lỗi ReferenceError
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Biến var có phạm vi hàm (function scope). Khi setTimeout thực thi sau 100ms, vòng lặp đã kết thúc và i có giá trị là 3.
+
+[Câu 6] Mã ID: QA_G2_06 | Nhóm: G2 (G2.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Khái niệm Closure trong JavaScript được định nghĩa chính xác là gì?
+Các phương án lựa chọn:
+   A. Một hàm tự động đóng trình duyệt sau khi chạy xong
+   B. Khả năng một hàm ghi nhớ và truy cập vào các biến thuộc phạm vi từ vựng (lexical scope) của nó ngay cả khi hàm đó được thực thi bên ngoài phạm vi đó
+   C. Cơ chế giải phóng bộ nhớ của trình thu gom rác (Garbage Collector)
+   D. Một phương thức dùng để đóng kết nối WebSocket
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Closure là sự kết hợp giữa một hàm và môi trường từ vựng nơi hàm đó được khai báo.
+
+[Câu 7] Mã ID: QA_G2_07 | Nhóm: G2 (G2.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Khi người dùng click vào một phần tử con bên trong nhiều thẻ cha, sự kiện lan truyền từ thẻ con ngược lên các thẻ cha được gọi là gì?
+Các phương án lựa chọn:
+   A. Event Capturing
+   B. Event Bubbling (Sủi bọt sự kiện)
+   C. Event Throttle
+   D. Event Hijacking
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Event bubbling là giai đoạn sự kiện sau khi kích hoạt tại target element sẽ truyền ngược lên các phần tử tổ tiên đến document.
+
+[Câu 8] Mã ID: QA_G2_08 | Nhóm: G2 (G2.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Đoạn mã sau in ra giá trị gì trên màn hình console?
+const obj = {
+  count: 10,
+  getCount: function() {
+    return () => this.count;
+  }
+};
+const fn = obj.getCount();
+console.log(fn());
+Các phương án lựa chọn:
+   A. undefined
+   B. 10
+   C. Lỗi TypeError: this is undefined
+   D. NaN
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: getCount là regular function được gọi qua obj nên this bên trong là obj. Arrow function kế thừa this của getCount, do đó this.count là 10.
+
+[Câu 9] Mã ID: QA_G2_09 | Nhóm: G2 (G2.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: Kỹ thuật "Event Delegation" mang lại lợi ích lớn nhất nào khi xử lý danh sách gồm 10,000 phần tử (ví dụ: danh sách sản phẩm)?
+Các phương án lựa chọn:
+   A. Giúp trình duyệt tải trang nhanh hơn mà không cần tải file CSS
+   B. Chỉ cần gắn 1 event listener duy nhất lên phần tử cha thay vì gắn 10,000 listener riêng lẻ, tiết kiệm đáng kể bộ nhớ
+   C. Tự động gửi request lên server mỗi khi click
+   D. Ngăn chặn hoàn toàn việc người dùng nhấp đúp
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Event Delegation lợi dụng event bubbling để quản lý sự kiện tập trung tại thẻ cha, tối ưu bộ nhớ vượt trội.
+
+[Câu 10] Mã ID: QA_G2_10 | Nhóm: G2 (G2.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Đoạn mã sao chép object sau tạo ra bản sao nông (shallow copy) hay bản sao sâu (deep copy)?
+const original = { a: 1, b: { c: 2 } };
+const clone = { ...original };
+Các phương án lựa chọn:
+   A. Deep copy hoàn toàn, sửa clone.b.c không ảnh hưởng original
+   B. Shallow copy, sửa clone.b.c sẽ làm thay đổi cả original.b.c
+   C. Gây lỗi cú pháp vì spread không áp dụng được cho object lồng nhau
+   D. Tạo liên kết tham chiếu (không phải bản sao)
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Toán tử Spread (...) chỉ copy nông các thuộc tính tầng 1. Thuộc tính b vẫn giữ nguyên tham chiếu vùng nhớ cũ.
+
+
+--------------------------------------------------------------------------------
+NHÓM 3: G3 - REACT CƠ BẢN (Trọng số ban đầu: 20%)
+Mô tả: Xây dựng giao diện hướng thành phần, quản lý luồng dữ liệu một chiều qua props, state và React hooks.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G3_01 | Nhóm: G3 (G3.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Trong React, thuộc tính nào được truyền từ component cha xuống component con và có tính chất chỉ đọc (read-only)?
+Các phương án lựa chọn:
+   A. state
+   B. props
+   C. context
+   D. ref
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: props là dữ liệu truyền từ component cha và component con không được phép biến đổi (mutate) props trực tiếp.
+
+[Câu 2] Mã ID: QA_G3_02 | Nhóm: G3 (G3.2) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Hook nào trong React dùng để khai báo và quản lý trạng thái nội bộ (local state) trong Function Component?
+Các phương án lựa chọn:
+   A. useEffect
+   B. useState
+   C. useContext
+   D. useMemo
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: useState trả về một cặp gồm giá trị state hiện tại và hàm cập nhật state.
+
+[Câu 3] Mã ID: QA_G3_03 | Nhóm: G3 (G3.3) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: Khi render một danh sách các phần tử bằng phương thức .map(), tại sao React yêu cầu mỗi phần tử phải có thuộc tính key?
+Các phương án lựa chọn:
+   A. Để tự động đánh số thứ tự hiển thị
+   B. Để thuật toán Reconciliation của React xác định chính xác phần tử nào bị thêm, sửa hoặc xóa, tối ưu quá trình re-render
+   C. Để áp dụng CSS class cho phần tử đó
+   D. Để lưu trữ dữ liệu vào database
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: key giúp React nhận diện danh tính ổn định của từng item khi danh sách biến động.
+
+[Câu 4] Mã ID: QA_G3_04 | Nhóm: G3 (G3.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: useEffect(() => { console.log("Mounted"); }, []);
+Đoạn effect với mảng phụ thuộc rỗng ([]) này sẽ chạy khi nào?
+Các phương án lựa chọn:
+   A. Chạy lại sau mỗi lần component re-render
+   B. Chỉ chạy đúng 1 lần sau khi component được mount lần đầu tiên vào DOM
+   C. Chỉ chạy trước khi component bị unmount
+   D. Không bao giờ chạy
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Mảng dependency rỗng [] báo hiệu cho React rằng effect không phụ thuộc vào bất kỳ prop hay state nào, chỉ chạy 1 lần khi mount.
+
+[Câu 5] Mã ID: QA_G3_05 | Nhóm: G3 (G3.1) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Cách cập nhật state đếm tăng thêm 1 nào dưới đây là an toàn nhất khi có nhiều sự kiện kích hoạt dồn dập?
+Các phương án lựa chọn:
+   A. setCount(count + 1)
+   B. setCount(prevCount => prevCount + 1)
+   C. count = count + 1
+   D. count++
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Functional update form setCount(prev => prev + 1) đảm bảo luôn lấy đúng giá trị state mới nhất trong hàng đợi cập nhật.
+
+[Câu 6] Mã ID: QA_G3_06 | Nhóm: G3 (G3.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Đoạn mã sau hiển thị gì khi biến unreadCount = 0?
+<div>{unreadCount && <span>Có tin nhắn mới</span>}</div>
+Các phương án lựa chọn:
+   A. Không hiển thị gì cả (khoảng trống)
+   B. In ra số 0 trên màn hình giao diện
+   C. In ra chữ "Có tin nhắn mới"
+   D. Gây lỗi crash ứng dụng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Trong JS, 0 là falsy. Toán tử && trả về vế trái nếu là falsy, dẫn đến React render trực tiếp giá trị số 0 ra UI. Cách đúng: unreadCount > 0 && ...
+
+[Câu 7] Mã ID: QA_G3_07 | Nhóm: G3 (G3.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Hàm cleanup trả về bên trong useEffect được kích hoạt khi nào?
+Đoạn mã code:
+----------------
+useEffect(() => {
+  const timer = setInterval(() => {}, 1000);
+  return () => clearInterval(timer);
+}, [id]);
+----------------
+Các phương án lựa chọn:
+   A. Chỉ khi trang web bị tắt hoàn toàn
+   B. Trước khi effect chạy lại ở lần render tiếp theo (khi id thay đổi) và khi component unmount
+   C. Ngay khi hàm useEffect vừa bắt đầu thực thi
+   D. Chỉ chạy khi có lỗi exception xảy ra
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Cleanup function dọn dẹp tài nguyên trước khi effect chạy lần mới và trước khi component bị gỡ khỏi DOM.
+
+[Câu 8] Mã ID: QA_G3_08 | Nhóm: G3 (G3.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: CÂU HỎI MẪU NGHIÊN CỨU: Một component danh sách lọc theo từ khóa đang lưu cả danh sách gốc và danh sách đã lọc trong hai state riêng, gây lệch dữ liệu khi danh sách gốc thay đổi. Cách sửa phù hợp nhất là gì?
+Các phương án lựa chọn:
+   A. Thêm state thứ ba đồng bộ hai state
+   B. Chỉ lưu danh sách gốc trong state, tính danh sách lọc khi render (derived state)
+   C. Dùng ref thay state cho cả hai
+   D. Tải lại trang sau mỗi lần lọc
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Đúng theo nguyên lý "Don't put in state what you can compute on the fly": tính danh sách lọc trực tiếp từ danh sách gốc và từ khóa tìm kiếm.
+
+[Câu 9] Mã ID: QA_G3_09 | Nhóm: G3 (G3.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Nguyên nhân nào dẫn đến lỗi "Maximum update depth exceeded" (vòng lặp vô hạn re-render) trong đoạn mã sau?
+function MyComp() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([{ id: 1 }]);
+  });
+}
+Các phương án lựa chọn:
+   A. Do data là một mảng rỗng
+   B. Do useEffect không khai báo dependency array, mỗi lần setData kích hoạt render, render lại kích hoạt useEffect gọi setData tiếp
+   C. Do ID của phần tử là số nguyên
+   D. Do React không hỗ trợ hàm mũi tên trong effect
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thiếu dependency array khiến effect chạy sau mỗi lần render. setData gây render lại -> lặp vô tận.
+
+[Câu 10] Mã ID: QA_G3_10 | Nhóm: G3 (G3.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Tại sao việc dùng chỉ số index mảng (items.map((item, index) => <Item key={index} />)) làm key có thể gây lỗi nghiêm trọng khi danh sách hỗ trợ xóa, sắp xếp hoặc thêm vào đầu?
+Các phương án lựa chọn:
+   A. Vì index là số nguyên, React chỉ chấp nhận chuỗi (string) làm key
+   B. Vì khi thứ tự phần tử thay đổi, index của item thay đổi theo khiến React liên kết nhầm local state của component cũ sang dữ liệu mới
+   C. Vì index làm tăng kích thước bundle của ứng dụng
+   D. Vì index không hiển thị được trên màn hình
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Index không đại diện cho danh tính nội tại của dữ liệu. Khi đổi chỗ hoặc xóa, index bị gán lại gây lệch state nội bộ giữa các phần tử.
+
+
+--------------------------------------------------------------------------------
+NHÓM 4: G4 - KẾT NỐI API & BẤT ĐỒNG BỘ (Trọng số ban đầu: 15%)
+Mô tả: Lập trình bất đồng bộ với Promise, async/await, gọi API RESTful qua fetch/axios, kiểm soát loading và bắt lỗi.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G4_01 | Nhóm: G4 (G4.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Mã trạng thái HTTP (Status Code) nào dưới đây biểu thị yêu cầu đã được máy chủ tiếp nhận và xử lý thành công?
+Các phương án lựa chọn:
+   A. 200 OK
+   B. 404 Not Found
+   C. 500 Internal Server Error
+   D. 301 Moved Permanently
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: 200 OK biểu thị request thành công theo chuẩn giao thức HTTP.
+
+[Câu 2] Mã ID: QA_G4_02 | Nhóm: G4 (G4.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Phương thức HTTP nào theo tiêu chuẩn RESTful được sử dụng để lấy danh sách tài nguyên từ máy chủ mà không làm thay đổi dữ liệu?
+Các phương án lựa chọn:
+   A. POST
+   B. GET
+   C. PUT
+   D. DELETE
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: GET là phương thức an toàn (safe) và bình đạm (idempotent) dùng để đọc dữ liệu.
+
+[Câu 3] Mã ID: QA_G4_03 | Nhóm: G4 (G4.1) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: Một Promise trong JavaScript có thể nằm ở một trong những trạng thái nào sau đây?
+Các phương án lựa chọn:
+   A. Pending, Fulfilled, Rejected
+   B. Start, Pause, Stop
+   C. Ready, Running, Terminated
+   D. Open, Closed, Reconnecting
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Promise có 3 trạng thái duy nhất: Pending (chờ), Fulfilled (thành công) hoặc Rejected (thất bại).
+
+[Câu 4] Mã ID: QA_G4_04 | Nhóm: G4 (G4.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Từ khóa await trong JavaScript chỉ có thể được sử dụng hợp lệ bên trong đâu?
+Các phương án lựa chọn:
+   A. Bên trong bất kỳ vòng lặp nào
+   B. Bên trong một hàm được khai báo với từ khóa async (hoặc top-level module)
+   C. Bên trong khối lệnh if/else
+   D. Bên trong hàm setTimeout
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: await chỉ có thể dùng trong async function (hoặc ES Module cấp cao nhất - top-level await).
+
+[Câu 5] Mã ID: QA_G4_05 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: CÂU HỎI MẪU NGHIÊN CỨU: Đoạn mã dùng fetch lấy danh sách sản phẩm nhưng giao diện không hiển thị khi máy chủ trả lỗi 500. Phương án xử lý đúng nhất là gì?
+Các phương án lựa chọn:
+   A. Bỏ qua lỗi và giữ giao diện trống
+   B. Kiểm tra response.ok, hiển thị thông báo lỗi và giữ dữ liệu cũ (nếu có)
+   C. Gọi lại API vô hạn đến khi thành công
+   D. Ẩn toàn bộ trang khi có lỗi
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Fetch API không tự động reject khi nhận mã 500. Lập trình viên phải kiểm tra response.ok, thông báo lỗi cho người dùng và duy trì dữ liệu fallback.
+
+[Câu 6] Mã ID: QA_G4_06 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Tại sao khi dùng Fetch API cần phải gọi await response.json() thay vì nhận dữ liệu ngay sau lệnh fetch?
+Các phương án lựa chọn:
+   A. Vì fetch chỉ trả về Headers, còn response.json() là thao tác đọc luồng dữ liệu (ReadableStream) bất đồng bộ
+   B. Vì fetch là hàm đồng bộ
+   C. Vì response.json() dùng để mã hóa mật khẩu
+   D. Vì đây là quy định bắt buộc của CSS
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: fetch() giải quyết ngay khi nhận được HTTP Header. Đọc body dưới dạng JSON là một stream bất đồng bộ cần thêm await.
+
+[Câu 7] Mã ID: QA_G4_07 | Nhóm: G4 (G4.1) | Bloom: Phân tích | Độ khó: Trung bình
+Nội dung: Đoạn mã sau in ra thứ tự nào trên console?
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+Các phương án lựa chọn:
+   A. 1 -> 2 -> 3 -> 4
+   B. 1 -> 4 -> 3 -> 2
+   C. 1 -> 4 -> 2 -> 3
+   D. 3 -> 1 -> 4 -> 2
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thứ tự ưu tiên Event Loop: Đồng bộ (1, 4) -> Microtask queue (Promise: 3) -> Macrotask queue (setTimeout: 2).
+
+[Câu 8] Mã ID: QA_G4_08 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: Khi người dùng gõ tìm kiếm liên tục, làm thế nào để hủy (cancel) các HTTP request cũ đang bay để tránh dữ liệu cũ ghi đè lên kết quả mới?
+Các phương án lựa chọn:
+   A. Sử dụng AbortController và truyền signal vào hàm fetch
+   B. Tắt kết nối internet tạm thời
+   C. Gọi hàm window.stop()
+   D. Khởi động lại trình duyệt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: AbortController cung cấp đối tượng signal cho fetch để chủ động hủy bỏ network request khi không còn cần thiết.
+
+[Câu 9] Mã ID: QA_G4_09 | Nhóm: G4 (G4.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Để gửi dữ liệu một đối tượng mới lên server theo chuẩn JSON, cấu hình fetch nào sau đây là đầy đủ và chính xác nhất?
+Đoạn mã code:
+----------------
+fetch(url, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+----------------
+Các phương án lựa chọn:
+   A. Thiếu headers Content-Type
+   B. Cấu hình hoàn toàn chính xác theo chuẩn HTTP
+   C. Body phải là đối tượng trực tiếp data (không cần stringify)
+   D. Method phải là GET
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Cần method POST, header báo kiểu dữ liệu Content-Type: application/json, và chuyển object thành JSON string.
+
+[Câu 10] Mã ID: QA_G4_10 | Nhóm: G4 (G4.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Phương thức Promise.all([p1, p2, p3]) có hành vi như thế nào nếu một trong ba promise (ví dụ p2) bị reject?
+Các phương án lựa chọn:
+   A. Vẫn đợi các promise khác và trả về kết quả thành công của p1 và p3
+   B. Ngay lập tức reject toàn bộ với lý do lỗi của p2 (fail-fast)
+   C. Tự động gọi lại p2 nhiều lần
+   D. Chuyển trạng thái sang pending mãi mãi
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Promise.all hoạt động theo cơ chế all-or-nothing (fail-fast). Nếu muốn nhận kết quả cả thành công lẫn thất bại, dùng Promise.allSettled.
+
+
+--------------------------------------------------------------------------------
+NHÓM 5: G5 - GIT/GITHUB & DEVTOOLS (Trọng số ban đầu: 10%)
+Mô tả: Hệ thống quản lý phiên bản mã nguồn, quy trình làm việc nhóm phân nhánh Git và sử dụng công cụ nhà phát triển.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G5_01 | Nhóm: G5 (G5.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Lệnh Git nào dùng để đưa các tệp đã chỉnh sửa vào khu vực chuẩn bị commit (Staging Area)?
+Các phương án lựa chọn:
+   A. git status
+   B. git add .
+   C. git commit
+   D. git push
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git add đưa các tệp từ working directory vào staging area.
+
+[Câu 2] Mã ID: QA_G5_02 | Nhóm: G5 (G5.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Lệnh nào dùng để kiểm tra trạng thái các tệp đang thay đổi, chưa được theo dõi (untracked) hoặc đã stage?
+Các phương án lựa chọn:
+   A. git log
+   B. git status
+   C. git branch
+   D. git checkout
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git status cung cấp thông tin tổng quan trạng thái làm việc hiện tại của Git.
+
+[Câu 3] Mã ID: QA_G5_03 | Nhóm: G5 (G5.2) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Cú pháp lệnh Git nào cho phép tạo một nhánh mới có tên feature-login và chuyển ngay sang nhánh đó?
+Các phương án lựa chọn:
+   A. git checkout -b feature-login
+   B. git branch feature-login
+   C. git switch feature-login
+   D. git merge feature-login
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: git checkout -b (hoặc git switch -c) tạo mới và đồng thời chuyển sang nhánh vừa tạo.
+
+[Câu 4] Mã ID: QA_G5_04 | Nhóm: G5 (G5.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Khi ở nhánh main và muốn gộp các thay đổi từ nhánh feature vào main, câu lệnh nào được sử dụng?
+Các phương án lựa chọn:
+   A. git merge feature
+   B. git branch feature
+   C. git push feature
+   D. git clone feature
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Đứng tại nhánh đích (main) và chạy git merge <nhánh-nguồn>.
+
+[Câu 5] Mã ID: QA_G5_05 | Nhóm: G5 (G5.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Merge Conflict (Xung đột gộp nhánh) trong Git xảy ra trong tình huống điển hình nào?
+Các phương án lựa chọn:
+   A. Khi hai lập trình viên cùng sửa trên cùng một dòng trong cùng một tệp và Git không thể tự quyết định lấy bản nào
+   B. Khi mất kết nối mạng internet
+   C. Khi dung lượng commit vượt quá 100MB
+   D. Khi tên nhánh quá dài
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Conflict xảy ra khi có các thay đổi đối nghịch nhau trên cùng vùng code giữa hai nhánh.
+
+[Câu 6] Mã ID: QA_G5_06 | Nhóm: G5 (G5.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Lệnh git pull thực chất là sự kết hợp của hai hành động Git nào?
+Các phương án lựa chọn:
+   A. git add và git commit
+   B. git fetch và git merge
+   C. git clone và git checkout
+   D. git branch và git push
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git pull = git fetch (tải dữ liệu từ remote về) + git merge (gộp vào nhánh cục bộ hiện tại).
+
+[Câu 7] Mã ID: QA_G5_07 | Nhóm: G5 (G5.1) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Tệp nào dùng để chỉ định cho Git bỏ qua không theo dõi thư mục node_modules hoặc các tệp cấu hình chứa mã khóa bí mật (.env)?
+Các phương án lựa chọn:
+   A. .gitconfig
+   B. .gitignore
+   C. package.json
+   D. README.md
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: .gitignore liệt kê các pattern file/thư mục mà Git sẽ hoàn toàn bỏ qua.
+
+[Câu 8] Mã ID: QA_G5_08 | Nhóm: G5 (G5.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: Khi gặp xung đột conflict, các ký hiệu đánh dấu <<<<<<< HEAD, =======, và >>>>>>> feature biểu thị điều gì trong tệp?
+Các phương án lựa chọn:
+   A. Ký hiệu lỗi cú pháp của ngôn ngữ lập trình
+   B. Vùng xung đột: Phần giữa HEAD và ======= là code nhánh hiện tại, phần giữa ======= và feature là code nhánh cần gộp
+   C. Mã hóa bảo mật SHA của commit
+   D. Thẻ HTML đặc biệt của GitHub
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Git chèn conflict markers để lập trình viên lựa chọn giữ bản code nào hoặc kết hợp cả hai.
+
+[Câu 9] Mã ID: QA_G5_09 | Nhóm: G5 (G5.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Thông điệp commit nào dưới đây tuân thủ đúng quy ước quốc tế Conventional Commits nhất cho việc bổ sung tính năng giỏ hàng?
+Các phương án lựa chọn:
+   A. update code
+   B. fix bug and add cart
+   C. feat(cart): implement add to cart and quantity adjustment
+   D. Commit lan 2
+>>> ĐÁP ÁN ĐÚNG: [ C ]
+>>> GIẢI THÍCH: Conventional Commits có cấu trúc type(scope): description rõ ràng, tách bạch tính năng (feat).
+
+[Câu 10] Mã ID: QA_G5_10 | Nhóm: G5 (G5.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Lệnh git push --force có thể gây hậu quả nguy hiểm gì khi làm việc nhóm trên nhánh chung (như develop hoặc main)?
+Các phương án lựa chọn:
+   A. Làm hỏng ổ cứng máy tính cá nhân
+   B. Ghi đè và xóa mất lịch sử commit của các thành viên khác trên server từ xa
+   C. Tự động hủy bỏ tài khoản GitHub
+   D. Khóa toàn bộ quyền truy cập mạng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: --force cưỡng chế viết đè lịch sử nhánh remote, cực kỳ rủi ro trong làm việc nhóm.
+
+
+--------------------------------------------------------------------------------
+NHÓM 6: G6 - DEBUG & KIỂM THỬ (Trọng số ban đầu: 15%)
+Mô tả: Kỹ năng khoanh vùng lỗi, đọc thông báo console, đặt breakpoint truy vết luồng thực thi và hiểu cơ bản về Unit Test.
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QA_G6_01 | Nhóm: G6 (G6.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Tab nào trong Chrome DevTools dùng để kiểm tra các thông điệp lỗi console.error() và thực thi lệnh JavaScript trực tiếp?
+Các phương án lựa chọn:
+   A. Elements
+   B. Console
+   C. Network
+   D. Application
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Tab Console là nơi xuất các thông điệp log/error và là môi trường REPL tương tác.
+
+[Câu 2] Mã ID: QA_G6_02 | Nhóm: G6 (G6.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Tab nào trong DevTools cho phép kiểm tra chi tiết các yêu cầu API HTTP gửi đi, Headers, Payload và dữ liệu JSON phản hồi?
+Các phương án lựa chọn:
+   A. Sources
+   B. Network
+   C. Performance
+   D. Memory
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Tab Network ghi lại mọi hoạt động truyền thông mạng của trang web.
+
+[Câu 3] Mã ID: QA_G6_03 | Nhóm: G6 (G6.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: Mục đích chính của Kiểm thử đơn vị (Unit Test) trong phát triển phần mềm là gì?
+Các phương án lựa chọn:
+   A. Kiểm tra tốc độ gõ phím của lập trình viên
+   B. Kiểm tra tính đúng đắn của từng đơn vị mã nguồn nhỏ nhất (hàm, phương thức) một cách độc lập
+   C. Kiểm tra giao diện người dùng trên nhiều loại máy tính
+   D. Kiểm tra khả năng chịu tải của server khi có hàng triệu người dùng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Unit test tập trung kiểm thử các đơn vị code riêng lẻ, cô lập với hệ thống bên ngoài.
+
+[Câu 4] Mã ID: QA_G6_04 | Nhóm: G6 (G6.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Lỗi "Uncaught TypeError: Cannot read properties of undefined (reading 'name')" thường xuất phát từ nguyên nhân nào?
+Các phương án lựa chọn:
+   A. Do biến đang truy cập thuộc tính .name có giá trị là undefined (chưa được gán hoặc API chưa tải xong)
+   B. Do tên biến bị viết hoa
+   C. Do mạng internet bị ngắt
+   D. Do máy chủ bị tắt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Truy cập thuộc tính trên một giá trị null hoặc undefined sinh ra ngoại lệ TypeError kinh điển.
+
+[Câu 5] Mã ID: QA_G6_05 | Nhóm: G6 (G6.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Lợi thế lớn nhất của việc đặt Breakpoint trong tab Sources so với việc viết console.log() tràn lan khi debug là gì?
+Các phương án lựa chọn:
+   A. Breakpoint có thể tạm dừng luồng chạy tại thời điểm thực thi, xem giá trị biến trong Call Stack và không cần sửa/xóa code sau khi fix xong
+   B. Breakpoint tự động sửa lỗi cho lập trình viên
+   C. Breakpoint giúp website chạy nhanh gấp đôi
+   D. Breakpoint không cần mở trình duyệt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Breakpoint cho phép kiểm tra trạng thái bộ nhớ thời gian thực, từng bước thực thi (step over, step into) sạch sẽ.
+
+[Câu 6] Mã ID: QA_G6_06 | Nhóm: G6 (G6.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: Khi gặp lỗi giao diện không cập nhật sau khi gọi hàm sửa mảng: items.push(newItem); setItems(items); nguyên nhân là gì?
+Các phương án lựa chọn:
+   A. items.push biến đổi trực tiếp (mutate) mảng cũ, tham chiếu vùng nhớ không đổi nên React coi như state chưa đổi và bỏ qua render
+   B. Do hàm push không hỗ trợ object
+   C. Do React bị lỗi cú pháp
+   D. Do mạng chậm
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: React so sánh tham chiếu (Object.is). Cần tạo mảng mới: setItems([...items, newItem]).
+
+[Câu 7] Mã ID: QA_G6_07 | Nhóm: G6 (G6.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: Mô hình chuẩn AAA trong viết Unit Test đại diện cho 3 bước nào?
+Các phương án lựa chọn:
+   A. Action, Algorithm, Array
+   B. Arrange (Thiết lập), Act (Hành động), Assert (Khẳng định kết quả)
+   C. Async, Await, Apply
+   D. Add, Align, Animate
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: AAA: Arrange (chuẩn bị dữ liệu), Act (gọi hàm cần test), Assert (so sánh kết quả mong đợi).
+
+[Câu 8] Mã ID: QA_G6_08 | Nhóm: G6 (G6.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Đoạn mã sau xảy ra lỗi gì khi chạy?
+function sum(n) {
+  if (n === 0) return 0;
+  return n + sum(n);
+}
+Các phương án lựa chọn:
+   A. Lỗi RangeError: Maximum call stack size exceeded (Tràn ngăn xếp do đệ quy vô hạn)
+   B. Chạy bình thường và trả về kết quả n
+   C. Lỗi cú pháp SyntaxError
+   D. Lỗi bộ nhớ RAM đầy
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: sum(n) gọi lại chính nó với cùng tham số n mà không giảm dần về 0, dẫn tới tràn Call Stack.
+
+[Câu 9] Mã ID: QA_G6_09 | Nhóm: G6 (G6.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Để giả lập tình huống mạng yếu hoặc mất kết nối nhằm kiểm tra trạng thái Offline và Skeleton UI của ứng dụng, ta thao tác ở đâu trong DevTools?
+Các phương án lựa chọn:
+   A. Tab Network -> Throttling dropdown -> Chọn Slow 3G hoặc Offline
+   B. Rút dây mạng trực tiếp
+   C. Tab Memory -> Take snapshot
+   D. Tab Security -> Clear certificates
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Network Throttling cho phép giả lập mạng chậm 3G, 4G hoặc Offline ngay trong trình duyệt.
+
+[Câu 10] Mã ID: QA_G6_10 | Nhóm: G6 (G6.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: Đoạn test case sau kiểm tra hàm tính tổng hợp lệ khi nào?
+test("tính tổng đúng", () => {
+  expect(sum(2, 3)).toBe(5);
+});
+Các phương án lựa chọn:
+   A. Khi hàm sum(2, 3) trả về chính xác giá trị 5
+   B. Khi hàm sum(2, 3) không có lỗi cú pháp
+   C. Khi kết quả khác 5
+   D. Khi mã nguồn được biên dịch xong
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: expect(value).toBe(expected) là assertion so sánh bằng nghiêm ngặt trong Jest/Vitest.
+
+
+================================================================================
+PHẦN 2: ĐỀ B – BỘ CÂU HỎI HẬU KIỂM SINH ĐÔI (POST-TEST) [60 CÂU]
+Cấu trúc tương đương 100% về ma trận Bloom và độ khó phục vụ đo lường tiến bộ thực nghiệm
+================================================================================
+
+
+--------------------------------------------------------------------------------
+NHÓM 1: G1 - HTML/CSS & RESPONSIVE UI (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G1_01 | Nhóm: G1 (G1.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Thẻ HTML5 ngữ nghĩa nào dưới đây phù hợp nhất để chứa các liên kết điều hướng chính của trang web?
+Các phương án lựa chọn:
+   A. <div class="menu">
+   B. <nav>
+   C. <section>
+   D. <aside>
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thẻ <nav> trong HTML5 được thiết kế chuyên biệt đại diện cho vùng chứa các liên kết điều hướng chính.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_01
+
+[Câu 2] Mã ID: QB_G1_02 | Nhóm: G1 (G1.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Thuộc tính nào của thẻ <input> dùng để liên kết với thẻ <label> nhằm tối ưu khả năng tiếp cận (Accessibility)?
+Các phương án lựa chọn:
+   A. name
+   B. id
+   C. type
+   D. value
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thẻ <label for="xyz"> liên kết trực tiếp với thẻ <input id="xyz"> qua thuộc tính id.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_02
+
+[Câu 3] Mã ID: QB_G1_03 | Nhóm: G1 (G1.2) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Trong Flexbox, thuộc tính nào trên phần tử cha dùng để căn chỉnh các item theo trục chính (main axis)?
+Các phương án lựa chọn:
+   A. align-items
+   B. justify-content
+   C. align-content
+   D. flex-direction
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: justify-content chịu trách nhiệm căn chỉnh các flex items dọc theo trục chính (main axis).
+>>> Câu gốc tương ứng ở Đề A: QA_G1_03
+
+[Câu 4] Mã ID: QB_G1_04 | Nhóm: G1 (G1.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Giá trị nào của display cho phép thiết lập bố cục lưới hai chiều đồng thời theo cả hàng và cột?
+Các phương án lựa chọn:
+   A. display: flex
+   B. display: grid
+   C. display: inline-block
+   D. display: table-cell
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: CSS Grid là hệ thống bố cục 2 chiều (hàng và cột), trong khi Flexbox chủ yếu là 1 chiều.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_04
+
+[Câu 5] Mã ID: QB_G1_05 | Nhóm: G1 (G1.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Để căn một phần tử con ra chính giữa màn hình cả chiều ngang lẫn dọc bằng Flexbox, đoạn CSS nào trên phần tử cha là chính xác?
+Đoạn mã code:
+----------------
+.parent {
+  display: flex;
+  /* Cần thêm 2 thuộc tính nào? */
+}
+----------------
+Các phương án lựa chọn:
+   A. justify-content: center; align-items: center;
+   B. text-align: center; vertical-align: middle;
+   C. margin: 0 auto; align-content: center;
+   D. place-items: flex-center;
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: justify-content: center (căn giữa trục ngang) và align-items: center (căn giữa trục dọc).
+>>> Câu gốc tương ứng ở Đề A: QA_G1_05
+
+[Câu 6] Mã ID: QB_G1_06 | Nhóm: G1 (G1.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Đơn vị rem trong CSS được tính toán dựa trên giá trị nào?
+Các phương án lựa chọn:
+   A. font-size của phần tử cha trực tiếp
+   B. font-size của phần tử gốc <html>
+   C. Độ rộng của khung nhìn (viewport width)
+   D. Chiều cao của phần tử hiện tại
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: rem (root em) luôn tham chiếu tới kích thước phông chữ (font-size) của phần tử gốc (thẻ html).
+>>> Câu gốc tương ứng ở Đề A: QA_G1_06
+
+[Câu 7] Mã ID: QB_G1_07 | Nhóm: G1 (G1.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Để áp dụng kiểu dáng cho các thiết bị có chiều rộng màn hình tối đa 768px (Mobile & Tablet dọc), cú pháp media query nào đúng?
+Các phương án lựa chọn:
+   A. @media (min-width: 768px) { ... }
+   B. @media (max-width: 768px) { ... }
+   C. @media screen and (device-width: 768px) { ... }
+   D. @media only (screen-size <= 768px) { ... }
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: @media (max-width: 768px) áp dụng quy tắc từ 0px đến 768px.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_07
+
+[Câu 8] Mã ID: QB_G1_08 | Nhóm: G1 (G1.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Thẻ meta viewport nào sau đây là chuẩn mực bắt buộc để trang web hiển thị responsive đúng tỷ lệ trên thiết bị di động?
+Các phương án lựa chọn:
+   A. <meta name="viewport" content="width=1024, initial-scale=1.0">
+   B. <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   C. <meta name="viewport" content="user-scalable=no">
+   D. <meta name="viewport" content="height=device-height">
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: width=device-width đặt độ rộng trang theo kích thước màn hình thiết bị và initial-scale=1.0 đặt mức thu phóng ban đầu.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_08
+
+[Câu 9] Mã ID: QB_G1_09 | Nhóm: G1 (G1.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã CSS Grid: grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) có hành vi như thế nào khi co giãn màn hình?
+Các phương án lựa chọn:
+   A. Luôn cố định 4 cột trên mọi kích thước màn hình
+   B. Tự động tính số cột vừa với khung chứa, mỗi cột tối thiểu 250px và co giãn đều
+   C. Tạo vô hạn cột và gây thanh cuộn ngang khi màn hình < 250px
+   D. Chỉ hoạt động khi có thẻ media query hỗ trợ
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: auto-fit kết hợp minmax tạo ra lưới tự động tính số cột, không cần media query mà vẫn responsive.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_09
+
+[Câu 10] Mã ID: QB_G1_10 | Nhóm: G1 (G1.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Khi xây dựng một bài viết trên blog có phần tiêu đề, tác giả, ngày đăng và các bình luận độc lập, cấu trúc HTML nào ngữ nghĩa nhất?
+Các phương án lựa chọn:
+   A. <div class="post"> có các thẻ <span>
+   B. <article> chứa <header>, các đoạn <p> nội dung và các thẻ <article> con cho bình luận
+   C. <section> chứa thẻ <aside> cho toàn bộ nội dung bài
+   D. <main> lồng bên trong thẻ <footer>
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: <article> dùng cho nội dung độc lập tự trọn vẹn, các bình luận cũng là các <article> con lồng bên trong.
+>>> Câu gốc tương ứng ở Đề A: QA_G1_10
+
+
+--------------------------------------------------------------------------------
+NHÓM 2: G2 - JAVASCRIPT & DOM (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G2_01 | Nhóm: G2 (G2.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Từ khóa nào trong JavaScript ES6 dùng để khai báo hằng số không thể gán lại giá trị?
+Các phương án lựa chọn:
+   A. var
+   B. let
+   C. const
+   D. static
+>>> ĐÁP ÁN ĐÚNG: [ C ]
+>>> GIẢI THÍCH: const được dùng để khai báo một biến có phạm vi khối (block-scoped) và không thể gán lại bằng toán tử gán.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_01
+
+[Câu 2] Mã ID: QB_G2_02 | Nhóm: G2 (G2.1) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Kết quả in ra console của đoạn mã sau là gì?
+const user = { name: "An", age: 20 };
+const { name, age } = user;
+console.log(name, age);
+Các phương án lựa chọn:
+   A. undefined undefined
+   B. An 20
+   C. { name: "An", age: 20 }
+   D. Lỗi cú pháp SyntaxError
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Đây là cú pháp Destructuring Assignment của ES6 giúp trích xuất các thuộc tính từ object vào các biến riêng biệt.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_02
+
+[Câu 3] Mã ID: QB_G2_03 | Nhóm: G2 (G2.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Phương thức chuẩn nào của Document dùng để gắn một hàm lắng nghe sự kiện (event listener) vào phần tử HTML?
+Các phương án lựa chọn:
+   A. element.attachEvent()
+   B. element.addEventListener()
+   C. element.listen()
+   D. element.setEventHandler()
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: addEventListener() là phương thức chuẩn của W3C DOM để đăng ký xử lý sự kiện.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_03
+
+[Câu 4] Mã ID: QB_G2_04 | Nhóm: G2 (G2.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Điểm khác biệt quan trọng nhất giữa Arrow Function và Regular Function trong JavaScript là gì?
+Các phương án lựa chọn:
+   A. Arrow function chạy chậm hơn function thường
+   B. Arrow function không có ngữ cảnh this riêng mà kế thừa từ phạm vi bao quanh (lexical this)
+   C. Arrow function không thể nhận tham số đầu vào
+   D. Arrow function có thể dùng làm hàm khởi tạo constructor với từ khóa new
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Arrow functions không định nghĩa ngữ cảnh this của riêng mình, this được bind theo ngữ cảnh bao bọc (lexical scoping).
+>>> Câu gốc tương ứng ở Đề A: QA_G2_04
+
+[Câu 5] Mã ID: QB_G2_05 | Nhóm: G2 (G2.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sau in ra giá trị gì?
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+Các phương án lựa chọn:
+   A. 0 1 2
+   B. 3 3 3
+   C. undefined undefined undefined
+   D. Lỗi ReferenceError
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Biến var có phạm vi hàm (function scope). Khi setTimeout thực thi sau 100ms, vòng lặp đã kết thúc và i có giá trị là 3.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_05
+
+[Câu 6] Mã ID: QB_G2_06 | Nhóm: G2 (G2.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Khái niệm Closure trong JavaScript được định nghĩa chính xác là gì?
+Các phương án lựa chọn:
+   A. Một hàm tự động đóng trình duyệt sau khi chạy xong
+   B. Khả năng một hàm ghi nhớ và truy cập vào các biến thuộc phạm vi từ vựng (lexical scope) của nó ngay cả khi hàm đó được thực thi bên ngoài phạm vi đó
+   C. Cơ chế giải phóng bộ nhớ của trình thu gom rác (Garbage Collector)
+   D. Một phương thức dùng để đóng kết nối WebSocket
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Closure là sự kết hợp giữa một hàm và môi trường từ vựng nơi hàm đó được khai báo.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_06
+
+[Câu 7] Mã ID: QB_G2_07 | Nhóm: G2 (G2.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Khi người dùng click vào một phần tử con bên trong nhiều thẻ cha, sự kiện lan truyền từ thẻ con ngược lên các thẻ cha được gọi là gì?
+Các phương án lựa chọn:
+   A. Event Capturing
+   B. Event Bubbling (Sủi bọt sự kiện)
+   C. Event Throttle
+   D. Event Hijacking
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Event bubbling là giai đoạn sự kiện sau khi kích hoạt tại target element sẽ truyền ngược lên các phần tử tổ tiên đến document.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_07
+
+[Câu 8] Mã ID: QB_G2_08 | Nhóm: G2 (G2.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sau in ra giá trị gì trên màn hình console?
+const obj = {
+  count: 10,
+  getCount: function() {
+    return () => this.count;
+  }
+};
+const fn = obj.getCount();
+console.log(fn());
+Các phương án lựa chọn:
+   A. undefined
+   B. 10
+   C. Lỗi TypeError: this is undefined
+   D. NaN
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: getCount là regular function được gọi qua obj nên this bên trong là obj. Arrow function kế thừa this của getCount, do đó this.count là 10.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_08
+
+[Câu 9] Mã ID: QB_G2_09 | Nhóm: G2 (G2.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Kỹ thuật "Event Delegation" mang lại lợi ích lớn nhất nào khi xử lý danh sách gồm 10,000 phần tử (ví dụ: danh sách sản phẩm)?
+Các phương án lựa chọn:
+   A. Giúp trình duyệt tải trang nhanh hơn mà không cần tải file CSS
+   B. Chỉ cần gắn 1 event listener duy nhất lên phần tử cha thay vì gắn 10,000 listener riêng lẻ, tiết kiệm đáng kể bộ nhớ
+   C. Tự động gửi request lên server mỗi khi click
+   D. Ngăn chặn hoàn toàn việc người dùng nhấp đúp
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Event Delegation lợi dụng event bubbling để quản lý sự kiện tập trung tại thẻ cha, tối ưu bộ nhớ vượt trội.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_09
+
+[Câu 10] Mã ID: QB_G2_10 | Nhóm: G2 (G2.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sao chép object sau tạo ra bản sao nông (shallow copy) hay bản sao sâu (deep copy)?
+const original = { a: 1, b: { c: 2 } };
+const clone = { ...original };
+Các phương án lựa chọn:
+   A. Deep copy hoàn toàn, sửa clone.b.c không ảnh hưởng original
+   B. Shallow copy, sửa clone.b.c sẽ làm thay đổi cả original.b.c
+   C. Gây lỗi cú pháp vì spread không áp dụng được cho object lồng nhau
+   D. Tạo liên kết tham chiếu (không phải bản sao)
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Toán tử Spread (...) chỉ copy nông các thuộc tính tầng 1. Thuộc tính b vẫn giữ nguyên tham chiếu vùng nhớ cũ.
+>>> Câu gốc tương ứng ở Đề A: QA_G2_10
+
+
+--------------------------------------------------------------------------------
+NHÓM 3: G3 - REACT CƠ BẢN (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G3_01 | Nhóm: G3 (G3.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Trong React, thuộc tính nào được truyền từ component cha xuống component con và có tính chất chỉ đọc (read-only)?
+Các phương án lựa chọn:
+   A. state
+   B. props
+   C. context
+   D. ref
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: props là dữ liệu truyền từ component cha và component con không được phép biến đổi (mutate) props trực tiếp.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_01
+
+[Câu 2] Mã ID: QB_G3_02 | Nhóm: G3 (G3.2) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Hook nào trong React dùng để khai báo và quản lý trạng thái nội bộ (local state) trong Function Component?
+Các phương án lựa chọn:
+   A. useEffect
+   B. useState
+   C. useContext
+   D. useMemo
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: useState trả về một cặp gồm giá trị state hiện tại và hàm cập nhật state.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_02
+
+[Câu 3] Mã ID: QB_G3_03 | Nhóm: G3 (G3.3) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Khi render một danh sách các phần tử bằng phương thức .map(), tại sao React yêu cầu mỗi phần tử phải có thuộc tính key?
+Các phương án lựa chọn:
+   A. Để tự động đánh số thứ tự hiển thị
+   B. Để thuật toán Reconciliation của React xác định chính xác phần tử nào bị thêm, sửa hoặc xóa, tối ưu quá trình re-render
+   C. Để áp dụng CSS class cho phần tử đó
+   D. Để lưu trữ dữ liệu vào database
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: key giúp React nhận diện danh tính ổn định của từng item khi danh sách biến động.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_03
+
+[Câu 4] Mã ID: QB_G3_04 | Nhóm: G3 (G3.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] useEffect(() => { console.log("Mounted"); }, []);
+Đoạn effect với mảng phụ thuộc rỗng ([]) này sẽ chạy khi nào?
+Các phương án lựa chọn:
+   A. Chạy lại sau mỗi lần component re-render
+   B. Chỉ chạy đúng 1 lần sau khi component được mount lần đầu tiên vào DOM
+   C. Chỉ chạy trước khi component bị unmount
+   D. Không bao giờ chạy
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Mảng dependency rỗng [] báo hiệu cho React rằng effect không phụ thuộc vào bất kỳ prop hay state nào, chỉ chạy 1 lần khi mount.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_04
+
+[Câu 5] Mã ID: QB_G3_05 | Nhóm: G3 (G3.1) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Cách cập nhật state đếm tăng thêm 1 nào dưới đây là an toàn nhất khi có nhiều sự kiện kích hoạt dồn dập?
+Các phương án lựa chọn:
+   A. setCount(count + 1)
+   B. setCount(prevCount => prevCount + 1)
+   C. count = count + 1
+   D. count++
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Functional update form setCount(prev => prev + 1) đảm bảo luôn lấy đúng giá trị state mới nhất trong hàng đợi cập nhật.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_05
+
+[Câu 6] Mã ID: QB_G3_06 | Nhóm: G3 (G3.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sau hiển thị gì khi biến unreadCount = 0?
+<div>{unreadCount && <span>Có tin nhắn mới</span>}</div>
+Các phương án lựa chọn:
+   A. Không hiển thị gì cả (khoảng trống)
+   B. In ra số 0 trên màn hình giao diện
+   C. In ra chữ "Có tin nhắn mới"
+   D. Gây lỗi crash ứng dụng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Trong JS, 0 là falsy. Toán tử && trả về vế trái nếu là falsy, dẫn đến React render trực tiếp giá trị số 0 ra UI. Cách đúng: unreadCount > 0 && ...
+>>> Câu gốc tương ứng ở Đề A: QA_G3_06
+
+[Câu 7] Mã ID: QB_G3_07 | Nhóm: G3 (G3.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Hàm cleanup trả về bên trong useEffect được kích hoạt khi nào?
+Đoạn mã code:
+----------------
+useEffect(() => {
+  const timer = setInterval(() => {}, 1000);
+  return () => clearInterval(timer);
+}, [id]);
+----------------
+Các phương án lựa chọn:
+   A. Chỉ khi trang web bị tắt hoàn toàn
+   B. Trước khi effect chạy lại ở lần render tiếp theo (khi id thay đổi) và khi component unmount
+   C. Ngay khi hàm useEffect vừa bắt đầu thực thi
+   D. Chỉ chạy khi có lỗi exception xảy ra
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Cleanup function dọn dẹp tài nguyên trước khi effect chạy lần mới và trước khi component bị gỡ khỏi DOM.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_07
+
+[Câu 8] Mã ID: QB_G3_08 | Nhóm: G3 (G3.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Một component danh sách lọc theo từ khóa đang lưu cả danh sách gốc và danh sách đã lọc trong hai state riêng, gây lệch dữ liệu khi danh sách gốc thay đổi. Cách sửa phù hợp nhất là gì?
+Các phương án lựa chọn:
+   A. Thêm state thứ ba đồng bộ hai state
+   B. Chỉ lưu danh sách gốc trong state, tính danh sách lọc khi render (derived state)
+   C. Dùng ref thay state cho cả hai
+   D. Tải lại trang sau mỗi lần lọc
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Đúng theo nguyên lý "Don't put in state what you can compute on the fly": tính danh sách lọc trực tiếp từ danh sách gốc và từ khóa tìm kiếm.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_08
+
+[Câu 9] Mã ID: QB_G3_09 | Nhóm: G3 (G3.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Nguyên nhân nào dẫn đến lỗi "Maximum update depth exceeded" (vòng lặp vô hạn re-render) trong đoạn mã sau?
+function MyComp() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([{ id: 1 }]);
+  });
+}
+Các phương án lựa chọn:
+   A. Do data là một mảng rỗng
+   B. Do useEffect không khai báo dependency array, mỗi lần setData kích hoạt render, render lại kích hoạt useEffect gọi setData tiếp
+   C. Do ID của phần tử là số nguyên
+   D. Do React không hỗ trợ hàm mũi tên trong effect
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thiếu dependency array khiến effect chạy sau mỗi lần render. setData gây render lại -> lặp vô tận.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_09
+
+[Câu 10] Mã ID: QB_G3_10 | Nhóm: G3 (G3.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Tại sao việc dùng chỉ số index mảng (items.map((item, index) => <Item key={index} />)) làm key có thể gây lỗi nghiêm trọng khi danh sách hỗ trợ xóa, sắp xếp hoặc thêm vào đầu?
+Các phương án lựa chọn:
+   A. Vì index là số nguyên, React chỉ chấp nhận chuỗi (string) làm key
+   B. Vì khi thứ tự phần tử thay đổi, index của item thay đổi theo khiến React liên kết nhầm local state của component cũ sang dữ liệu mới
+   C. Vì index làm tăng kích thước bundle của ứng dụng
+   D. Vì index không hiển thị được trên màn hình
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Index không đại diện cho danh tính nội tại của dữ liệu. Khi đổi chỗ hoặc xóa, index bị gán lại gây lệch state nội bộ giữa các phần tử.
+>>> Câu gốc tương ứng ở Đề A: QA_G3_10
+
+
+--------------------------------------------------------------------------------
+NHÓM 4: G4 - KẾT NỐI API & BẤT ĐỒNG BỘ (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G4_01 | Nhóm: G4 (G4.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Mã trạng thái HTTP (Status Code) nào dưới đây biểu thị yêu cầu đã được máy chủ tiếp nhận và xử lý thành công?
+Các phương án lựa chọn:
+   A. 200 OK
+   B. 404 Not Found
+   C. 500 Internal Server Error
+   D. 301 Moved Permanently
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: 200 OK biểu thị request thành công theo chuẩn giao thức HTTP.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_01
+
+[Câu 2] Mã ID: QB_G4_02 | Nhóm: G4 (G4.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Phương thức HTTP nào theo tiêu chuẩn RESTful được sử dụng để lấy danh sách tài nguyên từ máy chủ mà không làm thay đổi dữ liệu?
+Các phương án lựa chọn:
+   A. POST
+   B. GET
+   C. PUT
+   D. DELETE
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: GET là phương thức an toàn (safe) và bình đạm (idempotent) dùng để đọc dữ liệu.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_02
+
+[Câu 3] Mã ID: QB_G4_03 | Nhóm: G4 (G4.1) | Bloom: Hiểu | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Một Promise trong JavaScript có thể nằm ở một trong những trạng thái nào sau đây?
+Các phương án lựa chọn:
+   A. Pending, Fulfilled, Rejected
+   B. Start, Pause, Stop
+   C. Ready, Running, Terminated
+   D. Open, Closed, Reconnecting
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Promise có 3 trạng thái duy nhất: Pending (chờ), Fulfilled (thành công) hoặc Rejected (thất bại).
+>>> Câu gốc tương ứng ở Đề A: QA_G4_03
+
+[Câu 4] Mã ID: QB_G4_04 | Nhóm: G4 (G4.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Từ khóa await trong JavaScript chỉ có thể được sử dụng hợp lệ bên trong đâu?
+Các phương án lựa chọn:
+   A. Bên trong bất kỳ vòng lặp nào
+   B. Bên trong một hàm được khai báo với từ khóa async (hoặc top-level module)
+   C. Bên trong khối lệnh if/else
+   D. Bên trong hàm setTimeout
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: await chỉ có thể dùng trong async function (hoặc ES Module cấp cao nhất - top-level await).
+>>> Câu gốc tương ứng ở Đề A: QA_G4_04
+
+[Câu 5] Mã ID: QB_G4_05 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã dùng fetch lấy danh sách sản phẩm nhưng giao diện không hiển thị khi máy chủ trả lỗi 500. Phương án xử lý đúng nhất là gì?
+Các phương án lựa chọn:
+   A. Bỏ qua lỗi và giữ giao diện trống
+   B. Kiểm tra response.ok, hiển thị thông báo lỗi và giữ dữ liệu cũ (nếu có)
+   C. Gọi lại API vô hạn đến khi thành công
+   D. Ẩn toàn bộ trang khi có lỗi
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Fetch API không tự động reject khi nhận mã 500. Lập trình viên phải kiểm tra response.ok, thông báo lỗi cho người dùng và duy trì dữ liệu fallback.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_05
+
+[Câu 6] Mã ID: QB_G4_06 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Tại sao khi dùng Fetch API cần phải gọi await response.json() thay vì nhận dữ liệu ngay sau lệnh fetch?
+Các phương án lựa chọn:
+   A. Vì fetch chỉ trả về Headers, còn response.json() là thao tác đọc luồng dữ liệu (ReadableStream) bất đồng bộ
+   B. Vì fetch là hàm đồng bộ
+   C. Vì response.json() dùng để mã hóa mật khẩu
+   D. Vì đây là quy định bắt buộc của CSS
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: fetch() giải quyết ngay khi nhận được HTTP Header. Đọc body dưới dạng JSON là một stream bất đồng bộ cần thêm await.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_06
+
+[Câu 7] Mã ID: QB_G4_07 | Nhóm: G4 (G4.1) | Bloom: Phân tích | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sau in ra thứ tự nào trên console?
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+Các phương án lựa chọn:
+   A. 1 -> 2 -> 3 -> 4
+   B. 1 -> 4 -> 3 -> 2
+   C. 1 -> 4 -> 2 -> 3
+   D. 3 -> 1 -> 4 -> 2
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Thứ tự ưu tiên Event Loop: Đồng bộ (1, 4) -> Microtask queue (Promise: 3) -> Macrotask queue (setTimeout: 2).
+>>> Câu gốc tương ứng ở Đề A: QA_G4_07
+
+[Câu 8] Mã ID: QB_G4_08 | Nhóm: G4 (G4.2) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Khi người dùng gõ tìm kiếm liên tục, làm thế nào để hủy (cancel) các HTTP request cũ đang bay để tránh dữ liệu cũ ghi đè lên kết quả mới?
+Các phương án lựa chọn:
+   A. Sử dụng AbortController và truyền signal vào hàm fetch
+   B. Tắt kết nối internet tạm thời
+   C. Gọi hàm window.stop()
+   D. Khởi động lại trình duyệt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: AbortController cung cấp đối tượng signal cho fetch để chủ động hủy bỏ network request khi không còn cần thiết.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_08
+
+[Câu 9] Mã ID: QB_G4_09 | Nhóm: G4 (G4.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Để gửi dữ liệu một đối tượng mới lên server theo chuẩn JSON, cấu hình fetch nào sau đây là đầy đủ và chính xác nhất?
+Đoạn mã code:
+----------------
+fetch(url, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+----------------
+Các phương án lựa chọn:
+   A. Thiếu headers Content-Type
+   B. Cấu hình hoàn toàn chính xác theo chuẩn HTTP
+   C. Body phải là đối tượng trực tiếp data (không cần stringify)
+   D. Method phải là GET
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Cần method POST, header báo kiểu dữ liệu Content-Type: application/json, và chuyển object thành JSON string.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_09
+
+[Câu 10] Mã ID: QB_G4_10 | Nhóm: G4 (G4.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Phương thức Promise.all([p1, p2, p3]) có hành vi như thế nào nếu một trong ba promise (ví dụ p2) bị reject?
+Các phương án lựa chọn:
+   A. Vẫn đợi các promise khác và trả về kết quả thành công của p1 và p3
+   B. Ngay lập tức reject toàn bộ với lý do lỗi của p2 (fail-fast)
+   C. Tự động gọi lại p2 nhiều lần
+   D. Chuyển trạng thái sang pending mãi mãi
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Promise.all hoạt động theo cơ chế all-or-nothing (fail-fast). Nếu muốn nhận kết quả cả thành công lẫn thất bại, dùng Promise.allSettled.
+>>> Câu gốc tương ứng ở Đề A: QA_G4_10
+
+
+--------------------------------------------------------------------------------
+NHÓM 5: G5 - GIT/GITHUB & DEVTOOLS (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G5_01 | Nhóm: G5 (G5.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Lệnh Git nào dùng để đưa các tệp đã chỉnh sửa vào khu vực chuẩn bị commit (Staging Area)?
+Các phương án lựa chọn:
+   A. git status
+   B. git add .
+   C. git commit
+   D. git push
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git add đưa các tệp từ working directory vào staging area.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_01
+
+[Câu 2] Mã ID: QB_G5_02 | Nhóm: G5 (G5.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Lệnh nào dùng để kiểm tra trạng thái các tệp đang thay đổi, chưa được theo dõi (untracked) hoặc đã stage?
+Các phương án lựa chọn:
+   A. git log
+   B. git status
+   C. git branch
+   D. git checkout
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git status cung cấp thông tin tổng quan trạng thái làm việc hiện tại của Git.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_02
+
+[Câu 3] Mã ID: QB_G5_03 | Nhóm: G5 (G5.2) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Cú pháp lệnh Git nào cho phép tạo một nhánh mới có tên feature-login và chuyển ngay sang nhánh đó?
+Các phương án lựa chọn:
+   A. git checkout -b feature-login
+   B. git branch feature-login
+   C. git switch feature-login
+   D. git merge feature-login
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: git checkout -b (hoặc git switch -c) tạo mới và đồng thời chuyển sang nhánh vừa tạo.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_03
+
+[Câu 4] Mã ID: QB_G5_04 | Nhóm: G5 (G5.2) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Khi ở nhánh main và muốn gộp các thay đổi từ nhánh feature vào main, câu lệnh nào được sử dụng?
+Các phương án lựa chọn:
+   A. git merge feature
+   B. git branch feature
+   C. git push feature
+   D. git clone feature
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Đứng tại nhánh đích (main) và chạy git merge <nhánh-nguồn>.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_04
+
+[Câu 5] Mã ID: QB_G5_05 | Nhóm: G5 (G5.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Merge Conflict (Xung đột gộp nhánh) trong Git xảy ra trong tình huống điển hình nào?
+Các phương án lựa chọn:
+   A. Khi hai lập trình viên cùng sửa trên cùng một dòng trong cùng một tệp và Git không thể tự quyết định lấy bản nào
+   B. Khi mất kết nối mạng internet
+   C. Khi dung lượng commit vượt quá 100MB
+   D. Khi tên nhánh quá dài
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Conflict xảy ra khi có các thay đổi đối nghịch nhau trên cùng vùng code giữa hai nhánh.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_05
+
+[Câu 6] Mã ID: QB_G5_06 | Nhóm: G5 (G5.3) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Lệnh git pull thực chất là sự kết hợp của hai hành động Git nào?
+Các phương án lựa chọn:
+   A. git add và git commit
+   B. git fetch và git merge
+   C. git clone và git checkout
+   D. git branch và git push
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: git pull = git fetch (tải dữ liệu từ remote về) + git merge (gộp vào nhánh cục bộ hiện tại).
+>>> Câu gốc tương ứng ở Đề A: QA_G5_06
+
+[Câu 7] Mã ID: QB_G5_07 | Nhóm: G5 (G5.1) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Tệp nào dùng để chỉ định cho Git bỏ qua không theo dõi thư mục node_modules hoặc các tệp cấu hình chứa mã khóa bí mật (.env)?
+Các phương án lựa chọn:
+   A. .gitconfig
+   B. .gitignore
+   C. package.json
+   D. README.md
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: .gitignore liệt kê các pattern file/thư mục mà Git sẽ hoàn toàn bỏ qua.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_07
+
+[Câu 8] Mã ID: QB_G5_08 | Nhóm: G5 (G5.3) | Bloom: Vận dụng | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Khi gặp xung đột conflict, các ký hiệu đánh dấu <<<<<<< HEAD, =======, và >>>>>>> feature biểu thị điều gì trong tệp?
+Các phương án lựa chọn:
+   A. Ký hiệu lỗi cú pháp của ngôn ngữ lập trình
+   B. Vùng xung đột: Phần giữa HEAD và ======= là code nhánh hiện tại, phần giữa ======= và feature là code nhánh cần gộp
+   C. Mã hóa bảo mật SHA của commit
+   D. Thẻ HTML đặc biệt của GitHub
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Git chèn conflict markers để lập trình viên lựa chọn giữ bản code nào hoặc kết hợp cả hai.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_08
+
+[Câu 9] Mã ID: QB_G5_09 | Nhóm: G5 (G5.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Thông điệp commit nào dưới đây tuân thủ đúng quy ước quốc tế Conventional Commits nhất cho việc bổ sung tính năng giỏ hàng?
+Các phương án lựa chọn:
+   A. update code
+   B. fix bug and add cart
+   C. feat(cart): implement add to cart and quantity adjustment
+   D. Commit lan 2
+>>> ĐÁP ÁN ĐÚNG: [ C ]
+>>> GIẢI THÍCH: Conventional Commits có cấu trúc type(scope): description rõ ràng, tách bạch tính năng (feat).
+>>> Câu gốc tương ứng ở Đề A: QA_G5_09
+
+[Câu 10] Mã ID: QB_G5_10 | Nhóm: G5 (G5.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Lệnh git push --force có thể gây hậu quả nguy hiểm gì khi làm việc nhóm trên nhánh chung (như develop hoặc main)?
+Các phương án lựa chọn:
+   A. Làm hỏng ổ cứng máy tính cá nhân
+   B. Ghi đè và xóa mất lịch sử commit của các thành viên khác trên server từ xa
+   C. Tự động hủy bỏ tài khoản GitHub
+   D. Khóa toàn bộ quyền truy cập mạng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: --force cưỡng chế viết đè lịch sử nhánh remote, cực kỳ rủi ro trong làm việc nhóm.
+>>> Câu gốc tương ứng ở Đề A: QA_G5_10
+
+
+--------------------------------------------------------------------------------
+NHÓM 6: G6 - DEBUG & KIỂM THỬ (Đề B - Hậu kiểm)
+--------------------------------------------------------------------------------
+
+[Câu 1] Mã ID: QB_G6_01 | Nhóm: G6 (G6.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Tab nào trong Chrome DevTools dùng để kiểm tra các thông điệp lỗi console.error() và thực thi lệnh JavaScript trực tiếp?
+Các phương án lựa chọn:
+   A. Elements
+   B. Console
+   C. Network
+   D. Application
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Tab Console là nơi xuất các thông điệp log/error và là môi trường REPL tương tác.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_01
+
+[Câu 2] Mã ID: QB_G6_02 | Nhóm: G6 (G6.1) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Tab nào trong DevTools cho phép kiểm tra chi tiết các yêu cầu API HTTP gửi đi, Headers, Payload và dữ liệu JSON phản hồi?
+Các phương án lựa chọn:
+   A. Sources
+   B. Network
+   C. Performance
+   D. Memory
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Tab Network ghi lại mọi hoạt động truyền thông mạng của trang web.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_02
+
+[Câu 3] Mã ID: QB_G6_03 | Nhóm: G6 (G6.3) | Bloom: Nhớ | Độ khó: Dễ
+Nội dung: [Đề B - Câu sinh đôi] Mục đích chính của Kiểm thử đơn vị (Unit Test) trong phát triển phần mềm là gì?
+Các phương án lựa chọn:
+   A. Kiểm tra tốc độ gõ phím của lập trình viên
+   B. Kiểm tra tính đúng đắn của từng đơn vị mã nguồn nhỏ nhất (hàm, phương thức) một cách độc lập
+   C. Kiểm tra giao diện người dùng trên nhiều loại máy tính
+   D. Kiểm tra khả năng chịu tải của server khi có hàng triệu người dùng
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: Unit test tập trung kiểm thử các đơn vị code riêng lẻ, cô lập với hệ thống bên ngoài.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_03
+
+[Câu 4] Mã ID: QB_G6_04 | Nhóm: G6 (G6.1) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Lỗi "Uncaught TypeError: Cannot read properties of undefined (reading 'name')" thường xuất phát từ nguyên nhân nào?
+Các phương án lựa chọn:
+   A. Do biến đang truy cập thuộc tính .name có giá trị là undefined (chưa được gán hoặc API chưa tải xong)
+   B. Do tên biến bị viết hoa
+   C. Do mạng internet bị ngắt
+   D. Do máy chủ bị tắt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Truy cập thuộc tính trên một giá trị null hoặc undefined sinh ra ngoại lệ TypeError kinh điển.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_04
+
+[Câu 5] Mã ID: QB_G6_05 | Nhóm: G6 (G6.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Lợi thế lớn nhất của việc đặt Breakpoint trong tab Sources so với việc viết console.log() tràn lan khi debug là gì?
+Các phương án lựa chọn:
+   A. Breakpoint có thể tạm dừng luồng chạy tại thời điểm thực thi, xem giá trị biến trong Call Stack và không cần sửa/xóa code sau khi fix xong
+   B. Breakpoint tự động sửa lỗi cho lập trình viên
+   C. Breakpoint giúp website chạy nhanh gấp đôi
+   D. Breakpoint không cần mở trình duyệt
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Breakpoint cho phép kiểm tra trạng thái bộ nhớ thời gian thực, từng bước thực thi (step over, step into) sạch sẽ.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_05
+
+[Câu 6] Mã ID: QB_G6_06 | Nhóm: G6 (G6.2) | Bloom: Vận dụng | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Khi gặp lỗi giao diện không cập nhật sau khi gọi hàm sửa mảng: items.push(newItem); setItems(items); nguyên nhân là gì?
+Các phương án lựa chọn:
+   A. items.push biến đổi trực tiếp (mutate) mảng cũ, tham chiếu vùng nhớ không đổi nên React coi như state chưa đổi và bỏ qua render
+   B. Do hàm push không hỗ trợ object
+   C. Do React bị lỗi cú pháp
+   D. Do mạng chậm
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: React so sánh tham chiếu (Object.is). Cần tạo mảng mới: setItems([...items, newItem]).
+>>> Câu gốc tương ứng ở Đề A: QA_G6_06
+
+[Câu 7] Mã ID: QB_G6_07 | Nhóm: G6 (G6.3) | Bloom: Hiểu | Độ khó: Trung bình
+Nội dung: [Đề B - Câu sinh đôi] Mô hình chuẩn AAA trong viết Unit Test đại diện cho 3 bước nào?
+Các phương án lựa chọn:
+   A. Action, Algorithm, Array
+   B. Arrange (Thiết lập), Act (Hành động), Assert (Khẳng định kết quả)
+   C. Async, Await, Apply
+   D. Add, Align, Animate
+>>> ĐÁP ÁN ĐÚNG: [ B ]
+>>> GIẢI THÍCH: AAA: Arrange (chuẩn bị dữ liệu), Act (gọi hàm cần test), Assert (so sánh kết quả mong đợi).
+>>> Câu gốc tương ứng ở Đề A: QA_G6_07
+
+[Câu 8] Mã ID: QB_G6_08 | Nhóm: G6 (G6.2) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Đoạn mã sau xảy ra lỗi gì khi chạy?
+function sum(n) {
+  if (n === 0) return 0;
+  return n + sum(n);
+}
+Các phương án lựa chọn:
+   A. Lỗi RangeError: Maximum call stack size exceeded (Tràn ngăn xếp do đệ quy vô hạn)
+   B. Chạy bình thường và trả về kết quả n
+   C. Lỗi cú pháp SyntaxError
+   D. Lỗi bộ nhớ RAM đầy
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: sum(n) gọi lại chính nó với cùng tham số n mà không giảm dần về 0, dẫn tới tràn Call Stack.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_08
+
+[Câu 9] Mã ID: QB_G6_09 | Nhóm: G6 (G6.1) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Để giả lập tình huống mạng yếu hoặc mất kết nối nhằm kiểm tra trạng thái Offline và Skeleton UI của ứng dụng, ta thao tác ở đâu trong DevTools?
+Các phương án lựa chọn:
+   A. Tab Network -> Throttling dropdown -> Chọn Slow 3G hoặc Offline
+   B. Rút dây mạng trực tiếp
+   C. Tab Memory -> Take snapshot
+   D. Tab Security -> Clear certificates
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: Network Throttling cho phép giả lập mạng chậm 3G, 4G hoặc Offline ngay trong trình duyệt.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_09
+
+[Câu 10] Mã ID: QB_G6_10 | Nhóm: G6 (G6.3) | Bloom: Phân tích | Độ khó: Khó
+Nội dung: [Đề B - Câu sinh đôi] Đoạn test case sau kiểm tra hàm tính tổng hợp lệ khi nào?
+test("tính tổng đúng", () => {
+  expect(sum(2, 3)).toBe(5);
+});
+Các phương án lựa chọn:
+   A. Khi hàm sum(2, 3) trả về chính xác giá trị 5
+   B. Khi hàm sum(2, 3) không có lỗi cú pháp
+   C. Khi kết quả khác 5
+   D. Khi mã nguồn được biên dịch xong
+>>> ĐÁP ÁN ĐÚNG: [ A ]
+>>> GIẢI THÍCH: expect(value).toBe(expected) là assertion so sánh bằng nghiêm ngặt trong Jest/Vitest.
+>>> Câu gốc tương ứng ở Đề A: QA_G6_10
+
+
+================================================================================
+PHẦN 3: BỘ CÂU HỎI PHỎNG VẤN KỸ THUẬT FRONTEND THỰC TẾ (MOCK INTERVIEW) [18 CÂU]
+Tổng hợp từ các yêu cầu tuyển dụng thực tế và phỏng vấn Tech Lead doanh nghiệp
+================================================================================
+
+[Câu phỏng vấn 1] Mã: INT_G1_01 | Nhóm kỹ năng: G1 (HTML/CSS & Responsive) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Giải thích mô hình hộp (Box Model) trong CSS và ý nghĩa của box-sizing: border-box?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Content, Padding, Border, Margin
+   2. Mặc định content-box làm tăng kích thước
+   3. border-box giữ kích thước cố định
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Box Model gồm 4 thành phần: Content (nội dung), Padding (khoảng đệm), Border (viền) và Margin (khoảng cách ngoài). Mặc định box-sizing: content-box sẽ cộng thêm padding và border vào width của phần tử khiến giao diện dễ bị vỡ. Khi đặt box-sizing: border-box, width bao trọn cả padding và border, giúp việc căn chỉnh layout dễ dàng và chuẩn xác.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Nghĩ rằng margin cũng được tính vào width khi dùng border-box
+   - Không phân biệt được padding bên trong và margin bên ngoài
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 2] Mã: INT_G1_02 | Nhóm kỹ năng: G1 (HTML/CSS & Responsive) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Khi nào bạn nên dùng CSS Flexbox và khi nào nên dùng CSS Grid?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Flexbox: 1 chiều (hàng hoặc cột)
+   2. Grid: 2 chiều (hàng và cột đồng thời)
+   3. Use cases cụ thể
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Flexbox là hệ thống bố cục một chiều (1D), tối ưu cho việc căn chỉnh các phần tử theo một hướng (như menu điều hướng, thanh công cụ, căn giữa item). CSS Grid là hệ thống bố cục hai chiều (2D), tối ưu cho việc chia lưới toàn trang gồm nhiều hàng và cột đan xen (như bảng sản phẩm, layout báo chí phức tạp). Có thể kết hợp Grid cho layout tổng thể và Flexbox cho các thành phần con.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Cố dùng Flexbox lồng nhau 4-5 cấp để làm lưới thay vì dùng Grid
+   - Xem Flexbox và Grid loại trừ lẫn nhau
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 3] Mã: INT_G2_01 | Nhóm kỹ năng: G2 (JavaScript & DOM) | Mức độ: Nâng cao (Junior)
+CÂU HỎI: "Giải thích cơ chế hoạt động của Event Loop trong JavaScript?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Call Stack
+   2. Web APIs
+   3. Callback Queue (Microtask vs Macrotask)
+   4. Single-threaded non-blocking
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+JavaScript là ngôn ngữ đơn luồng (single-threaded). Khi gặp các tác vụ bất đồng bộ (như setTimeout, fetch), JS đẩy sang Web APIs để xử lý nền và tiếp tục chạy mã đồng bộ trong Call Stack. Khi Call Stack rỗng, Event Loop sẽ kiểm tra hàng đợi: ưu tiên lấy toàn bộ Microtask (Promise, queueMicrotask) ra chạy trước, sau đó mới lấy Macrotask (setTimeout, setInterval).
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Nghĩ rằng setTimeout(fn, 0) sẽ chạy ngay lập tức mà không cần chờ Call Stack rỗng
+   - Không biết Promise có độ ưu tiên cao hơn setTimeout
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 4] Mã: INT_G2_02 | Nhóm kỹ năng: G2 (JavaScript & DOM) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Closure là gì? Cho một ví dụ thực tế về ứng dụng của Closure?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Lexical Scope
+   2. Hàm con truy cập biến hàm cha
+   3. Data privacy / Memoization
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Closure là khả năng một hàm ghi nhớ và truy cập vào các biến thuộc phạm vi từ vựng (lexical scope) của nó, ngay cả khi hàm cha đã thực thi xong và kết thúc. Ví dụ thực tế: tạo biến riêng tư (private variable) trong hàm đếm counter, hoặc hàm ghi nhớ kết quả tính toán (memoization), hoặc các custom hook trong React.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Nhầm closure với callback thông thường
+   - Không chú ý rò rỉ bộ nhớ (memory leak) nếu closure giữ tham chiếu tới các biến quá lớn không dùng nữa
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 5] Mã: INT_G3_01 | Nhóm kỹ năng: G3 (React cơ bản) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Tại sao không được phép thay đổi (mutate) State trực tiếp trong React mà phải dùng setState/setCount?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Immutability
+   2. Reconciliation
+   3. So sánh tham chiếu Object.is
+   4. Re-render trigger
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+React dựa vào tính bất biến (Immutability) để phát hiện sự thay đổi trạng thái thông qua so sánh tham chiếu vùng nhớ (shallow comparison - Object.is). Nếu ta mutate trực tiếp (ví dụ: state.push()), tham chiếu của object/array không hề thay đổi, React sẽ coi như không có gì mới và bỏ qua việc kích hoạt render lại giao diện, gây lỗi đồng bộ.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Viết arr.push() rồi gọi setArr(arr)
+   - Không dùng cú pháp spread [...arr] hoặc hàm cập nhật functional setArr(prev => [...prev])
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 6] Mã: INT_G3_02 | Nhóm kỹ năng: G3 (React cơ bản) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Quy tắc Dependency Array trong useEffect là gì? Điều gì xảy ra nếu quên truyền dependency?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. []: Chạy 1 lần mount
+   2. [deps]: Chạy khi deps thay đổi
+   3. Không truyền: Chạy sau mọi lần render
+   4. Infinite loop
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Dependency Array quy định khi nào Effect sẽ thực thi lại. Nếu không truyền mảng phụ thuộc, useEffect sẽ chạy lại sau mỗi lần component render, nếu bên trong có setState sẽ dẫn đến lỗi lặp vô hạn (Infinite Loop). Nếu truyền [], effect chỉ chạy 1 lần khi mount. Nếu truyền [a, b], effect chỉ chạy lại khi a hoặc b thay đổi giá trị.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Bỏ sót các biến/hàm được dùng bên trong effect ra khỏi mảng dependency (stale closure)
+   - Truyền object mới mỗi lần render làm effect chạy liên tục
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 7] Mã: INT_G4_01 | Nhóm kỹ năng: G4 (Kết nối API & Bất đồng bộ) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Tại sao Fetch API không nhảy vào khối catch khi máy chủ trả về mã lỗi 404 hoặc 500?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Fetch chỉ reject khi lỗi mạng (network failure)
+   2. Mã HTTP 404/500 vẫn là response hợp lệ
+   3. response.ok
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Fetch API được thiết kế để chỉ reject Promise khi có lỗi mạng thực sự (như mất internet, sai DNS hoặc CORS block). Khi máy chủ vẫn phản hồi (dù là mã 404 Not Found hay 500 Internal Server Error), Promise vẫn được giải quyết (resolved). Do đó lập trình viên phải chủ động kiểm tra thuộc tính response.ok (true khi status 200–299) và ném lỗi thủ công.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Chỉ bọc fetch trong try/catch mà không kiểm tra response.ok, dẫn đến giao diện hiển thị dữ liệu rác
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 8] Mã: INT_G5_01 | Nhóm kỹ năng: G5 (Git/GitHub & DevTools) | Mức độ: Cơ bản (Fresher)
+CÂU HỎI: "Trình bày quy trình làm việc nhóm bằng Git Feature Branch chuẩn mà bạn áp dụng?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. git pull main
+   2. git checkout -b feature/...
+   3. Conventional commit
+   4. Push & Pull Request (PR)
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Quy trình chuẩn: 1. Đứng tại nhánh main/develop cập nhật bản mới nhất (git pull). 2. Tạo nhánh tính năng mới (git checkout -b feature/login). 3. Lập trình và commit theo quy chuẩn Conventional Commits (feat, fix). 4. Đẩy nhánh lên GitHub (git push -u origin feature/login). 5. Tạo Pull Request (PR) để đồng đội review code trước khi gộp (merge) vào nhánh chính.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Commit và push thẳng vào nhánh main khi làm việc nhóm
+   - Dùng git push --force bừa bãi
+
+------------------------------------------------------------
+
+[Câu phỏng vấn 9] Mã: INT_G6_01 | Nhóm kỹ năng: G6 (Debug & Kiểm thử) | Mức độ: Nâng cao (Junior)
+CÂU HỎI: "Làm thế nào để tìm nguyên nhân và khắc phục lỗi rò rỉ bộ nhớ (Memory Leak) trong ứng dụng Frontend?"
+
+CÁC Ý CHÍNH CẦN NÊU ĐƯỢC (KEY POINTS):
+   1. Cleanup function trong useEffect
+   2. Event listener chưa gỡ
+   3. DevTools Memory Heap Snapshot
+
+CÂU TRẢ LỜI MẪU CHUẨN MỰC:
+Nguyên nhân phổ biến: quên clear setInterval/setTimeout, chưa gỡ bỏ addEventListener khi component unmount, hoặc giữ tham chiếu biến toàn cục trong closure. Cách debug: Dùng Chrome DevTools tab Memory, chụp Heap Snapshot trước và sau khi thao tác chuyển trang để đối sánh các object còn sót lại (Detached DOM trees). Trong React, luôn viết hàm cleanup trong useEffect để hủy listener/interval.
+
+CÁC LỖI THƯỜNG GẶP CẦN TRÁNH:
+   - Chỉ dựa vào console.log thay vì dùng công cụ Profiler/Memory của trình duyệt
+
+------------------------------------------------------------
+
