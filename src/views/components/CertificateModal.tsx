@@ -44,12 +44,12 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
       padding: '20px'
     }}>
       <div className="certificate-modal-container" style={{
-        backgroundColor: '#0f172a',
-        border: '2px solid #38bdf8',
+        backgroundColor: 'var(--bg-card)',
+        border: '2px solid var(--accent)',
         borderRadius: '16px',
         maxWidth: '850px',
         width: '100%',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.3)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.2)',
         overflow: 'hidden',
         position: 'relative'
       }}>
@@ -59,10 +59,10 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '12px 20px',
-          background: 'rgba(30, 41, 59, 0.8)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          background: 'var(--bg-card-subtle)',
+          borderBottom: '1px solid var(--border-subtle)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#38bdf8', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent)', fontWeight: 600 }}>
             <Award size={18} />
             <span>CHỨNG THỰC NĂNG LỰC HỌC THUẬT & DOANH NGHIỆP</span>
           </div>
@@ -73,7 +73,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                background: '#0284c7',
+                background: 'var(--primary)',
                 color: '#fff',
                 border: 'none',
                 padding: '6px 14px',
@@ -90,7 +90,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#94a3b8',
+                color: 'var(--text-muted)',
                 cursor: 'pointer',
                 padding: '4px',
                 borderRadius: '4px'
@@ -104,13 +104,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         {/* Certificate Body (Official Layout) */}
         <div className="printable-certificate" style={{
           padding: '40px',
-          background: 'linear-gradient(135deg, #0b1329 0%, #080d1a 100%)',
-          border: '8px double #1e293b',
+          background: 'var(--bg-card)',
+          border: '8px double var(--border-subtle)',
           margin: '16px',
           borderRadius: '12px',
           position: 'relative',
           textAlign: 'center',
-          color: '#f8fafc'
+          color: 'var(--text-main)'
         }}>
           {/* Watermark Logo */}
           <div style={{
@@ -118,7 +118,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            opacity: 0.03,
+            opacity: 0.04,
             pointerEvents: 'none'
           }}>
             <ShieldCheck size={380} />
@@ -126,19 +126,19 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           {/* Academic Header */}
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ fontSize: '13px', letterSpacing: '2px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700 }}>
+            <div style={{ fontSize: '13px', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
               TRƯỜNG ĐẠI HỌC TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)
             </div>
-            <div style={{ fontSize: '15px', letterSpacing: '1.5px', color: '#38bdf8', fontWeight: 800, marginTop: '4px' }}>
+            <div style={{ fontSize: '15px', letterSpacing: '1.5px', color: 'var(--accent)', fontWeight: 800, marginTop: '4px' }}>
               VIỆN CÔNG NGHỆ THÔNG TIN • ĐỀ TÀI NCKH SINH VIÊN 2026
             </div>
-            <div style={{ width: '80px', height: '2px', background: '#38bdf8', margin: '12px auto' }}></div>
+            <div style={{ width: '80px', height: '2px', background: 'var(--accent)', margin: '12px auto' }}></div>
           </div>
 
           {/* Certificate Title */}
           <h1 style={{
             fontSize: '24px',
-            color: '#f1f5f9',
+            color: 'var(--text-main)',
             letterSpacing: '1px',
             textTransform: 'uppercase',
             fontWeight: 800,
@@ -148,34 +148,34 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           </h1>
           <div style={{
             fontSize: '15px',
-            color: '#38bdf8',
+            color: 'var(--accent)',
             fontStyle: 'italic',
             marginBottom: '24px'
           }}>
             (Certificate of Frontend Competency for Intern/Fresher)
           </div>
 
-          <p style={{ fontSize: '14px', color: '#94a3b8', marginBottom: '8px' }}>
+          <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '8px' }}>
             Hội đồng Đánh giá Năng lực Khoa học Công nghệ Viện CNTT chứng nhận sinh viên:
           </p>
 
           {/* Student Name */}
           <h2 style={{
             fontSize: '30px',
-            color: '#38bdf8',
+            color: 'var(--accent)',
             fontWeight: 800,
             letterSpacing: '0.5px',
             margin: '8px 0 4px 0'
           }}>
             {student.name}
           </h2>
-          <div style={{ fontSize: '14px', color: '#cbd5e1', marginBottom: '20px' }}>
-            Mã sinh viên: <strong>{student.code}</strong> • Định hướng chuyên môn: <strong>{student.targetRole}</strong>
+          <div style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '20px' }}>
+            Mã sinh viên: <strong style={{ color: 'var(--text-main)' }}>{student.code}</strong> • Định hướng chuyên môn: <strong style={{ color: 'var(--text-main)' }}>{student.targetRole}</strong>
           </div>
 
           <p style={{
             fontSize: '13px',
-            color: '#94a3b8',
+            color: 'var(--text-muted)',
             maxWidth: '620px',
             margin: '0 auto 24px auto',
             lineHeight: '1.6'
@@ -192,33 +192,33 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             marginBottom: '28px'
           }}>
             <div style={{
-              background: 'rgba(30, 41, 59, 0.7)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              background: 'var(--bg-card-subtle)',
+              border: '1px solid var(--border-subtle)',
               padding: '10px 18px',
               borderRadius: '8px'
             }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block' }}>ĐIỂM NĂNG LỰC TỔNG</span>
-              <strong style={{ fontSize: '20px', color: '#10b981' }}>{score}/100</strong>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>ĐIỂM NĂNG LỰC TỔNG</span>
+              <strong style={{ fontSize: '20px', color: 'var(--color-success)' }}>{score}/100</strong>
             </div>
 
             <div style={{
-              background: 'rgba(30, 41, 59, 0.7)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              background: 'var(--bg-card-subtle)',
+              border: '1px solid var(--border-subtle)',
               padding: '10px 18px',
               borderRadius: '8px'
             }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block' }}>CHUẨN DOANH NGHIỆP R(s)</span>
-              <strong style={{ fontSize: '20px', color: '#38bdf8' }}>70% (ĐẠT)</strong>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>CHUẨN DOANH NGHIỆP R(s)</span>
+              <strong style={{ fontSize: '20px', color: 'var(--accent)' }}>70% (ĐẠT)</strong>
             </div>
 
             <div style={{
-              background: 'rgba(30, 41, 59, 0.7)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              background: 'var(--bg-card-subtle)',
+              border: '1px solid var(--border-subtle)',
               padding: '10px 18px',
               borderRadius: '8px'
             }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block' }}>KỸ THUẬT GIT & RUBRIC</span>
-              <strong style={{ fontSize: '20px', color: '#a855f7' }}>9/9 Điểm</strong>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>KỸ THUẬT GIT & RUBRIC</span>
+              <strong style={{ fontSize: '20px', color: 'var(--color-purple)' }}>9/9 Điểm</strong>
             </div>
           </div>
 
@@ -229,16 +229,16 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             alignItems: 'center',
             marginTop: '30px',
             paddingTop: '20px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+            borderTop: '1px solid var(--border-subtle)'
           }}>
             {/* Left: Researcher */}
             <div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '40px' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '40px' }}>
                 Hà Nội, ngày {issueDate}<br />
                 <strong>TRƯỞNG NHÓM NGHIÊN CỨU</strong>
               </div>
-              <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: '14px' }}>Nguyễn Duy Hưng</div>
-              <div style={{ fontSize: '11px', color: '#64748b' }}>Viện CNTT FBU</div>
+              <div style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '14px' }}>Nguyễn Duy Hưng</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Viện CNTT FBU</div>
             </div>
 
             {/* Center: Verification Stamp / Seal */}
@@ -262,19 +262,19 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 <span>VIỆN CNTT</span>
                 <span>CHỨNG THỰC</span>
               </div>
-              <div style={{ fontSize: '9px', color: '#64748b', marginTop: '6px', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: '9px', color: 'var(--text-dim)', marginTop: '6px', fontFamily: 'monospace' }}>
                 {certId}
               </div>
             </div>
 
             {/* Right: Advisor */}
             <div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '40px' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '40px' }}>
                 Xác nhận từ Viện CNTT FBU<br />
                 <strong>GIẢNG VIÊN HƯỚNG DẪN</strong>
               </div>
-              <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: '14px' }}>Nguyễn Thanh Tuyên</div>
-              <div style={{ fontSize: '11px', color: '#64748b' }}>Giảng viên Viện CNTT FBU</div>
+              <div style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '14px' }}>Nguyễn Thanh Tuyên</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Giảng viên Viện CNTT FBU</div>
             </div>
           </div>
         </div>

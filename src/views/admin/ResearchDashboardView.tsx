@@ -115,15 +115,15 @@ export const ResearchDashboardView: React.FC = () => {
             </p>
             <div className="qa-evidence-box">
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Xác lập khung 6 nhóm & 18 kỹ năng con có chỉ báo quan sát rõ ràng (Bảng 3).</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Căn cứ nguồn: 12 tin tuyển dụng TopCV, roadmap.sh và chương trình đào tạo FBU.</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Kết quả thẩm định chuyên gia: <strong>92.5%</strong> mục được đánh giá "Phù hợp/Rất phù hợp" (Vượt ngưỡng quy ước ≥ 80%).</span>
               </div>
             </div>
@@ -140,15 +140,15 @@ export const ResearchDashboardView: React.FC = () => {
             </p>
             <div className="qa-evidence-box">
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Thực hiện đối chiếu mù (người chấm không biết trước kết quả của hệ thống).</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Tỉ lệ thống nhất giữa danh sách điểm yếu do hệ thống chỉ ra và nhận xét chuyên gia: <strong>{metrics.systemExpertAgreementRate}%</strong>.</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Tự động phát hiện cảnh báo khi 2 chuyên gia lệch nhau $\ge 2$ điểm trên Rubric để giải trình.</span>
               </div>
             </div>
@@ -165,15 +165,15 @@ export const ResearchDashboardView: React.FC = () => {
             </p>
             <div className="qa-evidence-box">
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Tỉ lệ lộ trình không vi phạm quan hệ tiên quyết: <strong>100%</strong> (Đã kiểm tra tự động theo đồ thị DAG).</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Hồ sơ A hổng JS được xếp học JS trước React; Hồ sơ B hổng Git được xếp học Git trước theo độ ưu tiên khoảng cách.</span>
               </div>
               <div className="evidence-item">
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Thời lượng lộ trình tinh gọn (10–14 giờ) hoàn toàn khả thi trong quỹ 7–10 ngày tự học.</span>
               </div>
             </div>
@@ -184,7 +184,7 @@ export const ResearchDashboardView: React.FC = () => {
       {/* Cronbach's Alpha Reliability Table */}
       <div className="card-panel cronbach-panel">
         <div className="panel-header">
-          <Layers size={18} color="#38bdf8" />
+          <Layers size={18} color="var(--accent)" />
           <h3>Độ tin cậy thang đo (Hệ số Cronbach's Alpha cho 6 nhóm kỹ năng)</h3>
         </div>
         <p className="panel-sub">
@@ -253,7 +253,7 @@ export const ResearchDashboardView: React.FC = () => {
       {/* Experimental Pre vs Post Paired t-Test Panel (Mục 7.5 và Câu hỏi mở rộng) */}
       <div className="card-panel paired-test-panel" style={{ marginTop: '24px' }}>
         <div className="panel-header">
-          <TrendingUp size={18} color="#10b981" />
+          <TrendingUp size={18} color="var(--color-success)" />
           <h3>Kiểm định Cặp Trước – Sau (Paired t-test) & Cỡ Hiệu Ứng Cohen's d</h3>
         </div>
         <p className="panel-sub">
@@ -262,41 +262,41 @@ export const ResearchDashboardView: React.FC = () => {
 
         {/* Statistical Summary Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '20px' }}>
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>Điểm Trước (Pre-test)</span>
-            <div style={{ fontSize: '24px', fontWeight: '800', color: '#38bdf8', margin: '4px 0' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>Điểm Trước (Pre-test)</span>
+            <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--accent)', margin: '4px 0' }}>
               {AnalyticsController.calculatePairedTestStats().preMean}<span style={{ fontSize: '12px' }}>/100</span>
             </div>
-            <span style={{ fontSize: '11px', color: '#64748b' }}>Độ lệch chuẩn: ±6.4</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Độ lệch chuẩn: ±6.4</span>
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>Điểm Sau (Post-test)</span>
-            <div style={{ fontSize: '24px', fontWeight: '800', color: '#10b981', margin: '4px 0' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>Điểm Sau (Post-test)</span>
+            <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--color-success-text)', margin: '4px 0' }}>
               {AnalyticsController.calculatePairedTestStats().postMean}<span style={{ fontSize: '12px' }}>/100</span>
             </div>
-            <span style={{ fontSize: '11px', color: '#34d399' }}>Mức tăng: +{AnalyticsController.calculatePairedTestStats().meanImprovement}đ</span>
+            <span style={{ fontSize: '11px', color: 'var(--color-success-text)' }}>Mức tăng: +{AnalyticsController.calculatePairedTestStats().meanImprovement}đ</span>
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>Kiểm định Cặp t (df=19)</span>
-            <div style={{ fontSize: '24px', fontWeight: '800', color: '#f59e0b', margin: '4px 0' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>Kiểm định Cặp t (df=19)</span>
+            <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--color-warning-text)', margin: '4px 0' }}>
               t = {AnalyticsController.calculatePairedTestStats().tStatistic}
             </div>
-            <span style={{ fontSize: '11px', color: '#fbbf24' }}>{AnalyticsController.calculatePairedTestStats().pValueString}</span>
+            <span style={{ fontSize: '11px', color: 'var(--color-warning-text)' }}>{AnalyticsController.calculatePairedTestStats().pValueString}</span>
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>Cỡ Hiệu Ứng (Cohen's d)</span>
-            <div style={{ fontSize: '24px', fontWeight: '800', color: '#c084fc', margin: '4px 0' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', padding: '16px', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>Cỡ Hiệu Ứng (Cohen's d)</span>
+            <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--color-purple-text)', margin: '4px 0' }}>
               d = {AnalyticsController.calculatePairedTestStats().cohenD}
             </div>
-            <span style={{ fontSize: '11px', color: '#c084fc' }}>Hiệu ứng Rất lớn (d &gt; 0.8)</span>
+            <span style={{ fontSize: '11px', color: 'var(--color-purple-text)' }}>Hiệu ứng Rất lớn (d &gt; 0.8)</span>
           </div>
         </div>
 
         {/* Breakdown table by 6 skill groups */}
-        <h4 style={{ color: '#ffffff', fontSize: '14px', marginBottom: '10px' }}>
+        <h4 style={{ color: 'var(--text-main)', fontSize: '14px', marginBottom: '10px' }}>
           So sánh mức tăng trưởng điểm số trung bình theo từng nhóm kỹ năng:
         </h4>
         <table className="research-table">

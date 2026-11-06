@@ -91,13 +91,13 @@ export const QuestionBankView: React.FC = () => {
             width: '100%',
             maxHeight: '90vh',
             overflowY: 'auto',
-            background: '#0b1120',
-            border: '1px solid #38bdf8'
+            background: 'var(--bg-card)',
+            border: '1px solid var(--accent)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ArrowRightLeft size={20} color="#38bdf8" />
-                <h3 style={{ color: '#ffffff' }}>Đối chiếu Cặp Câu Sinh Đôi (Đề A vs Đề B)</h3>
+                <ArrowRightLeft size={20} color="var(--accent)" />
+                <h3 style={{ color: 'var(--text-main)' }}>Đối chiếu Cặp Câu Sinh Đôi (Đề A vs Đề B)</h3>
               </div>
               <button
                 className="pill-btn"
@@ -108,18 +108,18 @@ export const QuestionBankView: React.FC = () => {
               </button>
             </div>
 
-            <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '20px' }}>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '20px' }}>
               Xác thực nguyên tắc sinh đôi theo mục 7.5 đề cương: <strong>Cùng kỹ năng con, cùng độ khó ({twinComparePair.qA.difficulty}), cùng mức Bloom ({twinComparePair.qA.bloomLevel})</strong>; khác biệt bối cảnh đoạn mã và thứ tự đảo đáp án.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               {/* Question A */}
-              <div style={{ background: 'rgba(15, 23, 42, 0.9)', padding: '20px', borderRadius: '10px', border: '1px solid rgba(56, 189, 248, 0.3)' }}>
+              <div style={{ background: 'var(--bg-card-subtle)', padding: '20px', borderRadius: '10px', border: '1px solid var(--color-info-border)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                   <span className="exam-tag">Đề A (Tiền kiểm)</span>
-                  <span style={{ fontSize: '11px', color: '#94a3b8' }}>ID: {twinComparePair.qA.id}</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>ID: {twinComparePair.qA.id}</span>
                 </div>
-                <p style={{ fontWeight: '600', color: '#ffffff', fontSize: '14px', marginBottom: '12px' }}>
+                <p style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '14px', marginBottom: '12px' }}>
                   {twinComparePair.qA.content}
                 </p>
                 {twinComparePair.qA.codeSnippet && (
@@ -135,12 +135,12 @@ export const QuestionBankView: React.FC = () => {
               </div>
 
               {/* Question B */}
-              <div style={{ background: 'rgba(15, 23, 42, 0.9)', padding: '20px', borderRadius: '10px', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
+              <div style={{ background: 'var(--bg-card-subtle)', padding: '20px', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                   <span className="exam-tag" style={{ background: '#8b5cf6' }}>Đề B (Hậu kiểm)</span>
-                  <span style={{ fontSize: '11px', color: '#94a3b8' }}>ID: {twinComparePair.qB.id}</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>ID: {twinComparePair.qB.id}</span>
                 </div>
-                <p style={{ fontWeight: '600', color: '#ffffff', fontSize: '14px', marginBottom: '12px' }}>
+                <p style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '14px', marginBottom: '12px' }}>
                   {twinComparePair.qB.content}
                 </p>
                 {twinComparePair.qB.codeSnippet && (

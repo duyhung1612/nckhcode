@@ -60,8 +60,8 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
             <polygon
               key={`grid-${lvl}`}
               points={points}
-              fill={lvl === 100 ? 'rgba(30, 41, 59, 0.4)' : 'none'}
-              stroke="rgba(148, 163, 184, 0.2)"
+              fill={lvl === 100 ? 'var(--radar-grid-fill)' : 'none'}
+              stroke="var(--radar-grid-stroke)"
               strokeWidth="1"
             />
           );
@@ -77,7 +77,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
               y1={center}
               x2={x}
               y2={y}
-              stroke="rgba(148, 163, 184, 0.25)"
+              stroke="var(--radar-axis-stroke)"
               strokeWidth="1"
               strokeDasharray="3,3"
             />
@@ -87,8 +87,8 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
         {/* Đa giác Chuẩn yêu cầu R(s) - Đường nét đứt màu cam hổ phách */}
         <polygon
           points={reqPoints}
-          fill="rgba(245, 158, 11, 0.08)"
-          stroke="#f59e0b"
+          fill="var(--radar-bench-fill)"
+          stroke="var(--radar-bench-stroke)"
           strokeWidth="2"
           strokeDasharray="4,4"
         />
@@ -96,8 +96,8 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
         {/* Đa giác Năng lực Sinh viên C(s) - Gradient xanh ngọc lấp lánh */}
         <polygon
           points={currentPoints}
-          fill="rgba(14, 165, 233, 0.35)"
-          stroke="#0284c7"
+          fill="var(--radar-student-fill)"
+          stroke="var(--radar-student-stroke)"
           strokeWidth="2.5"
         />
 
@@ -111,17 +111,17 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
                 cx={x}
                 cy={y}
                 r="5"
-                fill={isWeak ? '#ef4444' : '#10b981'}
-                stroke="#ffffff"
+                fill={isWeak ? 'var(--color-danger)' : 'var(--color-success)'}
+                stroke="var(--bg-card)"
                 strokeWidth="2"
-                style={{ filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.3))' }}
+                style={{ filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))' }}
               />
               <text
                 x={x}
                 y={y - 8}
                 fontSize="11"
                 fontWeight="700"
-                fill={isWeak ? '#f87171' : '#34d399'}
+                fill={isWeak ? 'var(--color-danger-text)' : 'var(--color-success-text)'}
                 textAnchor="middle"
               >
                 {s.currentScore}%
@@ -142,7 +142,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
               y={labelCoord.y}
               fontSize="12"
               fontWeight="600"
-              fill="#cbd5e1"
+              fill="var(--radar-label-color)"
               textAnchor="middle"
               dominantBaseline="central"
             >
@@ -155,16 +155,16 @@ export const RadarChart: React.FC<RadarChartProps> = ({ skillScores, size = 420 
       {/* Chú giải biểu đồ (Legend) */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '10px', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-          <span style={{ width: '14px', height: '14px', borderRadius: '3px', background: 'rgba(14, 165, 233, 0.7)' }}></span>
-          <span style={{ color: '#e2e8f0' }}>Năng lực hiện tại C(s)</span>
+          <span style={{ width: '14px', height: '14px', borderRadius: '3px', background: 'var(--radar-student-stroke)' }}></span>
+          <span style={{ color: 'var(--text-main)' }}>Năng lực hiện tại C(s)</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-          <span style={{ width: '14px', height: '3px', borderTop: '2px dashed #f59e0b' }}></span>
-          <span style={{ color: '#f59e0b' }}>Chuẩn đầu vào R(s) = {skillScores[0]?.requiredScore || 70}%</span>
+          <span style={{ width: '14px', height: '3px', borderTop: '2px dashed var(--radar-bench-stroke)' }}></span>
+          <span style={{ color: 'var(--color-warning-text)' }}>Chuẩn đầu vào R(s) = {skillScores[0]?.requiredScore || 70}%</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></span>
-          <span style={{ color: '#f87171' }}>Lỗ hổng cần bổ sung (Gap &gt; 0)</span>
+          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-danger)' }}></span>
+          <span style={{ color: 'var(--color-danger-text)' }}>Lỗ hổng cần bổ sung (Gap &gt; 0)</span>
         </div>
       </div>
     </div>

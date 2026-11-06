@@ -9,15 +9,9 @@ import { RadarChart } from '../components/RadarChart';
 import { SkillScore } from '../../models/types';
 import { 
   Users, 
-  ArrowRight, 
-  ShieldAlert, 
-  CheckCircle2, 
   Sparkles, 
-  Sliders, 
-  Clock, 
   FileSpreadsheet, 
-  Compass, 
-  Layers 
+  Compass
 } from 'lucide-react';
 
 export const ComparativeStudyView: React.FC = () => {
@@ -70,28 +64,28 @@ export const ComparativeStudyView: React.FC = () => {
       <div className="admin-header-card">
         <div>
           <div className="badge-pill admin-badge">KIỂM ĐỊNH HỌC THUẬT NCKH • BẢNG 6</div>
-          <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#f8fafc', marginTop: '4px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-main)', marginTop: '4px' }}>
             Thực nghiệm Đối chiếu Hai Hồ sơ Tiêu biểu (Hồ sơ A vs Hồ sơ B)
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '4px' }}>
             Kiểm chứng giả thuyết khoa học: Cùng định hướng Frontend, nhưng hai sinh viên có cấu trúc lỗ hổng đối nghịch sẽ nhận được lộ trình học hoàn toàn khác biệt nhờ cấu trúc DAG tiên quyết.
           </p>
         </div>
 
         {/* Dynamic Sensitivity Controller Slider */}
         <div style={{
-          background: 'rgba(30, 41, 59, 0.7)',
+          background: 'var(--bg-card-subtle)',
           padding: '12px 18px',
           borderRadius: '10px',
-          border: '1px solid rgba(56, 189, 248, 0.3)',
+          border: '1px solid var(--border-subtle)',
           display: 'flex',
           flexDirection: 'column',
           gap: '8px',
           minWidth: '240px'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>Ngưỡng chuẩn R(s):</span>
-            <strong style={{ color: '#38bdf8', fontSize: '16px' }}>{sensitivityR}%</strong>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>Ngưỡng chuẩn R(s):</span>
+            <strong style={{ color: 'var(--accent)', fontSize: '16px' }}>{sensitivityR}%</strong>
           </div>
           <div style={{ display: 'flex', gap: '6px' }}>
             {[65, 70, 75].map(val => (
@@ -102,9 +96,9 @@ export const ComparativeStudyView: React.FC = () => {
                   flex: 1,
                   padding: '6px',
                   borderRadius: '6px',
-                  border: 'none',
-                  background: sensitivityR === val ? '#0ea5e9' : 'rgba(255,255,255,0.06)',
-                  color: sensitivityR === val ? '#ffffff' : '#94a3b8',
+                  border: '1px solid var(--border-subtle)',
+                  background: sensitivityR === val ? 'var(--primary)' : 'var(--bg-card)',
+                  color: sensitivityR === val ? '#ffffff' : 'var(--text-muted)',
                   fontSize: '12px',
                   fontWeight: 700,
                   cursor: 'pointer'
@@ -120,18 +114,18 @@ export const ComparativeStudyView: React.FC = () => {
       {/* Side-by-Side Profiles Overview */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
         {/* Profile A Card */}
-        <div className="card-panel" style={{ borderTop: '4px solid #38bdf8' }}>
+        <div className="card-panel" style={{ borderTop: '4px solid var(--primary)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
             <div>
-              <span className="skill-code-badge" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
+              <span className="skill-code-badge" style={{ background: 'var(--color-info-bg)', color: 'var(--accent)', border: '1px solid var(--color-info-border)' }}>
                 HỒ SƠ A (STU_001)
               </span>
-              <h3 style={{ fontSize: '18px', color: '#f8fafc', marginTop: '6px' }}>{profileA.name}</h3>
-              <p style={{ fontSize: '12px', color: '#94a3b8' }}>Mô hình sinh viên: <em>"Nặng lý thuyết cú pháp, hổng kỹ năng thực hành dự án"</em></p>
+              <h3 style={{ fontSize: '18px', color: 'var(--text-main)', marginTop: '6px' }}>{profileA.name}</h3>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Mô hình sinh viên: <em>"Nặng lý thuyết cú pháp, hổng kỹ năng thực hành dự án"</em></p>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Điểm Pre-test</span>
-              <div style={{ fontSize: '22px', fontWeight: 800, color: '#f59e0b' }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Điểm Pre-test</span>
+              <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-warning-text)' }}>
                 {totalScoreA}<span style={{ fontSize: '13px' }}>/100</span>
               </div>
             </div>
@@ -141,9 +135,9 @@ export const ComparativeStudyView: React.FC = () => {
             <RadarChart skillScores={scoresA} size={280} />
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.6)', padding: '12px', borderRadius: '8px', fontSize: '12px', marginTop: '12px' }}>
-            <strong style={{ color: '#38bdf8' }}>Đặc trưng khoảng cách:</strong>
-            <p style={{ color: '#cbd5e1', marginTop: '4px' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)', padding: '12px', borderRadius: '8px', fontSize: '12px', marginTop: '12px' }}>
+            <strong style={{ color: 'var(--accent)' }}>Đặc trưng khoảng cách:</strong>
+            <p style={{ color: 'var(--text-muted)', marginTop: '4px' }}>
               Điểm lý thuyết HTML/CSS (80%) và JS cú pháp (70%) đạt ngưỡng, nhưng hổng nặng <strong>React (50%)</strong>, <strong>Git (40%)</strong> và <strong>Debug (40%)</strong>.
             </p>
           </div>
@@ -153,15 +147,15 @@ export const ComparativeStudyView: React.FC = () => {
         <div className="card-panel" style={{ borderTop: '4px solid #a855f7' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
             <div>
-              <span className="skill-code-badge" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#a855f7' }}>
+              <span className="skill-code-badge" style={{ background: 'var(--color-purple-bg)', color: 'var(--color-purple-text)' }}>
                 HỒ SƠ B (STU_002)
               </span>
-              <h3 style={{ fontSize: '18px', color: '#f8fafc', marginTop: '6px' }}>{profileB.name}</h3>
-              <p style={{ fontSize: '12px', color: '#94a3b8' }}>Mô hình sinh viên: <em>"Tự học qua video, quen copy template, rỗng nền tảng JS/DOM"</em></p>
+              <h3 style={{ fontSize: '18px', color: 'var(--text-main)', marginTop: '6px' }}>{profileB.name}</h3>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Mô hình sinh viên: <em>"Tự học qua video, quen copy template, rỗng nền tảng JS/DOM"</em></p>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Điểm Pre-test</span>
-              <div style={{ fontSize: '22px', fontWeight: 800, color: '#f43f5e' }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Điểm Pre-test</span>
+              <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-danger-text)' }}>
                 {totalScoreB}<span style={{ fontSize: '13px' }}>/100</span>
               </div>
             </div>
@@ -171,9 +165,9 @@ export const ComparativeStudyView: React.FC = () => {
             <RadarChart skillScores={scoresB} size={280} />
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.6)', padding: '12px', borderRadius: '8px', fontSize: '12px', marginTop: '12px' }}>
+          <div style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)', padding: '12px', borderRadius: '8px', fontSize: '12px', marginTop: '12px' }}>
             <strong style={{ color: '#a855f7' }}>Đặc trưng khoảng cách:</strong>
-            <p style={{ color: '#cbd5e1', marginTop: '4px' }}>
+            <p style={{ color: 'var(--text-muted)', marginTop: '4px' }}>
               Quen dùng Git (75%) và gõ template React (60%), nhưng hổng trầm trọng <strong>JavaScript & DOM (45%)</strong> và <strong>API/Async (40%)</strong>.
             </p>
           </div>
@@ -183,7 +177,7 @@ export const ComparativeStudyView: React.FC = () => {
       {/* Head-to-Head Comparison Table */}
       <div className="card-panel">
         <div className="panel-header">
-          <FileSpreadsheet size={18} color="#38bdf8" />
+          <FileSpreadsheet size={18} color="var(--accent)" />
           <h3>Bảng Đối Chiếu Chỉ Số Năng Lực & Khoảng Cách Tại Ngưỡng R = {sensitivityR}%</h3>
         </div>
 
@@ -194,22 +188,22 @@ export const ComparativeStudyView: React.FC = () => {
                 <th>Mã nhóm</th>
                 <th>Tên Nhóm Kỹ Năng</th>
                 <th>Trọng số w(s)</th>
-                <th style={{ color: '#38bdf8' }}>Điểm SV A - C(A)</th>
-                <th style={{ color: '#38bdf8' }}>Khoảng cách Gap(A)</th>
+                <th style={{ color: 'var(--accent)' }}>Điểm SV A - C(A)</th>
+                <th style={{ color: 'var(--accent)' }}>Khoảng cách Gap(A)</th>
                 <th style={{ color: '#a855f7' }}>Điểm SV B - C(B)</th>
                 <th style={{ color: '#a855f7' }}>Khoảng cách Gap(B)</th>
                 <th>So sánh thực nghiệm</th>
               </tr>
             </thead>
             <tbody>
-              {scoresA.map((sA: SkillScore, idx: number) => {
+              {scoresA.map((sA: SkillScore) => {
                 const sB = scoresB.find((b: SkillScore) => b.skillGroupId === sA.skillGroupId);
                 return (
                   <tr key={sA.skillGroupId}>
                     <td><span className="skill-code-badge">{sA.skillGroupId}</span></td>
                     <td><strong>{sA.skillName}</strong></td>
                     <td>{Math.round(sA.weight * 100)}%</td>
-                    <td style={{ color: sA.gap > 0 ? '#f43f5e' : '#10b981', fontWeight: 700 }}>
+                    <td style={{ color: sA.gap > 0 ? 'var(--color-danger-text)' : 'var(--color-success-text)', fontWeight: 700 }}>
                       {sA.currentScore}%
                     </td>
                     <td>
@@ -219,7 +213,7 @@ export const ComparativeStudyView: React.FC = () => {
                         <span className="pass-tag">0 (Đạt)</span>
                       )}
                     </td>
-                    <td style={{ color: (sB?.gap || 0) > 0 ? '#f43f5e' : '#10b981', fontWeight: 700 }}>
+                    <td style={{ color: (sB?.gap || 0) > 0 ? 'var(--color-danger-text)' : 'var(--color-success-text)', fontWeight: 700 }}>
                       {sB?.currentScore || 0}%
                     </td>
                     <td>
@@ -229,9 +223,9 @@ export const ComparativeStudyView: React.FC = () => {
                         <span className="pass-tag">0 (Đạt)</span>
                       )}
                     </td>
-                    <td style={{ fontSize: '12px', color: '#94a3b8' }}>
+                    <td style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
                       {sA.currentScore > (sB?.currentScore || 0) ? (
-                        <span style={{ color: '#38bdf8' }}>SV A vượt trội (+{sA.currentScore - (sB?.currentScore || 0)}%)</span>
+                        <span style={{ color: 'var(--accent)' }}>SV A vượt trội (+{sA.currentScore - (sB?.currentScore || 0)}%)</span>
                       ) : sA.currentScore < (sB?.currentScore || 0) ? (
                         <span style={{ color: '#a855f7' }}>SV B vượt trội (+{(sB?.currentScore || 0) - sA.currentScore}%)</span>
                       ) : (
@@ -251,7 +245,7 @@ export const ComparativeStudyView: React.FC = () => {
         {/* Roadmap A */}
         <div className="card-panel">
           <div className="panel-header">
-            <Compass size={18} color="#38bdf8" />
+            <Compass size={18} color="var(--accent)" />
             <h3>Lộ trình Đề xuất cho Sinh viên A ({roadmapA.length} Module)</h3>
           </div>
           <p className="panel-sub">
@@ -261,15 +255,15 @@ export const ComparativeStudyView: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
             {roadmapA.map((step, idx) => (
               <div key={step.skillGroupId} style={{
-                background: 'rgba(30, 41, 59, 0.6)',
-                border: '1px solid rgba(56, 189, 248, 0.2)',
+                background: 'var(--bg-card-subtle)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '8px',
                 padding: '12px'
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span style={{
-                      background: '#0284c7',
+                      background: 'var(--primary)',
                       color: '#fff',
                       width: '22px',
                       height: '22px',
@@ -282,13 +276,13 @@ export const ComparativeStudyView: React.FC = () => {
                     }}>
                       {idx + 1}
                     </span>
-                    <strong style={{ color: '#f8fafc', fontSize: '13px' }}>{step.skillName}</strong>
+                    <strong style={{ color: 'var(--text-main)', fontSize: '13px' }}>{step.skillName}</strong>
                   </div>
-                  <span style={{ fontSize: '12px', color: '#38bdf8', fontWeight: 600 }}>
+                  <span style={{ fontSize: '12px', color: 'var(--accent)', fontWeight: 600 }}>
                     {step.estimatedHours}h
                   </span>
                 </div>
-                <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '6px' }}>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '6px' }}>
                   {step.reason}
                 </div>
               </div>
@@ -299,7 +293,7 @@ export const ComparativeStudyView: React.FC = () => {
         {/* Roadmap B */}
         <div className="card-panel">
           <div className="panel-header">
-            <Compass size={18} color="#a855f7" />
+            <Compass size={18} color="var(--color-purple)" />
             <h3>Lộ trình Đề xuất cho Sinh viên B ({roadmapB.length} Module)</h3>
           </div>
           <p className="panel-sub">
@@ -309,8 +303,8 @@ export const ComparativeStudyView: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
             {roadmapB.map((step, idx) => (
               <div key={step.skillGroupId} style={{
-                background: 'rgba(30, 41, 59, 0.6)',
-                border: '1px solid rgba(168, 85, 247, 0.2)',
+                background: 'var(--bg-card-subtle)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '8px',
                 padding: '12px'
               }}>
@@ -330,13 +324,13 @@ export const ComparativeStudyView: React.FC = () => {
                     }}>
                       {idx + 1}
                     </span>
-                    <strong style={{ color: '#f8fafc', fontSize: '13px' }}>{step.skillName}</strong>
+                    <strong style={{ color: 'var(--text-main)', fontSize: '13px' }}>{step.skillName}</strong>
                   </div>
-                  <span style={{ fontSize: '12px', color: '#c084fc', fontWeight: 600 }}>
+                  <span style={{ fontSize: '12px', color: 'var(--color-purple-text)', fontWeight: 600 }}>
                     {step.estimatedHours}h
                   </span>
                 </div>
-                <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '6px' }}>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '6px' }}>
                   {step.reason}
                 </div>
               </div>
@@ -347,16 +341,16 @@ export const ComparativeStudyView: React.FC = () => {
 
       {/* Scientific Conclusion Box */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.3)',
+        background: 'var(--color-info-bg)',
+        border: '1px solid var(--color-info-border)',
         borderRadius: '12px',
         padding: '20px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#38bdf8', fontWeight: 700, marginBottom: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent)', fontWeight: 700, marginBottom: '8px' }}>
           <Sparkles size={18} />
           <span>KẾT LUẬN THỰC NGHIỆM ĐÓNG GÓP HỌC THUẬT (NCKH VIỆN CNTT FBU)</span>
         </div>
-        <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: '1.6' }}>
+        <p style={{ fontSize: '13px', color: 'var(--text-main)', lineHeight: '1.6' }}>
           Kết quả đối chiếu chứng minh rằng: Nếu áp dụng phương pháp đào tạo truyền thống theo một giáo trình tuyến tính cào bằng, cả hai sinh viên đều sẽ lãng phí thời gian học những nội dung mình đã biết hoặc bị quá tải ở những nội dung còn thiếu tiền đề.
           Mô hình kết hợp <strong>Chẩn đoán Khoảng cách Trọng số</strong> và <strong>Đồ thị Tiên quyết DAG</strong> tại Viện CNTT FBU đã tạo ra hai lộ trình hoàn toàn thích ứng: Sinh viên A tập trung hoàn thiện dự án thực chiến và Git (18 giờ), trong khi Sinh viên B được nắn chỉnh lại gốc rễ tư duy JavaScript/DOM trước khi phát triển React nâng cao (24 giờ).
         </p>

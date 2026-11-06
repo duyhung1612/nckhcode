@@ -89,7 +89,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
 
         {/* Evaluator identity */}
         <div className="evaluator-card">
-          <UserCheck size={18} color="#38bdf8" />
+          <UserCheck size={18} color="var(--accent)" />
           <div className="evaluator-info">
             <label>Giám khảo thẩm định:</label>
             <input
@@ -121,56 +121,56 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
       {alertMessage && (
         <div className="discrepancy-banner" style={{ flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <AlertTriangle size={20} color="#f59e0b" style={{ flexShrink: 0 }} />
+            <AlertTriangle size={20} color="var(--color-warning-text)" style={{ flexShrink: 0 }} />
             <div className="alert-content">
               <strong>CẢNH BÁO LỆCH ĐIỂM CHUYÊN GIA (MỤC 7.5 ĐỀ CƯƠNG):</strong>
               <p>{alertMessage}</p>
             </div>
           </div>
 
-          <div style={{ background: 'rgba(15, 23, 42, 0.85)', padding: '16px', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
-            <h4 style={{ color: '#fbbf24', fontSize: '13px', marginBottom: '8px' }}>
+          <div style={{ background: 'var(--bg-card)', padding: '16px', borderRadius: '8px', border: '1px solid var(--color-warning-border)' }}>
+            <h4 style={{ color: 'var(--color-warning-text)', fontSize: '13px', marginBottom: '8px' }}>
               ⚖️ Biên bản Đối chiếu Thống nhất Giám khảo:
             </h4>
-            <p style={{ fontSize: '12px', color: '#cbd5e1', marginBottom: '12px' }}>
+            <p style={{ fontSize: '12px', color: 'var(--text-main)', marginBottom: '12px' }}>
               Theo quy định, hai giám khảo sẽ trao đổi trực tiếp để thống nhất mức điểm cuối cùng và ghi rõ nguyên nhân bất đồng (do tiêu chí nào, đoạn mã nào).
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
               <div>
-                <label style={{ fontSize: '11px', color: '#94a3b8' }}>Điểm chốt Chức năng (0-3):</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Điểm chốt Chức năng (0-3):</label>
                 <input
                   type="number"
                   min="0"
                   max="3"
                   defaultValue="2"
-                  style={{ width: '100%', background: '#020617', border: '1px solid #38bdf8', padding: '6px', borderRadius: '4px', color: '#ffffff' }}
+                  style={{ width: '100%', background: 'var(--input-bg)', border: '1px solid var(--input-border)', padding: '6px', borderRadius: '4px', color: 'var(--input-text)' }}
                 />
               </div>
               <div>
-                <label style={{ fontSize: '11px', color: '#94a3b8' }}>Điểm chốt Cấu trúc (0-3):</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Điểm chốt Cấu trúc (0-3):</label>
                 <input
                   type="number"
                   min="0"
                   max="3"
                   defaultValue="2"
-                  style={{ width: '100%', background: '#020617', border: '1px solid #38bdf8', padding: '6px', borderRadius: '4px', color: '#ffffff' }}
+                  style={{ width: '100%', background: 'var(--input-bg)', border: '1px solid var(--input-border)', padding: '6px', borderRadius: '4px', color: 'var(--input-text)' }}
                 />
               </div>
               <div>
-                <label style={{ fontSize: '11px', color: '#94a3b8' }}>Điểm chốt Git & Lỗi (0-3):</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Điểm chốt Git & Lỗi (0-3):</label>
                 <input
                   type="number"
                   min="0"
                   max="3"
                   defaultValue="1"
-                  style={{ width: '100%', background: '#020617', border: '1px solid #38bdf8', padding: '6px', borderRadius: '4px', color: '#ffffff' }}
+                  style={{ width: '100%', background: 'var(--input-bg)', border: '1px solid var(--input-border)', padding: '6px', borderRadius: '4px', color: 'var(--input-text)' }}
                 />
               </div>
             </div>
             <textarea
               placeholder="Ghi giải trình lý do thống nhất điểm cuối của 2 giám khảo..."
               rows={2}
-              style={{ width: '100%', background: '#020617', border: '1px solid rgba(255,255,255,0.1)', padding: '8px', borderRadius: '4px', color: '#ffffff', fontSize: '12px', marginBottom: '10px' }}
+              style={{ width: '100%', background: 'var(--input-bg)', border: '1px solid var(--input-border)', padding: '8px', borderRadius: '4px', color: 'var(--input-text)', fontSize: '12px', marginBottom: '10px' }}
             />
             <button
               className="primary-action-btn"
@@ -191,7 +191,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
           {/* Left: Practical Artifacts */}
           <div className="card-panel artifacts-panel">
             <div className="panel-header">
-              <EyeOff size={18} color="#94a3b8" />
+              <EyeOff size={18} color="var(--text-muted)" />
               <h3>Sản phẩm nộp của Sinh viên (Đã ẩn danh kết quả trắc nghiệm)</h3>
             </div>
 
@@ -248,7 +248,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
           {/* Right: Rubric Scoring Form */}
           <div className="card-panel rubric-form-panel">
             <div className="panel-header">
-              <FileCheck size={18} color="#38bdf8" />
+              <FileCheck size={18} color="var(--accent)" />
               <h3>Phiếu Chấm Rubric 3 Tiêu chí (Thang 0 – 3)</h3>
             </div>
 
@@ -310,7 +310,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
         </div>
       ) : (
         <div className="empty-state-card">
-          <EyeOff size={40} color="#94a3b8" />
+          <EyeOff size={40} color="var(--text-muted)" />
           <h3>Chưa có bài thực hành nào được nộp</h3>
           <p>Sinh viên cần nộp link GitHub và Live demo ở tab Bài thực hành trước khi tiến hành chấm mù.</p>
         </div>

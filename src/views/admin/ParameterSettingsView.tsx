@@ -98,7 +98,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
       {/* Threshold Selection Cards */}
       <div className="card-panel threshold-control-panel">
         <div className="panel-header">
-          <Sliders size={18} color="#38bdf8" />
+          <Sliders size={18} color="var(--accent)" />
           <h3>1. Thiết lập Ngưỡng đạt yêu cầu R(s) cho vị trí Thực tập sinh</h3>
         </div>
         <p className="panel-sub">
@@ -140,7 +140,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
       {scores.length > 0 && (
         <div className="card-panel sensitivity-panel">
           <div className="panel-header">
-            <Info size={18} color="#f59e0b" />
+            <Info size={18} color="var(--color-warning-text)" />
             <h3>2. Kết quả Báo cáo Độ nhạy trên Hồ sơ: {student?.name}</h3>
           </div>
           <p className="panel-sub">
@@ -173,7 +173,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
       {/* Weight Adjustment Sliders */}
       <div className="card-panel weights-panel">
         <div className="panel-header">
-          <Sliders size={18} color="#38bdf8" />
+          <Sliders size={18} color="var(--accent)" />
           <h3>3. Trọng số 6 Nhóm Kỹ năng w(s) (Cho phép tinh chỉnh trong khoảng ±5%)</h3>
         </div>
 

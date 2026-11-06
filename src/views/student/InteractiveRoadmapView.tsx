@@ -46,7 +46,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
   if (!report || !report.roadmap || report.roadmap.length === 0) {
     return (
       <div className="empty-state-card">
-        <Sparkles size={48} color="#10b981" />
+        <Sparkles size={48} color="var(--color-success)" />
         <h2>Chúc mừng! Bạn đã đạt chuẩn đầu vào</h2>
         <p>Không phát hiện lỗ hổng kỹ năng nào dưới ngưỡng 70%. Bạn đã sẵn sàng ứng tuyển vị trí Thực tập sinh Frontend.</p>
       </div>
@@ -128,7 +128,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
           {/* Academic Verification Badge */}
           <div className="academic-badge-card">
             <div className="badge-status">
-              <ShieldCheck size={20} color="#10b981" />
+              <ShieldCheck size={20} color="var(--color-success)" />
               <span>Kiểm định Sư phạm: <strong>HỢP LỆ</strong></span>
             </div>
             <p className="badge-detail">0% vi phạm quan hệ tiên quyết giữa các kỹ năng</p>
@@ -207,7 +207,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
                     </div>
 
                     <div className="step-time-box">
-                      <Clock size={16} color="#f59e0b" />
+                      <Clock size={16} color="var(--color-warning-text)" />
                       <span>Ước tính: <strong>~{step.estimatedHours} giờ</strong></span>
                     </div>
                   </div>
@@ -311,16 +311,16 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
                       ⏱️ {dayItem.targetHours}h / ngày
                     </span>
                   </div>
-                  <h4 style={{ fontSize: '15px', color: '#ffffff', marginBottom: '8px' }}>
+                  <h4 style={{ fontSize: '15px', color: 'var(--text-main)', marginBottom: '8px' }}>
                     {dayItem.title}
                   </h4>
-                  <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '12px', lineHeight: '1.5' }}>
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.5' }}>
                     {dayItem.taskDescription}
                   </p>
                   
-                  <div style={{ background: 'rgba(15, 23, 42, 0.6)', padding: '10px', borderRadius: '6px', fontSize: '12px' }}>
-                    <strong style={{ color: '#cbd5e1', display: 'block', marginBottom: '4px' }}>Trọng tâm bài học:</strong>
-                    <ul style={{ paddingLeft: '16px', color: '#94a3b8' }}>
+                  <div style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)', padding: '10px', borderRadius: '6px', fontSize: '12px' }}>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>Trọng tâm bài học:</strong>
+                    <ul style={{ paddingLeft: '16px', color: 'var(--text-muted)' }}>
                       {dayItem.focusTopics.map((top, tIdx) => (
                         <li key={tIdx}>{top}</li>
                       ))}
@@ -328,7 +328,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
                   </div>
                 </div>
 
-                <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     className={`step-complete-btn ${isDayDone ? 'is-done' : ''}`}
                     style={{ width: '100%', justifyContent: 'center' }}
@@ -348,7 +348,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
       {viewMode === 'challenges' && (
         <div className="challenges-workspace card-panel" style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '18px' }}>
           <div className="challenges-sidebar">
-            <h4 style={{ color: '#38bdf8', marginBottom: '12px', fontSize: '14px', textTransform: 'uppercase' }}>
+            <h4 style={{ color: 'var(--accent)', marginBottom: '12px', fontSize: '14px', textTransform: 'uppercase' }}>
               Danh sách Bài tập Thực chiến:
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -371,7 +371,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
                 >
                   <div>
                     <strong>{ch.title}</strong>
-                    <span style={{ display: 'block', fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{ch.skill}</span>
+                    <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{ch.skill}</span>
                   </div>
                 </button>
               ))}
@@ -379,8 +379,8 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
           </div>
 
           <div className="challenge-code-area">
-            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>{codingChallenges[activeChallengeIdx].title}</h3>
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '16px' }}>{codingChallenges[activeChallengeIdx].description}</p>
+            <h3 style={{ color: 'var(--text-main)', marginBottom: '8px' }}>{codingChallenges[activeChallengeIdx].title}</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '13px', marginBottom: '16px' }}>{codingChallenges[activeChallengeIdx].description}</p>
 
             <textarea
               rows={8}
@@ -388,11 +388,11 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
               onChange={e => setUserCode(e.target.value)}
               style={{
                 width: '100%',
-                background: '#020617',
-                border: '1px solid rgba(255,255,255,0.15)',
+                background: 'var(--code-box-bg)',
+                border: '1px solid var(--code-box-border)',
                 borderRadius: '8px',
                 padding: '14px',
-                color: '#38bdf8',
+                color: 'var(--accent)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '13px',
                 outline: 'none',

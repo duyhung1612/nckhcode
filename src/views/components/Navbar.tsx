@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="header-top-row">
         <div className="header-brand-section">
           <div className="brand-logo-badge">
-            <GraduationCap size={22} color="#38bdf8" />
+            <GraduationCap size={22} color="var(--accent)" />
           </div>
           <div className="brand-text">
             <div className="university-badge">VIỆN CNTT – TRƯỜNG ĐH TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)</div>
@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         <div className="header-right-actions">
           <div className="profile-selector-box">
-            <UserCheck size={15} color="#94a3b8" />
+            <UserCheck size={15} color="var(--text-muted)" />
             <span className="profile-label">Hồ sơ:</span>
             <select
               className="student-dropdown"
@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="theme-toggle-btn"
             title={`Chuyển sang chế độ ${theme === 'dark' ? 'Sáng' : 'Tối'}`}
           >
-            {theme === 'dark' ? <Sun size={15} color="#f59e0b" /> : <Moon size={15} color="#38bdf8" />}
+            {theme === 'dark' ? <Sun size={15} color="#f59e0b" /> : <Moon size={15} color="var(--accent)" />}
             <span className="theme-toggle-label">
               {theme === 'dark' ? 'Giao diện Tối' : 'Giao diện Sáng'}
             </span>

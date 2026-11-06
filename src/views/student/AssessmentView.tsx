@@ -133,7 +133,7 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
 
         {/* Timer */}
         <div className="timer-box">
-          <Clock size={18} color="#f59e0b" />
+          <Clock size={18} color="var(--color-warning-text)" />
           <span className="timer-text">{formatTime(timeLeft)}</span>
         </div>
 
