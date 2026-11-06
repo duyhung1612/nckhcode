@@ -40,7 +40,7 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
   if (!report) {
     return (
       <div className="empty-state-card">
-        <Compass size={48} color="#38bdf8" />
+        <Compass size={48} color="var(--accent)" />
         <h2>Chưa có dữ liệu chẩn đoán</h2>
         <p>Sinh viên chưa làm bài kiểm tra tiền kiểm. Vui lòng thực hiện bài đánh giá để nhận chẩn đoán lỗ hổng kỹ năng.</p>
         <button className="primary-action-btn" onClick={onRetakeExam}>
@@ -86,7 +86,7 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
         <div className="hero-stat-cards">
           <div className="stat-card">
             <span className="stat-label">Điểm tổng kết</span>
-            <div className="stat-value" style={{ color: report.totalScore >= 70 ? '#10b981' : '#f59e0b' }}>
+            <div className="stat-value" style={{ color: report.totalScore >= 70 ? 'var(--color-success)' : 'var(--color-warning-text)' }}>
               {report.totalScore}<span className="stat-unit">/100</span>
             </div>
             <span className="stat-sub">Chuẩn doanh nghiệp: 70</span>
@@ -116,7 +116,7 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
         <div className="card-panel radar-panel">
           <div className="panel-header radar-card-header">
             <div className="panel-header-left">
-              <Target size={18} color="#38bdf8" />
+              <Target size={18} color="var(--accent)" />
               <h3 style={{ margin: 0 }}>Biểu đồ Mạng nhện Năng lực (Competency Radar)</h3>
             </div>
 
@@ -181,7 +181,7 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
             </>
           ) : (
             <div className="dag-focus-placeholder">
-              <Network size={36} color="#38bdf8" />
+              <Network size={36} color="var(--accent)" />
               <p>
                 <strong>Đang kích hoạt chế độ xem Sơ đồ Tiên quyết DAG bên dưới.</strong>
               </p>
@@ -195,7 +195,7 @@ export const DiagnosticReportView: React.FC<DiagnosticReportViewProps> = ({
         {/* Right: Detailed Skill Gap Breakdown */}
         <div className="card-panel gaps-panel">
           <div className="panel-header">
-            <AlertTriangle size={18} color="#f59e0b" />
+            <AlertTriangle size={18} color="var(--color-warning-text)" />
             <h3>Chi tiết 6 Nhóm Kỹ năng & Mức thiếu hụt</h3>
           </div>
 

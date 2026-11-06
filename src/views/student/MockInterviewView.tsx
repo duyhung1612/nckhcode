@@ -65,12 +65,12 @@ export const MockInterviewView: React.FC = () => {
         </div>
 
         {/* Readiness Index Card */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'rgba(15, 23, 42, 0.8)', padding: '12px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
-          <Award size={28} color="#38bdf8" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--bg-card-subtle)', padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+          <Award size={28} color="var(--accent)" />
           <div>
-            <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>Chỉ số Tự tin Phỏng vấn:</span>
-            <div style={{ fontSize: '22px', fontWeight: '800', color: readinessIndex >= 70 ? '#10b981' : '#f59e0b' }}>
-              {readinessIndex}% <span style={{ fontSize: '12px', color: '#94a3b8' }}>({ratedCount}/{SEED_INTERVIEW_QUESTIONS.length} câu)</span>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>Chỉ số Tự tin Phỏng vấn:</span>
+            <div style={{ fontSize: '22px', fontWeight: '800', color: readinessIndex >= 70 ? 'var(--color-success-text)' : 'var(--color-warning-text)' }}>
+              {readinessIndex}% <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>({ratedCount}/{SEED_INTERVIEW_QUESTIONS.length} câu)</span>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export const MockInterviewView: React.FC = () => {
           ))}
         </div>
 
-        <div style={{ fontSize: '13px', color: '#94a3b8' }}>
+        <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
           Câu <strong>{currentIndex + 1}</strong> / {filteredQuestions.length}
         </div>
       </div>
@@ -106,14 +106,14 @@ export const MockInterviewView: React.FC = () => {
         <div
           className="interview-flashcard card-panel"
           style={{
-            background: isFlipped ? 'rgba(15, 23, 42, 0.95)' : 'rgba(17, 24, 39, 0.85)',
-            border: isFlipped ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.1)',
+            background: isFlipped ? 'var(--bg-card-subtle)' : 'var(--bg-card)',
+            border: isFlipped ? '1px solid var(--accent)' : '1px solid var(--border-subtle)',
             minHeight: '380px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             transition: 'all 0.3s ease',
-            boxShadow: isFlipped ? '0 0 25px rgba(56, 189, 248, 0.2)' : 'var(--shadow-lg)'
+            boxShadow: isFlipped ? '0 0 25px rgba(2, 132, 199, 0.15)' : 'var(--shadow-card)'
           }}
         >
           {/* Card Top Meta */}
@@ -121,13 +121,13 @@ export const MockInterviewView: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <span className="skill-code-badge">{currentQ.skillGroupId}</span>
-                <span style={{ fontSize: '12px', color: '#cbd5e1', fontWeight: '600' }}>{currentQ.skillName}</span>
+                <span style={{ fontSize: '12px', color: 'var(--text-main)', fontWeight: '600' }}>{currentQ.skillName}</span>
                 <span className="badge-pill bloom-badge" style={{ fontSize: '10px' }}>{currentQ.difficulty}</span>
               </div>
               <button
                 className="pill-btn"
                 onClick={() => setIsFlipped(!isFlipped)}
-                style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#38bdf8' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent)' }}
               >
                 <RotateCw size={13} /> {isFlipped ? 'Xem lại câu hỏi' : 'Lật xem câu trả lời chuẩn'}
               </button>
@@ -136,18 +136,18 @@ export const MockInterviewView: React.FC = () => {
             {/* Front vs Back Content */}
             {!isFlipped ? (
               <div style={{ padding: '16px 0' }}>
-                <span style={{ fontSize: '12px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
                   Câu hỏi của Nhà tuyển dụng:
                 </span>
-                <h3 style={{ fontSize: '20px', color: '#ffffff', marginTop: '8px', marginBottom: '20px', lineHeight: '1.5' }}>
+                <h3 style={{ fontSize: '20px', color: 'var(--text-main)', marginTop: '8px', marginBottom: '20px', lineHeight: '1.5' }}>
                   "{currentQ.question}"
                 </h3>
 
-                <div style={{ background: 'rgba(15, 23, 42, 0.6)', padding: '16px', borderRadius: '8px', borderLeft: '3px solid #38bdf8' }}>
-                  <strong style={{ fontSize: '13px', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                <div style={{ background: 'var(--bg-card-subtle)', padding: '16px', borderRadius: '8px', border: '1px solid var(--border-subtle)', borderLeft: '3px solid var(--accent)' }}>
+                  <strong style={{ fontSize: '13px', color: 'var(--accent)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                     <Lightbulb size={15} /> Các ý cốt lõi cần nêu trong câu trả lời:
                   </strong>
-                  <ul style={{ paddingLeft: '18px', color: '#cbd5e1', fontSize: '13px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <ul style={{ paddingLeft: '18px', color: 'var(--text-main)', fontSize: '13px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {currentQ.keyPointsToMention.map((pt, pIdx) => (
                       <li key={pIdx}>{pt}</li>
                     ))}
@@ -156,18 +156,18 @@ export const MockInterviewView: React.FC = () => {
               </div>
             ) : (
               <div style={{ padding: '16px 0', animation: 'fadeIn 0.3s ease' }}>
-                <span style={{ fontSize: '12px', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
+                <span style={{ fontSize: '12px', color: 'var(--color-success-text)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
                   Câu trả lời mẫu gợi ý (Chuẩn kỹ thuật):
                 </span>
-                <p style={{ fontSize: '14px', color: '#f1f5f9', marginTop: '8px', marginBottom: '18px', lineHeight: '1.6', background: 'rgba(6, 78, 59, 0.15)', padding: '16px', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-main)', marginTop: '8px', marginBottom: '18px', lineHeight: '1.6', background: 'var(--color-success-bg)', padding: '16px', borderRadius: '8px', border: '1px solid var(--color-success-border)' }}>
                   {currentQ.idealAnswer}
                 </p>
 
-                <div style={{ background: 'rgba(136, 19, 55, 0.15)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(244, 63, 94, 0.3)' }}>
-                  <strong style={{ fontSize: '12px', color: '#f87171', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                <div style={{ background: 'var(--color-danger-bg)', padding: '14px', borderRadius: '8px', border: '1px solid var(--color-danger-border)' }}>
+                  <strong style={{ fontSize: '12px', color: 'var(--color-danger-text)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
                     <AlertCircle size={14} /> Lỗi sai thí sinh hay mắc phải:
                   </strong>
-                  <ul style={{ paddingLeft: '18px', color: '#fca5a5', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <ul style={{ paddingLeft: '18px', color: 'var(--color-danger-text)', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {currentQ.commonMistakes.map((mis, mIdx) => (
                       <li key={mIdx}>{mis}</li>
                     ))}
@@ -178,28 +178,28 @@ export const MockInterviewView: React.FC = () => {
           </div>
 
           {/* Self-Rating & Navigation */}
-          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '12px', color: '#94a3b8' }}>Tự đánh giá mức độ tự tin:</span>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Tự đánh giá mức độ tự tin:</span>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <button
                     className="pill-btn"
-                    style={{ background: confidenceRatings[currentQ.id] === 1 ? '#e11d48' : '' }}
+                    style={{ background: confidenceRatings[currentQ.id] === 1 ? 'var(--color-danger)' : '', color: confidenceRatings[currentQ.id] === 1 ? '#fff' : '' }}
                     onClick={() => handleRate(currentQ.id, 1)}
                   >
                     1★ Chưa nắm chắc
                   </button>
                   <button
                     className="pill-btn"
-                    style={{ background: confidenceRatings[currentQ.id] === 3 ? '#d97706' : '' }}
+                    style={{ background: confidenceRatings[currentQ.id] === 3 ? 'var(--color-warning)' : '', color: confidenceRatings[currentQ.id] === 3 ? '#fff' : '' }}
                     onClick={() => handleRate(currentQ.id, 3)}
                   >
                     3★ Hiểu cơ bản
                   </button>
                   <button
                     className="pill-btn"
-                    style={{ background: confidenceRatings[currentQ.id] === 5 ? '#059669' : '' }}
+                    style={{ background: confidenceRatings[currentQ.id] === 5 ? 'var(--color-success)' : '', color: confidenceRatings[currentQ.id] === 5 ? '#fff' : '' }}
                     onClick={() => handleRate(currentQ.id, 5)}
                   >
                     5★ Thành thạo

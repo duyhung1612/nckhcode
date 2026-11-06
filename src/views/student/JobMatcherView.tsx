@@ -91,7 +91,7 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
           {/* Left: Job Postings List */}
           <div className="card-panel">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', color: '#ffffff' }}>Danh sách 12 Tin Tuyển dụng Thăm dò:</h3>
+              <h3 style={{ fontSize: '16px', color: 'var(--text-main)' }}>Danh sách 12 Tin Tuyển dụng Thăm dò:</h3>
               <div style={{ display: 'flex', gap: '6px' }}>
                 <button
                   className={`pill-btn ${filterType === 'ALL' ? 'active' : ''}`}
@@ -123,8 +123,8 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
                     key={job.id}
                     onClick={() => setSelectedJob(job)}
                     style={{
-                      background: isSelected ? 'rgba(14, 165, 233, 0.15)' : 'rgba(15, 23, 42, 0.7)',
-                      border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.08)',
+                      background: isSelected ? 'var(--color-info-bg)' : 'var(--bg-card-subtle)',
+                      border: isSelected ? '1px solid var(--accent)' : '1px solid var(--border-subtle)',
                       borderRadius: '10px',
                       padding: '16px',
                       cursor: 'pointer',
@@ -132,22 +132,22 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-                      <strong style={{ color: '#ffffff', fontSize: '14px' }}>{job.title}</strong>
+                      <strong style={{ color: 'var(--text-main)', fontSize: '14px' }}>{job.title}</strong>
                       <span
                         style={{
                           fontSize: '12px',
                           fontWeight: '800',
                           padding: '2px 8px',
                           borderRadius: '12px',
-                          background: quickMatch >= 75 ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
-                          color: quickMatch >= 75 ? '#34d399' : '#fbbf24'
+                          background: quickMatch >= 75 ? 'var(--color-success-bg)' : 'var(--color-warning-bg)',
+                          color: quickMatch >= 75 ? 'var(--color-success-text)' : 'var(--color-warning-text)'
                         }}
                       >
                         Khớp: {quickMatch}%
                       </span>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '14px', fontSize: '12px', color: '#94a3b8', marginBottom: '10px' }}>
+                    <div style={{ display: 'flex', gap: '14px', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Building2 size={13} /> {job.company}</span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={13} /> {job.location}</span>
                     </div>
@@ -167,23 +167,23 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
           <div className="card-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div className="panel-header">
-                <Sparkles size={18} color="#38bdf8" />
+                <Sparkles size={18} color="var(--accent)" />
                 <h3>Phân Tích Độ Tương Thích Năng Lực</h3>
               </div>
 
-              <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '20px', borderRadius: '10px', textAlign: 'center', marginBottom: '20px', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>
+              <div style={{ background: 'var(--bg-card-subtle)', padding: '20px', borderRadius: '10px', textAlign: 'center', marginBottom: '20px', border: '1px solid var(--border-subtle)' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>
                   Tỷ lệ đáp ứng yêu cầu của {student.name}:
                 </span>
-                <div style={{ fontSize: '42px', fontWeight: '800', color: matchResult.overallMatchPercentage >= 75 ? '#10b981' : '#f59e0b', margin: '6px 0' }}>
+                <div style={{ fontSize: '42px', fontWeight: '800', color: matchResult.overallMatchPercentage >= 75 ? 'var(--color-success-text)' : 'var(--color-warning-text)', margin: '6px 0' }}>
                   {matchResult.overallMatchPercentage}%
                 </div>
-                <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: '1.4' }}>
+                <p style={{ fontSize: '13px', color: 'var(--text-main)', lineHeight: '1.4' }}>
                   {matchResult.advice}
                 </p>
               </div>
 
-              <h4 style={{ color: '#ffffff', fontSize: '14px', marginBottom: '12px' }}>
+              <h4 style={{ color: 'var(--text-main)', fontSize: '14px', marginBottom: '12px' }}>
                 Đối sánh chi tiết 6 nhóm kỹ năng:
               </h4>
 
@@ -195,7 +195,8 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      background: 'rgba(30, 41, 59, 0.5)',
+                      background: 'var(--bg-card-subtle)',
+                      border: '1px solid var(--border-subtle)',
                       padding: '10px 14px',
                       borderRadius: '6px',
                       fontSize: '12px'
@@ -203,16 +204,16 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
                   >
                     <div>
                       <span className="skill-code-badge" style={{ marginRight: '6px' }}>{s.skillGroupId}</span>
-                      <strong style={{ color: '#ffffff' }}>{s.skillName}</strong>
-                      {s.required && <span style={{ color: '#fbbf24', marginLeft: '6px' }}>(Tin yêu cầu)</span>}
+                      <strong style={{ color: 'var(--text-main)' }}>{s.skillName}</strong>
+                      {s.required && <span style={{ color: 'var(--color-warning-text)', marginLeft: '6px' }}>(Tin yêu cầu)</span>}
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ color: '#94a3b8' }}>Điểm: {s.studentScore}%</span>
+                      <span style={{ color: 'var(--text-muted)' }}>Điểm: {s.studentScore}%</span>
                       {s.isReady ? (
-                        <span style={{ color: '#34d399', fontWeight: '700' }}>✓ Đạt</span>
+                        <span style={{ color: 'var(--color-success-text)', fontWeight: '700' }}>✓ Đạt</span>
                       ) : (
-                        <span style={{ color: '#f87171', fontWeight: '700' }}>⚠️ Hổng</span>
+                        <span style={{ color: 'var(--color-danger-text)', fontWeight: '700' }}>⚠️ Hổng</span>
                       )}
                     </div>
                   </div>
@@ -220,11 +221,11 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
               </div>
             </div>
 
-            <div style={{ background: 'rgba(14, 165, 233, 0.1)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.25)', marginTop: '20px' }}>
-              <strong style={{ color: '#38bdf8', fontSize: '12px', display: 'block', marginBottom: '4px' }}>
+            <div style={{ background: 'var(--color-info-bg)', padding: '14px', borderRadius: '8px', border: '1px solid var(--color-info-border)', marginTop: '20px' }}>
+              <strong style={{ color: 'var(--accent)', fontSize: '12px', display: 'block', marginBottom: '4px' }}>
                 💡 Cơ sở căn cứ Đề cương:
               </strong>
-              <span style={{ fontSize: '12px', color: '#94a3b8', lineHeight: '1.4' }}>
+              <span style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.4' }}>
                 Khảo sát khẳng định 100% tin yêu cầu HTML/CSS & JS, 92% React, 75% API & Git. Việc bù đắp đúng trọng số sẽ nâng tỷ lệ đỗ phỏng vấn tối đa.
               </span>
             </div>
@@ -234,8 +235,8 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
         /* CUSTOM JD SCANNER TAB */
         <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '18px' }}>
           <div className="card-panel">
-            <h3 style={{ fontSize: '16px', color: '#ffffff', marginBottom: '8px' }}>Dán nội dung Job Description (JD) cần phân tích:</h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '14px' }}>
+            <h3 style={{ fontSize: '16px', color: 'var(--text-main)', marginBottom: '8px' }}>Dán nội dung Job Description (JD) cần phân tích:</h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '14px' }}>
               Hệ thống sẽ tự động quét các từ khóa kỹ năng theo khung chuẩn 6 nhóm để tính toán độ tương thích.
             </p>
 
@@ -245,11 +246,11 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
               onChange={e => setCustomJdText(e.target.value)}
               style={{
                 width: '100%',
-                background: '#020617',
-                border: '1px solid rgba(255,255,255,0.15)',
+                background: 'var(--input-bg)',
+                border: '1px solid var(--input-border)',
                 borderRadius: '8px',
                 padding: '14px',
-                color: '#38bdf8',
+                color: 'var(--accent)',
                 fontFamily: 'inherit',
                 fontSize: '13px',
                 lineHeight: '1.6',
@@ -261,21 +262,21 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
 
           <div className="card-panel">
             <div className="panel-header">
-              <Sparkles size={18} color="#38bdf8" />
+              <Sparkles size={18} color="var(--accent)" />
               <h3>Kết Quả Quét Kỹ Năng Tự Động</h3>
             </div>
 
-            <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '20px', borderRadius: '10px', textAlign: 'center', marginBottom: '20px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700' }}>
+            <div style={{ background: 'var(--bg-card-subtle)', padding: '20px', borderRadius: '10px', textAlign: 'center', marginBottom: '20px', border: '1px solid var(--border-subtle)' }}>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700' }}>
                 Mức độ tương thích của sinh viên:
               </span>
-              <div style={{ fontSize: '42px', fontWeight: '800', color: customMatchResult.overallMatchPercentage >= 75 ? '#10b981' : '#f59e0b', margin: '6px 0' }}>
+              <div style={{ fontSize: '42px', fontWeight: '800', color: customMatchResult.overallMatchPercentage >= 75 ? 'var(--color-success-text)' : 'var(--color-warning-text)', margin: '6px 0' }}>
                 {customMatchResult.overallMatchPercentage}%
               </div>
-              <p style={{ fontSize: '13px', color: '#cbd5e1' }}>{customMatchResult.advice}</p>
+              <p style={{ fontSize: '13px', color: 'var(--text-main)' }}>{customMatchResult.advice}</p>
             </div>
 
-            <h4 style={{ color: '#ffffff', fontSize: '14px', marginBottom: '10px' }}>Các nhóm kỹ năng phát hiện trong JD:</h4>
+            <h4 style={{ color: 'var(--text-main)', fontSize: '14px', marginBottom: '10px' }}>Các nhóm kỹ năng phát hiện trong JD:</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {customMatchResult.matchedSkills.map(s => (
                 <div
@@ -284,16 +285,17 @@ export const JobMatcherView: React.FC<JobMatcherViewProps> = ({ student }) => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    background: s.required ? 'rgba(14, 165, 233, 0.15)' : 'rgba(30, 41, 59, 0.4)',
+                    background: s.required ? 'var(--color-info-bg)' : 'var(--bg-card-subtle)',
+                    border: '1px solid var(--border-subtle)',
                     padding: '10px 14px',
                     borderRadius: '6px',
                     fontSize: '12px'
                   }}
                 >
-                  <strong style={{ color: s.required ? '#38bdf8' : '#94a3b8' }}>
+                  <strong style={{ color: s.required ? 'var(--accent)' : 'var(--text-muted)' }}>
                     {s.skillGroupId} - {s.skillName}
                   </strong>
-                  <span>{s.required ? '✓ Tìm thấy trong JD' : '— Không yêu cầu'}</span>
+                  <span style={{ color: 'var(--text-main)' }}>{s.required ? '✓ Tìm thấy trong JD' : '— Không yêu cầu'}</span>
                 </div>
               ))}
             </div>

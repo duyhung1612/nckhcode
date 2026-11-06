@@ -69,7 +69,7 @@ export const PracticalSubmitView: React.FC<PracticalSubmitViewProps> = ({
               ))}
             </ul>
             <div className="rubric-note-box">
-              <AlertCircle size={16} color="#f59e0b" />
+              <AlertCircle size={16} color="var(--color-warning-text)" />
               <span>Bài làm sẽ được chuyên gia chấm mù độc lập theo Rubric 3 tiêu chí (thang 0–3).</span>
             </div>
           </div>
@@ -179,7 +179,7 @@ export const PracticalSubmitView: React.FC<PracticalSubmitViewProps> = ({
             </div>
           ) : (
             <div className="pending-eval-box">
-              <Clock size={36} color="#94a3b8" />
+              <Clock size={36} color="var(--text-muted)" />
               <p>Bài nộp đang ở hàng đợi thẩm định của chuyên gia.</p>
               <span className="hint-text">
                 (Chuyển sang tab <strong>Chấm mù Rubric</strong> ở thanh điều hướng để trải nghiệm chấm điểm độc lập).
