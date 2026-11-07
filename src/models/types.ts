@@ -84,6 +84,7 @@ export interface SkillScore {
   gap: number;           // Gap(s) = max(0, R(s) - C(s))
   weightedGap: number;   // Gap(s) * w(s)
   isWeak: boolean;       // Gap(s) > 0
+  isUnassessed?: boolean; // Chưa thực hiện bài thi (VD: hồ sơ mới C03)
   subSkillDetails?: {
     subSkillId: string;
     subSkillName: string;

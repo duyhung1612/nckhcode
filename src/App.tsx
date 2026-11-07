@@ -2,10 +2,12 @@
 // APP ROOT CONTROLLER / VIEW COORDINATOR (MÔ HÌNH MVC)
 // Đề tài NCKH Viện CNTT FBU
 // ============================================================================
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StorageModel } from './models/storage';
 import { StudentProfile } from './models/types';
 import { Navbar } from './views/components/Navbar';
+import { ErrorBoundary } from './views/components/ErrorBoundary';
+import { animatePageEntrance } from './utils/motion';
 
 // Views
 import { AssessmentView } from './views/student/AssessmentView';
@@ -24,6 +26,7 @@ export function App() {
   const [students, setStudents] = useState<StudentProfile[]>([]);
   const [currentStudent, setCurrentStudent] = useState<StudentProfile | null>(null);
   const [currentTab, setCurrentTab] = useState<string>('diagnostic'); // Mặc định mở Báo cáo Chẩn đoán
+  const mainContentRef = useRef<HTMLElement | null>(null);
 
   // Tải dữ liệu ban đầu
   const refreshData = () => {
@@ -38,12 +41,27 @@ export function App() {
     refreshData();
   }, []);
 
+  // GSAP Smooth spatial tab transition
+  useEffect(() => {
+    if (mainContentRef.current) {
+      animatePageEntrance(mainContentRef.current);
+    }
+  }, [currentTab]);
+
   if (!currentStudent) {
     return <div className="loading-screen">Đang khởi tạo hệ thống NCKH...</div>;
   }
 
   return (
     <div className="app-layout">
+      {/* Antigravity Ambient Spatial Lighting Background */}
+      <div className="spatial-bg-ambient" aria-hidden="true">
+        <div className="ambient-orb orb-1"></div>
+        <div className="ambient-orb orb-2"></div>
+        <div className="ambient-orb orb-3"></div>
+        <div className="spatial-grid-overlay"></div>
+      </div>
+
       {/* Navbar & Navigation */}
       <Navbar
         currentTab={currentTab}
@@ -57,7 +75,8 @@ export function App() {
       />
 
       {/* Main View Workspace */}
-      <main className="app-main-content">
+      <main className="app-main-content" ref={mainContentRef}>
+        <ErrorBoundary>
         {currentTab === 'assessment' && (
           <AssessmentView
             student={currentStudent}
@@ -73,6 +92,11 @@ export function App() {
             student={currentStudent}
             onNavigateToRoadmap={() => setCurrentTab('roadmap')}
             onRetakeExam={() => setCurrentTab('assessment')}
+            students={students}
+            onStudentChange={(stu) => {
+              setCurrentStudent(stu);
+              StorageModel.setCurrentStudentId(stu.id);
+            }}
           />
         )}
 
@@ -113,6 +137,7 @@ export function App() {
         {currentTab === 'settings' && (
           <ParameterSettingsView onSettingsChanged={() => refreshData()} />
         )}
+        </ErrorBoundary>
       </main>
 
       {/* Footer */}

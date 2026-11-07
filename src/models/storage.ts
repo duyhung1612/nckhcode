@@ -13,18 +13,78 @@ const KEYS = {
 };
 
 export class StorageModel {
+  private static sanitizeStudent(s: StudentProfile): StudentProfile {
+    if (s.preTestReport?.skillScores) {
+      const seen = new Set<string>();
+      s.preTestReport.skillScores = s.preTestReport.skillScores.filter(item => {
+        const id = item.skillGroupId || item.skillName;
+        if (!id || seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      }).slice(0, 6);
+    }
+    if (s.postTestReport?.skillScores) {
+      const seen = new Set<string>();
+      s.postTestReport.skillScores = s.postTestReport.skillScores.filter(item => {
+        const id = item.skillGroupId || item.skillName;
+        if (!id || seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      }).slice(0, 6);
+    }
+    return s;
+  }
+
   static getStudents(): StudentProfile[] {
     const raw = localStorage.getItem(KEYS.STUDENTS);
+    const initial = getInitialMockProfiles().map(s => this.sanitizeStudent(s));
+
     if (!raw) {
-      const initial = getInitialMockProfiles();
       this.saveStudents(initial);
       return initial;
     }
     try {
-      return JSON.parse(raw);
+      const list: StudentProfile[] = JSON.parse(raw);
+      // Đảm bảo hồ sơ mẫu Nguyễn Văn A (STU_001) luôn được khôi phục nguyên vẹn theo chuẩn Bảng 6 đề cương
+      const stuA = initial.find(s => s.id === 'STU_001');
+      const idxA = list.findIndex(s => s.id === 'STU_001');
+      if (stuA) {
+        if (idxA >= 0) {
+          list[idxA] = stuA;
+        } else {
+          list.unshift(stuA);
+        }
+      }
+      const sanitized = list.map(s => this.sanitizeStudent(s));
+      this.saveStudents(sanitized);
+      return sanitized;
     } catch {
-      return getInitialMockProfiles();
+      this.saveStudents(initial);
+      return initial;
     }
+  }
+
+  // Khôi phục một hồ sơ mẫu về trạng thái gốc chuẩn NCKH (Bảng 6 đề cương)
+  static resetStudentToInitial(studentId: string = 'STU_001'): StudentProfile {
+    const initialProfiles = getInitialMockProfiles().map(s => this.sanitizeStudent(s));
+    const target = initialProfiles.find(s => s.id === studentId) || initialProfiles[0];
+    
+    const students = this.getStudents();
+    const idx = students.findIndex(s => s.id === target.id);
+    if (idx >= 0) {
+      students[idx] = target;
+    } else {
+      students.push(target);
+    }
+    this.saveStudents(students);
+    return target;
+  }
+
+  // Khôi phục toàn bộ các hồ sơ mẫu về chuẩn NCKH
+  static restoreAllSampleProfiles(): StudentProfile[] {
+    const initial = getInitialMockProfiles().map(s => this.sanitizeStudent(s));
+    this.saveStudents(initial);
+    return initial;
   }
 
   static saveStudents(students: StudentProfile[]): void {
@@ -72,7 +132,13 @@ export class StorageModel {
       return SEED_SKILL_GROUPS;
     }
     try {
-      return JSON.parse(raw);
+      const list: SkillGroup[] = JSON.parse(raw);
+      const seen = new Set<string>();
+      return list.filter(g => {
+        if (!g.id || seen.has(g.id)) return false;
+        seen.add(g.id);
+        return true;
+      }).slice(0, 6);
     } catch {
       return SEED_SKILL_GROUPS;
     }

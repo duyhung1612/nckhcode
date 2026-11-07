@@ -56,7 +56,7 @@ export const QuestionBankView: React.FC = () => {
   return (
     <div className="admin-view-container">
       {/* Header */}
-      <div className="admin-header-card">
+      <div className="admin-header-card spatial-card">
         <div>
           <div className="badge-pill admin-badge">CƠ SỞ DỮ LIỆU CÔNG CỤ ĐO (MA TRẬN BẢNG 4)</div>
           <h2>Ngân hàng 120 Câu hỏi Trắc nghiệm Đề A & Đề B</h2>
@@ -160,7 +160,7 @@ export const QuestionBankView: React.FC = () => {
       )}
 
       {/* Filters Toolbar */}
-      <div className="filter-toolbar-card">
+      <div className="filter-toolbar-card spatial-card">
         <div className="filter-item">
           <label>Bộ đề:</label>
           <select value={selectedExam} onChange={e => setSelectedExam(e.target.value as any)}>
@@ -220,7 +220,7 @@ export const QuestionBankView: React.FC = () => {
 
         <div className="questions-table-grid">
           {filteredQuestions.map((q) => (
-            <div key={q.id} className="question-admin-card">
+            <div key={q.id} className="question-admin-card spatial-card">
               <div className="card-top-meta">
                 <div className="id-group">
                   <span className="exam-tag">Đề {q.examSet}</span>

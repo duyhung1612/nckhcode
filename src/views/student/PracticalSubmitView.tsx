@@ -1,10 +1,11 @@
 // ============================================================================
 // VIEW: PRACTICAL SUBMIT VIEW (NỘP BÀI THỰC HÀNH MINI PRODUCT CATALOG)
+// ============================================================================
 import React, { useState } from 'react';
 import type { StudentProfile } from '../../models/types';
 import { PRACTICAL_EXERCISE_SPEC } from '../../models/seedRubric';
 import { RubricGradingController } from '../../controllers/RubricGradingController';
-import { GitBranch, Globe, GitCommit, FileText, CheckCircle2, AlertCircle, Award, Clock } from 'lucide-react';
+import { GitBranch, Globe, GitCommit, FileText, CheckCircle2, AlertCircle, Award, Clock, Sparkles } from 'lucide-react';
 
 interface PracticalSubmitViewProps {
   student: StudentProfile;
@@ -46,8 +47,10 @@ export const PracticalSubmitView: React.FC<PracticalSubmitViewProps> = ({
   return (
     <div className="practical-view-container">
       {/* Exercise Briefing Card */}
-      <div className="practical-brief-card">
-        <div className="badge-pill practical-badge">BÀI TẬP THỰC HÀNH TÍCH HỢP</div>
+      <div className="practical-brief-card spatial-card">
+        <div className="badge-pill practical-badge">
+          <Sparkles size={12} /> BÀI TẬP THỰC HÀNH TÍCH HỢP
+        </div>
         <h2>{PRACTICAL_EXERCISE_SPEC.title}</h2>
         <p className="brief-desc">{PRACTICAL_EXERCISE_SPEC.objective}</p>
 
@@ -78,7 +81,7 @@ export const PracticalSubmitView: React.FC<PracticalSubmitViewProps> = ({
 
       {/* Submission Form and Status */}
       <div className="submission-workspace-grid">
-        <div className="card-panel form-panel">
+        <div className="card-panel form-panel spatial-card">
           <h3>Nộp thông tin dự án của bạn</h3>
           <form onSubmit={handleSubmit} className="practical-form">
             <div className="form-group">
@@ -144,7 +147,7 @@ export const PracticalSubmitView: React.FC<PracticalSubmitViewProps> = ({
         </div>
 
         {/* Existing Evaluation Results (if graded) */}
-        <div className="card-panel status-panel">
+        <div className="card-panel status-panel spatial-card">
           <h3>Trạng thái Thẩm định Chuyên gia</h3>
           {existingSub?.scores && existingSub.scores.length > 0 ? (
             <div className="evaluation-results-box">

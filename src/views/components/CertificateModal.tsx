@@ -4,7 +4,7 @@
 // ============================================================================
 import React from 'react';
 import { StudentProfile } from '../../models/types';
-import { Award, CheckCircle, Download, Printer, X, ShieldCheck, QrCode } from 'lucide-react';
+import { Award, CheckCircle, Download, Printer, X, ShieldCheck, QrCode, Sparkles } from 'lucide-react';
 
 interface CertificateModalProps {
   student: StudentProfile;
@@ -35,79 +35,73 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
-      backdropFilter: 'blur(8px)',
+      backgroundColor: 'rgba(5, 11, 23, 0.85)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 9999,
       padding: '20px'
     }}>
-      <div className="certificate-modal-container" style={{
+      <div className="certificate-modal-container spatial-card" style={{
         backgroundColor: 'var(--bg-card)',
-        border: '2px solid var(--accent)',
-        borderRadius: '16px',
+        border: '1px solid rgba(56, 189, 248, 0.4)',
+        borderRadius: '20px',
         maxWidth: '850px',
         width: '100%',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.2)',
+        boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(56, 189, 248, 0.25)',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
+        animation: 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
       }}>
         {/* Top Control Bar */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '12px 20px',
+          padding: '14px 24px',
           background: 'var(--bg-card-subtle)',
           borderBottom: '1px solid var(--border-subtle)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent)', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent)', fontWeight: 700, fontSize: '13px', letterSpacing: '0.04em' }}>
             <Award size={18} />
             <span>CHỨNG THỰC NĂNG LỰC HỌC THUẬT & DOANH NGHIỆP</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button
               onClick={() => window.print()}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: 'var(--primary)',
-                color: '#fff',
-                border: 'none',
-                padding: '6px 14px',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: '13px'
-              }}
+              className="primary-action-btn"
+              style={{ padding: '6px 14px', fontSize: '12.5px' }}
             >
               <Printer size={14} /> In / Xuất PDF
             </button>
             <button
               onClick={onClose}
               style={{
-                background: 'transparent',
-                border: 'none',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid var(--border-subtle)',
                 color: 'var(--text-muted)',
                 cursor: 'pointer',
-                padding: '4px',
-                borderRadius: '4px'
+                padding: '6px',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
 
         {/* Certificate Body (Official Layout) */}
         <div className="printable-certificate" style={{
-          padding: '40px',
+          padding: '40px 36px',
           background: 'var(--bg-card)',
           border: '8px double var(--border-subtle)',
-          margin: '16px',
-          borderRadius: '12px',
+          margin: '20px',
+          borderRadius: '14px',
           position: 'relative',
           textAlign: 'center',
           color: 'var(--text-main)'
@@ -118,7 +112,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            opacity: 0.04,
+            opacity: 0.03,
             pointerEvents: 'none'
           }}>
             <ShieldCheck size={380} />
@@ -126,7 +120,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           {/* Academic Header */}
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ fontSize: '13px', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <div style={{ fontSize: '12.5px', letterSpacing: '2px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
               TRƯỜNG ĐẠI HỌC TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)
             </div>
             <div style={{ fontSize: '15px', letterSpacing: '1.5px', color: 'var(--accent)', fontWeight: 800, marginTop: '4px' }}>
@@ -142,20 +136,20 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             letterSpacing: '1px',
             textTransform: 'uppercase',
             fontWeight: 800,
-            marginBottom: '12px'
+            marginBottom: '8px'
           }}>
             GIẤY CHỨNG NHẬN ĐẠT CHUẨN NĂNG LỰC
           </h1>
           <div style={{
-            fontSize: '15px',
+            fontSize: '14.5px',
             color: 'var(--accent)',
             fontStyle: 'italic',
-            marginBottom: '24px'
+            marginBottom: '22px'
           }}>
             (Certificate of Frontend Competency for Intern/Fresher)
           </div>
 
-          <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '8px' }}>
+          <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', marginBottom: '8px' }}>
             Hội đồng Đánh giá Năng lực Khoa học Công nghệ Viện CNTT chứng nhận sinh viên:
           </p>
 
@@ -169,7 +163,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           }}>
             {student.name}
           </h2>
-          <div style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '20px' }}>
+          <div style={{ fontSize: '13.5px', color: 'var(--text-muted)', marginBottom: '20px' }}>
             Mã sinh viên: <strong style={{ color: 'var(--text-main)' }}>{student.code}</strong> • Định hướng chuyên môn: <strong style={{ color: 'var(--text-main)' }}>{student.targetRole}</strong>
           </div>
 
@@ -194,8 +188,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             <div style={{
               background: 'var(--bg-card-subtle)',
               border: '1px solid var(--border-subtle)',
-              padding: '10px 18px',
-              borderRadius: '8px'
+              padding: '10px 20px',
+              borderRadius: '10px'
             }}>
               <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>ĐIỂM NĂNG LỰC TỔNG</span>
               <strong style={{ fontSize: '20px', color: 'var(--color-success)' }}>{score}/100</strong>
@@ -204,8 +198,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             <div style={{
               background: 'var(--bg-card-subtle)',
               border: '1px solid var(--border-subtle)',
-              padding: '10px 18px',
-              borderRadius: '8px'
+              padding: '10px 20px',
+              borderRadius: '10px'
             }}>
               <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>CHUẨN DOANH NGHIỆP R(s)</span>
               <strong style={{ fontSize: '20px', color: 'var(--accent)' }}>70% (ĐẠT)</strong>
@@ -214,8 +208,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             <div style={{
               background: 'var(--bg-card-subtle)',
               border: '1px solid var(--border-subtle)',
-              padding: '10px 18px',
-              borderRadius: '8px'
+              padding: '10px 20px',
+              borderRadius: '10px'
             }}>
               <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>KỸ THUẬT GIT & RUBRIC</span>
               <strong style={{ fontSize: '20px', color: 'var(--color-purple)' }}>9/9 Điểm</strong>

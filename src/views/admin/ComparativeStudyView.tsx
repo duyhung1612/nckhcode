@@ -59,9 +59,9 @@ export const ComparativeStudyView: React.FC = () => {
   const totalHoursB = roadmapB.reduce((sum, step) => sum + step.estimatedHours, 0);
 
   return (
-    <div className="comparative-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+    <div className="comparative-view-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Header Banner */}
-      <div className="admin-header-card">
+      <div className="admin-header-card spatial-card">
         <div>
           <div className="badge-pill admin-badge">KIỂM ĐỊNH HỌC THUẬT NCKH • BẢNG 6</div>
           <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-main)', marginTop: '4px' }}>
@@ -112,9 +112,9 @@ export const ComparativeStudyView: React.FC = () => {
       </div>
 
       {/* Side-by-Side Profiles Overview */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div className="comparative-profiles-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* Profile A Card */}
-        <div className="card-panel" style={{ borderTop: '4px solid var(--primary)' }}>
+        <div className="card-panel spatial-card" style={{ borderTop: '4px solid var(--primary)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
             <div>
               <span className="skill-code-badge" style={{ background: 'var(--color-info-bg)', color: 'var(--accent)', border: '1px solid var(--color-info-border)' }}>
@@ -144,7 +144,7 @@ export const ComparativeStudyView: React.FC = () => {
         </div>
 
         {/* Profile B Card */}
-        <div className="card-panel" style={{ borderTop: '4px solid #a855f7' }}>
+        <div className="card-panel spatial-card" style={{ borderTop: '4px solid #a855f7' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
             <div>
               <span className="skill-code-badge" style={{ background: 'var(--color-purple-bg)', color: 'var(--color-purple-text)' }}>
@@ -175,7 +175,7 @@ export const ComparativeStudyView: React.FC = () => {
       </div>
 
       {/* Head-to-Head Comparison Table */}
-      <div className="card-panel">
+      <div className="card-panel spatial-card">
         <div className="panel-header">
           <FileSpreadsheet size={18} color="var(--accent)" />
           <h3>Bảng Đối Chiếu Chỉ Số Năng Lực & Khoảng Cách Tại Ngưỡng R = {sensitivityR}%</h3>
@@ -241,9 +241,9 @@ export const ComparativeStudyView: React.FC = () => {
       </div>
 
       {/* Side-by-Side Personalized Roadmaps (DAG Resolution) */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* Roadmap A */}
-        <div className="card-panel">
+        <div className="card-panel spatial-card">
           <div className="panel-header">
             <Compass size={18} color="var(--accent)" />
             <h3>Lộ trình Đề xuất cho Sinh viên A ({roadmapA.length} Module)</h3>
@@ -291,7 +291,7 @@ export const ComparativeStudyView: React.FC = () => {
         </div>
 
         {/* Roadmap B */}
-        <div className="card-panel">
+        <div className="card-panel spatial-card">
           <div className="panel-header">
             <Compass size={18} color="var(--color-purple)" />
             <h3>Lộ trình Đề xuất cho Sinh viên B ({roadmapB.length} Module)</h3>
@@ -340,7 +340,7 @@ export const ComparativeStudyView: React.FC = () => {
       </div>
 
       {/* Scientific Conclusion Box */}
-      <div style={{
+      <div className="spatial-card" style={{
         background: 'var(--color-info-bg)',
         border: '1px solid var(--color-info-border)',
         borderRadius: '12px',

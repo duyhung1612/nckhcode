@@ -77,7 +77,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
   return (
     <div className="admin-view-container">
       {/* Header with Blind Grading Protocol notice */}
-      <div className="admin-header-card">
+      <div className="admin-header-card spatial-card">
         <div>
           <div className="badge-pill admin-badge">QUY TRÌNH ĐỐI CHIẾU MÙ (BLIND GRADING)</div>
           <h2>Thẩm định Độc lập Bài Thực hành theo Rubric (Bảng 5)</h2>
@@ -103,7 +103,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
       </div>
 
       {/* Select submission */}
-      <div className="submission-selector-bar">
+      <div className="submission-selector-bar spatial-card">
         <label>Chọn bài nộp của sinh viên:</label>
         <select
           value={selectedStudentId}
@@ -189,7 +189,7 @@ export const BlindGradingView: React.FC<BlindGradingViewProps> = ({
       {sub ? (
         <div className="blind-grading-grid">
           {/* Left: Practical Artifacts */}
-          <div className="card-panel artifacts-panel">
+          <div className="card-panel artifacts-panel spatial-card">
             <div className="panel-header">
               <EyeOff size={18} color="var(--text-muted)" />
               <h3>Sản phẩm nộp của Sinh viên (Đã ẩn danh kết quả trắc nghiệm)</h3>
