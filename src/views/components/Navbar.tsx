@@ -315,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* 1. Brand Section: Logo FBU 44x44 tròn + Eyebrow đầy đủ + Tiêu đề 1 dòng */}
         <div className="header-brand-section">
           <img 
-            src="/fbu-logo.jpg" 
+            src={import.meta.env.BASE_URL + 'fbu-logo.jpg'} 
             alt="Logo FBU" 
             className="brand-logo-img"
             width={44}
