@@ -3486,18 +3486,19 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .app-header {
-    padding: 10px 14px;
+    padding: 0 12px;
   }
 
   .header-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
 
   .header-right-actions {
-    width: 100%;
-    justify-content: space-between;
+    width: auto;
+    justify-content: flex-end;
   }
 
   .report-hero-banner {

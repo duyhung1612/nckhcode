@@ -1,7 +1,8 @@
 /* Lucian UX/UI Prompt #027 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#027 */
 // ============================================================================
 // COMPONENT: EXPANDING TOP-BAR SEARCH (ADAPTED FROM LUCIANLABS #027)
-// Expanding top-bar search with live suggestions, keyboard navigation, and ARIA
+// Center expanding search: semi-expanded by default on desktop, collapses to icon in compact mode,
+// live suggestions from 11 tabs, 12 JDs & question topics, full keyboard navigation and ARIA.
 // ============================================================================
 import React, { useState, useRef, useEffect, useId } from 'react';
 import { SEED_JOB_POSTINGS } from '../../models/seedJobPostings';
@@ -9,6 +10,7 @@ import { SEED_JOB_POSTINGS } from '../../models/seedJobPostings';
 export interface ExpandingSearchProps {
   onNavigate: (tabId: string) => void;
   onOpenChange?: (isOpen: boolean) => void;
+  isCompact?: boolean;
 }
 
 interface SearchItem {
@@ -19,7 +21,7 @@ interface SearchItem {
   targetTab: string;
 }
 
-// Dữ liệu thật từ 11 tab, 12 JD TopCV và ngân hàng kiến thức
+// Dữ liệu thật từ 11 tab hệ thống, 12 JD TopCV và ngân hàng kiến thức
 const SEARCH_DATABASE: SearchItem[] = [
   // 11 Tab hệ thống
   { id: 'tab-assess', title: 'Làm bài đánh giá (Pre-test & Post-test)', category: 'Hành trình sinh viên', gradient: 'linear-gradient(140deg,#38BDF8,#0284C7)', targetTab: 'assessment' },
@@ -61,7 +63,8 @@ const RECENT_QUICK_SEARCHES = [
 
 export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
   onNavigate,
-  onOpenChange
+  onOpenChange,
+  isCompact = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -78,7 +81,7 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
     onOpenChange?.(true);
     setTimeout(() => {
       inputRef.current?.focus();
-    }, 120);
+    }, 80);
   };
 
   const handleClose = () => {
@@ -88,6 +91,13 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
     setActiveIndex(-1);
     triggerBtnRef.current?.focus();
   };
+
+  // Tự động đóng popover nếu header chuyển sang dạng compact
+  useEffect(() => {
+    if (isCompact && isOpen) {
+      handleClose();
+    }
+  }, [isCompact]);
 
   // Click outside listener
   useEffect(() => {
@@ -102,7 +112,7 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Lọc tối đa 3 kết quả
+  // Lọc tối đa 3 kết quả phù hợp nhất
   const filteredResults: SearchItem[] = React.useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) {
@@ -176,18 +186,32 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
 
   return (
     <div 
-      className={`u027 ${isOpen ? 'is-open' : ''}`} 
+      className={`u027 ${isOpen ? 'is-open' : ''} ${isCompact ? 'is-compact' : 'is-default-expanded'}`} 
       ref={containerRef}
     >
-      <div className="u027-field">
-        {/* Nút mở tìm kiếm kính lúp */}
+      <div 
+        className="u027-field"
+        onClick={() => {
+          if (!isOpen && !isCompact) {
+            handleOpen();
+          }
+        }}
+      >
+        {/* Nút kính lúp mở tìm kiếm */}
         <button
           className="u027-go"
           type="button"
           ref={triggerBtnRef}
           aria-label={isOpen ? "Nhập từ khóa tìm kiếm" : "Mở ô tìm kiếm"}
           aria-expanded={isOpen}
-          onClick={isOpen ? () => inputRef.current?.focus() : handleOpen}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (isOpen) {
+              inputRef.current?.focus();
+            } else {
+              handleOpen();
+            }
+          }}
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="6.5" />
@@ -206,89 +230,99 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
           aria-controls={listId}
           aria-activedescendant={activeIndex >= 0 ? `${listId}-opt-${activeIndex}` : undefined}
           placeholder="Tìm tab, JD TopCV, câu hỏi..."
-          tabIndex={isOpen ? 0 : -1}
+          tabIndex={isCompact && !isOpen ? -1 : 0}
           autoComplete="off"
           value={query}
+          onFocus={() => {
+            if (!isOpen) {
+              handleOpen();
+            }
+          }}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
         />
 
-        {/* Nút đóng X */}
-        <button
-          className="u027-x"
-          type="button"
-          aria-label="Đóng tìm kiếm"
-          tabIndex={isOpen ? 0 : -1}
-          onClick={handleClose}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 7l10 10M17 7L7 17" />
-          </svg>
-        </button>
+        {/* Nút đóng X (hiện khi mở hoặc có query) */}
+        {(isOpen || query) && (
+          <button
+            className="u027-x"
+            type="button"
+            aria-label="Đóng tìm kiếm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClose();
+            }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 7l10 10M17 7L7 17" />
+            </svg>
+          </button>
+        )}
       </div>
 
-      {/* Popover danh sách gợi ý & kết quả */}
-      <div 
-        className="u027-pop" 
-        role="region" 
-        aria-label="Kết quả tìm kiếm và gợi ý"
-      >
-        <p className="u027-sec">Gần đây</p>
-        <div className="u027-recent">
-          {RECENT_QUICK_SEARCHES.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => {
-                setQuery(tag);
-                inputRef.current?.focus();
-              }}
-            >
-              {tag}
-            </button>
-          ))}
+      {/* Popover danh sách gợi ý & kết quả (LucianLabs #027) */}
+      {isOpen && (
+        <div 
+          className="u027-pop" 
+          role="region" 
+          aria-label="Kết quả tìm kiếm và gợi ý"
+        >
+          <p className="u027-sec">Gần đây</p>
+          <div className="u027-recent">
+            {RECENT_QUICK_SEARCHES.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => {
+                  setQuery(tag);
+                  inputRef.current?.focus();
+                }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+
+          <p className="u027-sec">
+            {query.trim() ? 'Kết quả tìm kiếm' : 'Đề xuất'}
+          </p>
+          <ul
+            id={listId}
+            className="u027-list"
+            role="listbox"
+            aria-label="Danh sách gợi ý tìm kiếm"
+          >
+            {filteredResults.length === 0 ? (
+              <li className="u027-empty">Không tìm thấy kết quả cho &ldquo;{query}&rdquo;</li>
+            ) : (
+              filteredResults.map((item, index) => {
+                const isSelected = index === activeIndex;
+                return (
+                  <li
+                    key={item.id}
+                    id={`${listId}-opt-${index}`}
+                    className={`u027-opt ${isSelected ? 'active' : ''}`}
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => handleSelectItem(item)}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    style={{ transitionDelay: `${index * 40}ms` }}
+                  >
+                    <i 
+                      style={{ background: item.gradient }} 
+                      aria-hidden="true" 
+                    />
+                    <span>
+                      <b>{renderHighlightedText(item.title, query)}</b>
+                      <small>{item.category}</small>
+                    </span>
+                  </li>
+                );
+              })
+            )}
+          </ul>
         </div>
-
-        <p className="u027-sec">
-          {query.trim() ? 'Kết quả tìm kiếm' : 'Đề xuất'}
-        </p>
-        <ul
-          id={listId}
-          className="u027-list"
-          role="listbox"
-          aria-label="Danh sách gợi ý tìm kiếm"
-        >
-          {filteredResults.length === 0 ? (
-            <li className="u027-empty">Không tìm thấy kết quả cho &ldquo;{query}&rdquo;</li>
-          ) : (
-            filteredResults.map((item, index) => {
-              const isSelected = index === activeIndex;
-              return (
-                <li
-                  key={item.id}
-                  id={`${listId}-opt-${index}`}
-                  className="u027-opt"
-                  role="option"
-                  aria-selected={isSelected}
-                  onClick={() => handleSelectItem(item)}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  style={{ transitionDelay: `${index * 40}ms` }}
-                >
-                  <i 
-                    style={{ background: item.gradient }} 
-                    aria-hidden="true" 
-                  />
-                  <span>
-                    <b>{renderHighlightedText(item.title, query)}</b>
-                    <small>{item.category}</small>
-                  </span>
-                </li>
-              );
-            })
-          )}
-        </ul>
-      </div>
+      )}
     </div>
   );
 };
-

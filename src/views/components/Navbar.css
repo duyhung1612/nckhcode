@@ -1,6 +1,13 @@
-/* Lucian UX/UI Prompt #027, #354 & #037 Styles · MIT License (c) 2026 Seokwoooo */
+/* Lucian UX/UI Prompts #027, #037, #039, #212, #219, #354 · MIT License (c) 2026 Seokwoooo */
 /* ============================================================================
-   NAVBAR ENHANCEMENTS: EXPANDING SEARCH, STEPPER, MORPHING MEGA-MENU & ACCOUNT SWITCHER
+   NAVBAR COMPREHENSIVE STYLES (LAYOUT D: SEARCH IN THE CENTER)
+   - LucianLabs #212: Hide-on-scroll header, 58px top / 46px compact, 2px progress bar
+   - LucianLabs #219: Circular-reveal dark mode button with sun/moon spin
+   - LucianLabs #039: Sliding pill tabs stepper with keyboard navigation
+   - LucianLabs #027: Expanding top-bar search with live suggestions
+   - LucianLabs #354: Morphing mega-menu for Research & Faculty
+   - LucianLabs #037: Account switcher menu for student profiles
+   - 100% Solid Opaque Panels (var(--ux-surface)), zero backdrop-blur bleed-through
    ============================================================================ */
 
 /* --- Token Mapping for LucianLabs Elements --- */
@@ -31,7 +38,7 @@
 }
 
 /* ============================================================================
-   STICKY HEADER (SOLID OPAQUE BACKGROUND, SCROLL HIDE/SHOW)
+   STICKY HEADER CONTAINER (LUCIANLABS #212 HIDE-ON-SCROLL & STICKY NAV)
    ============================================================================ */
 .app-header {
   position: sticky;
@@ -41,32 +48,81 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border-bottom: 1px solid var(--ux-line);
-  padding: 10px 28px;
+  padding: 0 28px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   box-shadow: 0 4px 20px 0 var(--ux-shadow-strong);
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Khi cuộn xuống: Header trượt lên khỏi màn hình */
 .app-header.header-hidden {
   transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
   box-shadow: none;
 }
 
-/* --- Brand Section Layout & Animation --- */
+/* Thanh tiến trình cuộn 2px màu accent theo LucianLabs #212 */
+.u212-pg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--ux-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 60;
+}
+
+.app-header.has-scrolled .u212-pg {
+  opacity: 1;
+}
+
+/* ============================================================================
+   HÀNG 1: BRAND BÊN TRÁI · SEARCH Ở GIỮA · THEME & PROFILE BÊN PHẢI
+   ============================================================================ */
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 58px;
+  transition: height 0.3s var(--ux-ease);
+}
+
+/* Dạng thu gọn 46px khi cuộn lên */
+.app-header.is-compact .header-top-row {
+  height: 46px;
+}
+
+/* --- Brand Section (Logo + Eyebrow + Tiêu đề) --- */
 .header-brand-section {
   display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0;
+  flex-shrink: 0;
   transition: opacity 0.35s var(--ux-ease), transform 0.45s var(--ux-ease);
 }
 
-.app-header.is-search-open .header-brand-section {
-  opacity: 0;
-  transform: translateX(-24px);
-  pointer-events: none;
+.brand-logo-badge {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--ux-grad);
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  position: relative;
+  z-index: 2;
 }
 
 .brand-text {
@@ -76,6 +132,7 @@
   min-width: 0;
 }
 
+/* Eyebrow đầy đủ: TRƯỜNG ĐẠI HỌC TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU) */
 .university-badge {
   display: inline-flex;
   align-items: center;
@@ -87,8 +144,16 @@
   text-transform: uppercase;
   margin-bottom: 2px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  transition: opacity 0.25s ease, height 0.25s ease;
+}
+
+/* Khi header thu gọn hoặc màn hẹp: ẩn dòng eyebrow */
+.app-header.is-compact .university-badge {
+  display: none;
+}
+
+.badge-sparkle-icon {
+  color: var(--ux-accent);
 }
 
 .project-title {
@@ -99,55 +164,151 @@
   line-height: 1.25;
   white-space: nowrap;
   margin: 0;
+  transition: font-size 0.25s ease;
 }
 
-/* Compact theme toggle button */
-.theme-toggle-btn.icon-only {
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
+.app-header.is-compact .project-title {
+  font-size: 13.5px;
+}
+
+/* --- Vùng Ô Tìm Kiếm Ở Giữa Hàng 1 (Layout D) --- */
+.header-center-search {
+  flex: 1;
+  display: flex;
   justify-content: center;
-  border-radius: var(--radius-full);
-  background: var(--ux-surface-2);
-  border: 1px solid var(--ux-line);
-  color: var(--ux-ink);
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  align-items: center;
+  min-width: 0;
+  padding: 0 12px;
 }
 
-.theme-toggle-btn.icon-only:hover {
-  background: var(--ux-surface);
-  border-color: var(--ux-accent);
+/* --- Cụm nút bên phải: ThemeToggle + ProfileDropdown --- */
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 /* ============================================================================
-   LUCIANLABS #027 EXPANDING SEARCH COMPONENT
+   LUCIANLABS #219 CIRCULAR-REVEAL DARK MODE & VIEW TRANSITIONS
+   ============================================================================ */
+.u219-tg {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--ux-surface-2);
+  border: 1px solid var(--ux-line);
+  color: var(--ux-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.u219-tg:hover {
+  background: var(--ux-surface);
+  border-color: var(--ux-accent);
+  color: var(--ux-accent);
+}
+
+.u219-tg:active {
+  transform: scale(0.95);
+}
+
+.u219-tg:focus-visible {
+  outline: 2px solid var(--ux-accent);
+  outline-offset: 2px;
+}
+
+/* Icon mặt trời / mặt trăng xoay -90 độ trong 0.6s cubic-bezier(.3,1.4,.5,1) */
+.u219-icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  transition: transform 0.6s cubic-bezier(.3, 1.4, .5, 1);
+}
+
+.u219-icon-wrap.is-dark {
+  transform: rotate(-90deg);
+  color: #F59E0B;
+}
+
+.u219-icon-wrap.is-light {
+  transform: rotate(0deg);
+  color: var(--ux-accent);
+}
+
+/* View Transitions & Circular reveal overlay fallback */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.u219-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+  clip-path: circle(0px at var(--cx, 50%) var(--cy, 50%));
+  transition: clip-path 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.u219-reveal-overlay.is-active {
+  clip-path: circle(var(--r, 1200px) at var(--cx, 50%) var(--cy, 50%));
+}
+
+/* ============================================================================
+   LUCIANLABS #027 EXPANDING TOP-BAR SEARCH (CENTERED)
    ============================================================================ */
 .u027 {
   position: relative;
-  height: 44px;
+  height: 40px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  transition: max-width 0.5s var(--ux-spring);
+}
+
+/* Mặc định mở rộng vừa trên desktop */
+.u027.is-default-expanded {
+  max-width: 320px;
+}
+
+/* Bấm vào thì mở rộng hết cỡ theo #027 */
+.u027.is-open {
+  max-width: 480px;
+}
+
+/* Khi header ở dạng gọn (is-compact): thu về icon */
+.u027.is-compact:not(.is-open) {
+  max-width: 40px;
 }
 
 .u027-field {
   position: relative;
-  height: 44px;
-  width: 44px;
-  border-radius: 14px;
+  height: 40px;
+  width: 100%;
+  border-radius: 999px;
   background: var(--ux-surface-2);
   border: 1px solid var(--ux-line);
   overflow: hidden;
   transition: width 0.6s var(--ux-spring), background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
   z-index: 20;
+  cursor: text;
+}
+
+.u027.is-compact:not(.is-open) .u027-field {
+  width: 40px;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 .u027.is-open .u027-field {
-  width: 332px;
-  max-width: calc(100vw - 48px);
   background: var(--ux-surface);
   border-color: var(--ux-accent);
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25), 0 8px 24px var(--ux-shadow-strong);
@@ -157,13 +318,13 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border: 0;
   padding: 0;
-  border-radius: 14px;
+  border-radius: 999px;
   background: none;
-  color: var(--ux-ink);
+  color: var(--ux-ink-2);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -182,8 +343,8 @@
 
 .u027-go svg,
 .u027-x svg {
-  width: 19px;
-  height: 19px;
+  width: 17px;
+  height: 17px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -192,54 +353,48 @@
 
 .u027-in {
   position: absolute;
-  left: 44px;
-  right: 44px;
+  left: 38px;
+  right: 38px;
   top: 0;
-  height: 44px;
+  height: 40px;
   border: 0;
   outline: 0;
   background: none;
   padding: 0 4px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   font-family: inherit;
   color: var(--ux-ink);
-  opacity: 0;
-  transition: opacity 0.3s var(--ux-ease) 0.15s;
+  opacity: 1;
+  transition: opacity 0.25s var(--ux-ease);
 }
 
-.u027.is-open .u027-in {
-  opacity: 1;
+.u027.is-compact:not(.is-open) .u027-in {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .u027-in::placeholder {
   color: var(--ux-ink-3);
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .u027-x {
   position: absolute;
   right: 4px;
   top: 4px;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: 0;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 50%;
   background: var(--ux-surface-2);
   color: var(--ux-ink-2);
   display: grid;
   place-items: center;
   cursor: pointer;
-  opacity: 0;
-  transform: scale(0.6) rotate(-90deg);
-  transition: opacity 0.25s, transform 0.5s var(--ux-spring), background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
   z-index: 2;
-}
-
-.u027.is-open .u027-x {
-  opacity: 1;
-  transform: none;
 }
 
 .u027-x:hover {
@@ -247,11 +402,13 @@
   background: var(--ux-line);
 }
 
+/* Popover danh sách gợi ý & kết quả (Nền đặc var(--ux-surface)) */
 .u027-pop {
   position: absolute;
-  right: 0;
-  top: 52px;
-  width: 340px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 48px;
+  width: 440px;
   max-width: calc(100vw - 32px);
   padding: 14px 10px 10px;
   border-radius: 18px;
@@ -259,22 +416,20 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 1px solid var(--ux-line);
-  box-shadow: 0 16px 40px var(--ux-shadow-strong);
-  transform-origin: 90% 0;
-  opacity: 0;
-  transform: translateY(-10px) scale(0.96);
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.25s var(--ux-ease), transform 0.45s var(--ux-spring), visibility 0s 0.45s;
-  z-index: 100;
+  box-shadow: 0 24px 48px -12px var(--ux-shadow-strong);
+  z-index: 1000;
+  animation: u027PopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.u027.is-open .u027-pop {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-  visibility: visible;
-  transition: opacity 0.3s var(--ux-ease) 0.1s, transform 0.55s var(--ux-spring) 0.1s;
+@keyframes u027PopIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
 }
 
 .u027-sec {
@@ -329,16 +484,11 @@
   padding: 8px 10px;
   border-radius: 12px;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: background-color 0.2s var(--ux-ease), opacity 0.3s var(--ux-ease), transform 0.45s var(--ux-spring);
+  transition: background-color 0.2s var(--ux-ease);
 }
 
-.u027.is-open .u027-opt {
-  opacity: 1;
-  transform: none;
-}
-
+.u027-opt:hover,
+.u027-opt.active,
 .u027-opt[aria-selected="true"] {
   background: var(--ux-surface-2);
   outline: 1px solid var(--ux-line);
@@ -393,6 +543,315 @@
 }
 
 /* ============================================================================
+   HÀNG 2 (NAV ROW): STEPPER 6 BƯỚC BÊN TRÁI · NGHIÊN CỨU & GIẢNG VIÊN BÊN PHẢI
+   ============================================================================ */
+.navbar-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+/* ============================================================================
+   LUCIANLABS #039 SLIDING PILL TABS (STEPPER 6 BƯỚC SINH VIÊN)
+   ============================================================================ */
+.u039-tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--ux-surface-2);
+  border: 1px solid var(--ux-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: fit-content;
+}
+
+.u039-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pill trượt và đổi chiều rộng theo đúng tab đang chọn (0.5s spring) */
+.u039-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  border-radius: 999px;
+  background: var(--ux-accent);
+  box-shadow: 0 4px 14px -4px rgba(2, 132, 199, 0.5);
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), width 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), opacity 0.25s ease;
+}
+
+/* Tab button theo #039 */
+.u039-tab {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--ux-ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  user-select: none;
+  transition: color 0.35s ease, transform 0.15s ease;
+}
+
+.u039-tab:hover {
+  color: var(--ux-ink);
+}
+
+.u039-tab:active {
+  transform: scale(0.98);
+}
+
+.u039-tab:focus-visible {
+  outline: 2px solid var(--ux-accent);
+  outline-offset: 2px;
+}
+
+/* Tab đang được chọn có màu chữ nổi bật trên nền pill */
+.u039-tab[aria-selected="true"],
+.u039-tab.active {
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+/* Badge số thứ tự hoặc dấu tick hoàn thành */
+.u039-step-badge {
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 800;
+  background: var(--ux-surface);
+  border: 1px solid var(--ux-line);
+  color: var(--ux-ink-3);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.u039-tab[aria-selected="true"] .u039-step-badge,
+.u039-tab.active .u039-step-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.u039-step-badge.is-done {
+  background: #10B981 !important;
+  color: #FFFFFF !important;
+  border-color: #10B981 !important;
+}
+
+.u039-tab-label {
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   LUCIANLABS #354 MORPHING MEGA-MENU (NGHIÊN CỨU & GIẢNG VIÊN)
+   ============================================================================ */
+.research-mega-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.research-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--ux-surface-2);
+  border: 1px solid var(--ux-line);
+  color: var(--ux-ink-2);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  white-space: nowrap;
+}
+
+.research-menu-trigger:hover,
+.research-menu-trigger.active {
+  color: var(--ux-ink);
+  border-color: var(--ux-accent);
+  background: var(--ux-surface);
+}
+
+.research-menu-trigger.active {
+  color: var(--ux-accent);
+  border-color: var(--ux-accent);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.1));
+}
+
+.research-menu-trigger.is-open {
+  border-color: var(--ux-accent);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+.research-chevron-icon {
+  transition: transform 0.35s var(--ux-spring);
+  color: var(--ux-ink-3);
+}
+
+.research-chevron-icon.rotate-180 {
+  transform: rotate(180deg);
+  color: var(--ux-accent);
+}
+
+/* Morphing Mega Panel #354 với nền đặc var(--ux-surface) */
+.u354-pn {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 295px;
+  padding: 10px 8px;
+  border-radius: 18px;
+  background: var(--ux-surface) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 0 0 1px var(--ux-line), 0 24px 40px -18px var(--ux-shadow-strong);
+  z-index: 1000;
+  transform-origin: top right;
+  animation: u354FadeIn 0.25s cubic-bezier(.3, 1.1, .4, 1);
+}
+
+@keyframes u354FadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Caret 14x14 xoay 45 độ theo #354 */
+.u354-car {
+  position: absolute;
+  top: -7px;
+  right: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--ux-surface);
+  box-shadow: -1px -1px 0 var(--ux-line);
+  transform: rotate(45deg);
+  border-radius: 3px 0 0 0;
+  z-index: 2;
+}
+
+.research-dropdown-header {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ux-ink-3);
+  padding: 4px 10px 8px;
+}
+
+.u354-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.u354-it {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ux-ink);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: u354ItemIn 0.35s cubic-bezier(.3, 1.1, .4, 1) forwards;
+  animation-delay: calc(var(--i) * 32ms);
+  transition: background-color 0.2s var(--ux-ease);
+  font-family: inherit;
+}
+
+@keyframes u354ItemIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.u354-it:hover {
+  background: var(--ux-surface-2);
+}
+
+.u354-it.active {
+  background: var(--ux-surface-2);
+  color: var(--ux-accent);
+  box-shadow: inset 3px 0 0 var(--ux-accent);
+}
+
+.u354-it-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.u354-it-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.u354-it-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ux-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.u354-it.active .u354-it-title {
+  color: var(--ux-accent);
+}
+
+.u354-it-desc {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ux-ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================================
    LUCIANLABS #037 ACCOUNT SWITCHER MENU (PROFILE DROPDOWN)
    ============================================================================ */
 .u037-wrapper {
@@ -406,7 +865,7 @@
   gap: 8px;
   height: 38px;
   padding: 0 10px 0 5px;
-  border-radius: var(--radius-full);
+  border-radius: 999px;
   background: var(--ux-surface-2);
   border: 1px solid var(--ux-line);
   color: var(--ux-ink);
@@ -626,7 +1085,6 @@
   text-overflow: ellipsis;
 }
 
-/* Tick checkmark SVG */
 .u037-ck {
   margin-left: auto;
   width: 18px;
@@ -648,313 +1106,6 @@
 }
 
 /* ============================================================================
-   ROW 2: STUDENT 6-STEP JOURNEY STEPPER
-   ============================================================================ */
-.navbar-bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-}
-
-.student-stepper-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 3px;
-  background: var(--ux-surface-2);
-  border: 1px solid var(--ux-line);
-  border-radius: 12px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  flex: 1;
-  max-width: fit-content;
-}
-
-.student-stepper-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Sliding active pill indicator */
-.stepper-sliding-pill {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.28), rgba(56, 189, 248, 0.16));
-  border: 1px solid var(--ux-accent);
-  border-radius: 9px;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-  transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
-  z-index: 1;
-}
-
-.student-step-btn {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 11px;
-  border: 0;
-  background: transparent;
-  color: var(--ux-ink-2);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: inherit;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.15s ease;
-  white-space: nowrap;
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.student-step-btn:hover {
-  color: var(--ux-ink);
-}
-
-.student-step-btn:active {
-  transform: scale(0.98);
-}
-
-.student-step-btn.active {
-  color: var(--ux-accent);
-  font-weight: 700;
-}
-
-/* Step circular badge */
-.step-indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 19px;
-  height: 19px;
-  border-radius: 50%;
-  font-size: 10px;
-  font-weight: 800;
-  background: var(--ux-surface);
-  border: 1px solid var(--ux-line);
-  color: var(--ux-ink-3);
-  transition: all 0.25s ease;
-  flex-shrink: 0;
-}
-
-.student-step-btn.active .step-indicator {
-  background: var(--ux-accent);
-  color: #FFFFFF;
-  border-color: var(--ux-accent);
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
-}
-
-.student-step-btn .step-indicator.done {
-  background: #10B981;
-  color: #FFFFFF;
-  border-color: #10B981;
-}
-
-.student-step-btn.active .step-indicator.done {
-  background: #10B981;
-  border-color: #10B981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
-}
-
-.step-label {
-  white-space: nowrap;
-}
-
-/* ============================================================================
-   LUCIANLABS #354 MORPHING MEGA-MENU (NGHIÊN CỨU & GIẢNG VIÊN)
-   ============================================================================ */
-.research-mega-container {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.research-menu-trigger {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 13px;
-  border-radius: 10px;
-  background: var(--ux-surface-2);
-  border: 1px solid var(--ux-line);
-  color: var(--ux-ink-2);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
-  white-space: nowrap;
-}
-
-.research-menu-trigger:hover,
-.research-menu-trigger.active {
-  color: var(--ux-ink);
-  border-color: var(--ux-accent);
-  background: var(--ux-surface);
-}
-
-.research-menu-trigger.active {
-  color: var(--ux-accent);
-  border-color: var(--ux-accent);
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.1));
-}
-
-.research-menu-trigger.is-open {
-  border-color: var(--ux-accent);
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
-}
-
-.research-chevron-icon {
-  transition: transform 0.35s var(--ux-spring);
-  color: var(--ux-ink-3);
-}
-
-.research-chevron-icon.rotate-180 {
-  transform: rotate(180deg);
-  color: var(--ux-accent);
-}
-
-/* Morphing Mega Panel #354 với nền đặc var(--ux-surface) */
-.u354-pn {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 10px);
-  width: 295px;
-  padding: 10px 8px;
-  border-radius: 18px;
-  background: var(--ux-surface) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: 0 0 0 1px var(--ux-line), 0 24px 40px -18px var(--ux-shadow-strong);
-  z-index: 100;
-  transform-origin: top right;
-  animation: u354FadeIn 0.25s cubic-bezier(.3, 1.1, .4, 1);
-}
-
-@keyframes u354FadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Caret 14x14 xoay 45 độ theo #354 */
-.u354-car {
-  position: absolute;
-  top: -7px;
-  right: 28px;
-  width: 14px;
-  height: 14px;
-  background: var(--ux-surface);
-  box-shadow: -1px -1px 0 var(--ux-line);
-  transform: rotate(45deg);
-  border-radius: 3px 0 0 0;
-  z-index: 2;
-}
-
-.research-dropdown-header {
-  font-size: 10.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ux-ink-3);
-  padding: 4px 10px 8px;
-}
-
-.u354-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.u354-it {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 8px 10px;
-  border: 0;
-  border-radius: 12px;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  color: var(--ux-ink);
-  opacity: 0;
-  transform: translateY(6px);
-  animation: u354ItemIn 0.35s cubic-bezier(.3, 1.1, .4, 1) forwards;
-  animation-delay: calc(var(--i) * 32ms);
-  transition: background-color 0.2s var(--ux-ease);
-  font-family: inherit;
-}
-
-@keyframes u354ItemIn {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.u354-it:hover {
-  background: var(--ux-surface-2);
-}
-
-.u354-it.active {
-  background: var(--ux-surface-2);
-  color: var(--ux-accent);
-  box-shadow: inset 3px 0 0 var(--ux-accent);
-}
-
-.u354-it-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  flex: none;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.u354-it-texts {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-}
-
-.u354-it-title {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ux-ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.u354-it.active .u354-it-title {
-  color: var(--ux-accent);
-}
-
-.u354-it-desc {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--ux-ink-3);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ============================================================================
    ACCESSIBILITY & REDUCED MOTION
    ============================================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -967,10 +1118,12 @@
   .u037-car,
   .u037-ck,
   .u037-hl,
+  .u039-pill,
+  .u039-tab,
+  .u219-tg,
+  .u219-icon-wrap,
   .u354-pn,
-  .u354-it,
-  .stepper-sliding-pill,
-  .student-step-btn {
+  .u354-it {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
@@ -979,25 +1132,27 @@
 }
 
 /* ============================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN CHO CÁC MÀN HÌNH KHÁC NHAU
    ============================================================================ */
-@media (max-width: 900px) {
-  .navbar-bottom-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
+@media (max-width: 1024px) {
+  .university-badge {
+    display: none;
   }
-
-  .student-stepper-container {
-    max-width: 100%;
-  }
-
-  .research-mega-container {
-    align-self: flex-end;
+  
+  .u027.is-default-expanded {
+    max-width: 240px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .header-top-row {
+    gap: 8px;
+  }
+
   .university-badge {
     display: none;
   }
@@ -1006,19 +1161,51 @@
     font-size: 13.5px;
   }
 
-  .u027.is-open .u027-field {
-    width: calc(100vw - 36px);
+  /* Màn hẹp: search mặc định thu về icon kính lúp */
+  .u027.is-default-expanded {
+    max-width: 40px;
+  }
+
+  .u027:not(.is-open) .u027-field {
+    width: 40px;
+    border-radius: 12px;
+  }
+
+  .u027:not(.is-open) .u027-in {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .u027.is-open {
+    max-width: calc(100vw - 32px);
   }
 
   .u027-pop {
     width: calc(100vw - 32px);
   }
 
-  .u037-menu {
-    width: calc(100vw - 32px);
+  /* Nút hồ sơ: chỉ hiện avatar + mã hồ sơ trên mobile */
+  .u037-chip-texts b {
+    display: none;
   }
 
-  .u354-pn {
-    width: calc(100vw - 32px);
+  .u037-chip-texts small {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* Hàng 2: Cho phép stepper cuộn ngang mượt mà */
+  .navbar-bottom-row {
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .u039-tabs {
+    flex-shrink: 0;
+  }
+
+  .research-mega-container {
+    flex-shrink: 0;
   }
 }

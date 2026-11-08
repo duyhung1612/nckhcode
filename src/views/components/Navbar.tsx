@@ -1,30 +1,29 @@
+/* Lucian UX/UI Prompts #212, #219, #039, #354, #027 · MIT License (c) 2026 Seokwoooo */
 // ============================================================================
-// VIEW COMPONENT: NAVBAR (THANH ĐIỀU HƯỚNG VÀ CHỌN HỒ SƠ THỰC NGHIỆM)
-// Refactored header with LucianLabs #027 Search, #354 Morphing Mega-Menu & #037 Profile Switcher
+// VIEW COMPONENT: NAVBAR (LAYOUT D · BỐ CỤC SEARCH Ở GIỮA)
+// - Row 1: Brand (Trường ĐH Tài chính - Ngân hàng Hà Nội (FBU)), ExpandingSearch #027 ở giữa, ThemeToggle #219, ProfileDropdown #037.
+// - Row 2: Stepper 6 bước sinh viên (Sliding Pill Tabs #039), Mega-Menu Nghiên cứu #354.
+// - Hide-on-scroll & Compact header #212, Nav row sticky #242, 2px Accent Scroll Progress bar.
+// - 100% Solid Opaque Panels (var(--ux-surface)), no blur bleed, auto-close on scroll/Esc/tab change.
 // ============================================================================
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import { StorageModel } from '../../models/storage';
 import { StudentProfile } from '../../models/types';
 import { ProfileDropdown } from './ProfileDropdown';
 import { ExpandingSearch } from './ExpandingSearch';
+import { ThemeToggle } from './ThemeToggle';
 import './Navbar.css';
 import { 
   GraduationCap, 
   FlaskConical, 
   ClipboardCheck, 
   LineChart, 
-  MapPin, 
-  Code2, 
   Database, 
   Sliders, 
   Users,
-  Sun, 
-  Moon, 
   ChevronDown, 
   Sparkles,
-  Check,
-  Briefcase,
-  MessageSquare
+  Check
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -35,7 +34,7 @@ interface NavbarProps {
   students: StudentProfile[];
 }
 
-// 6 bước hành trình chuẩn của sinh viên
+// 6 bước hành trình chuẩn của sinh viên (LucianLabs #039)
 const STUDENT_STEPS = [
   { id: 'assessment', stepNum: 1, label: 'Làm bài đánh giá' },
   { id: 'diagnostic', stepNum: 2, label: 'Báo cáo Chẩn đoán' },
@@ -100,73 +99,87 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Refs
   const lastScrollY = useRef(0);
+  const scrollAccumulator = useRef(0);
   const megaContainerRef = useRef<HTMLDivElement>(null);
   const megaTriggerBtnRef = useRef<HTMLButtonElement>(null);
   const megaCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stepRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Sliding pill position state
-  const [pillStyle, setPillStyle] = useState<{ left: number; width: number; opacity: number }>({
-    left: 0,
-    width: 0,
+  // Sliding pill position state (LucianLabs #039)
+  const [pillStyle, setPillStyle] = useState<{ x: number; w: number; opacity: number }>({
+    x: 0,
+    w: 0,
     opacity: 0
   });
 
-  // Theme effect
+  // Theme synchronization effect
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('fbu_nckh_theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
-  // Đóng Research Menu khi currentTab thay đổi (từ Stepper, Search, hoặc bất kỳ nơi nào)
+  // Đóng Research Menu khi currentTab thay đổi (từ Stepper, Search, hoặc phím tắt)
   useEffect(() => {
     setIsMegaOpen(false);
   }, [currentTab]);
 
-  // Scroll detection: Đóng menu ngay khi cuộn và điều khiển ẩn/hiện header
+  // Hide-on-scroll logic theo LucianLabs #212
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const y = window.scrollY;
+      const d = y - lastScrollY.current;
+      lastScrollY.current = y;
 
-      // 1. Khi người dùng cuộn trang: đóng ngay menu nghiên cứu
+      // 1. Đóng menu ngay khi cuộn trang
       setIsMegaOpen(false);
 
-      // 2. Gần đỉnh trang luôn hiện header
-      if (currentScrollY <= 50) {
-        setIsHeaderHidden(false);
-        lastScrollY.current = currentScrollY;
-        return;
+      // 2. Tính tích lũy chiều cuộn (accumulator)
+      if ((d > 0) === (scrollAccumulator.current > 0)) {
+        scrollAccumulator.current += d;
+      } else {
+        scrollAccumulator.current = d;
       }
 
-      // 3. Nếu ô tìm kiếm đang mở, giữ header hiện để không ngắt trải nghiệm nhập liệu
+      // 3. Tính thanh tiến trình cuộn 2px dưới header
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(100, Math.max(0, (y / maxScroll) * 100));
+      setScrollProgress(progress);
+
+      // 4. Ở đỉnh trang (y < 60px): luôn hiện dạng đầy đủ 58px
+      if (y < 60) {
+        setIsCompact(false);
+        setIsHeaderHidden(false);
+        return;
+      } else {
+        setIsCompact(true);
+      }
+
+      // 5. Nếu ô tìm kiếm đang mở, giữ header hiện để không ngắt người dùng
       if (isSearchOpen) {
         setIsHeaderHidden(false);
-        lastScrollY.current = currentScrollY;
         return;
       }
 
-      // 4. Cuộn xuống -> ẩn header; cuộn lên -> hiện header
-      if (currentScrollY > lastScrollY.current + 8) {
+      // 6. Cuộn xuống tích lũy > 8px -> ẩn header
+      if (scrollAccumulator.current > 8) {
         setIsHeaderHidden(true);
-      } else if (currentScrollY < lastScrollY.current - 8) {
+      } 
+      // Cuộn lên tích lũy < -6px -> hiện header ở dạng gọn 46px
+      else if (scrollAccumulator.current < -6) {
         setIsHeaderHidden(false);
       }
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isSearchOpen]);
 
-  // Click outside listener for Research Mega-Menu
+  // Click outside và Escape listener cho Mega-Menu Nghiên cứu
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (megaContainerRef.current && !megaContainerRef.current.contains(e.target as Node)) {
@@ -191,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     };
   }, [isMegaOpen]);
 
-  // Quản lý hover leave / enter với 220ms delay chuẩn LucianLabs #354
+  // Hover leave / enter timer chuẩn LucianLabs #354 (220ms delay)
   const handleMegaPointerEnter = () => {
     if (megaCloseTimerRef.current) {
       clearTimeout(megaCloseTimerRef.current);
@@ -207,29 +220,53 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  // Tính toán vị trí sliding pill cho stepper
-  const updatePillPosition = () => {
+  // Tính vị trí Sliding Pill cho Stepper 6 bước (LucianLabs #039)
+  const updatePillPosition = useCallback(() => {
     const activeIdx = STUDENT_STEPS.findIndex(s => s.id === currentTab);
     if (activeIdx !== -1 && stepRefs.current[activeIdx]) {
       const el = stepRefs.current[activeIdx]!;
       setPillStyle({
-        left: el.offsetLeft,
-        width: el.offsetWidth,
+        x: el.offsetLeft,
+        w: el.offsetWidth,
         opacity: 1
       });
     } else {
       setPillStyle(prev => ({ ...prev, opacity: 0 }));
     }
-  };
+  }, [currentTab]);
 
   useLayoutEffect(() => {
     updatePillPosition();
-  }, [currentTab]);
+  }, [updatePillPosition, isCompact]);
 
   useEffect(() => {
     window.addEventListener('resize', updatePillPosition);
     return () => window.removeEventListener('resize', updatePillPosition);
-  }, []);
+  }, [updatePillPosition]);
+
+  // Điều hướng bằng phím mũi tên trên stepper (LucianLabs #039)
+  const handleTabKeyDown = (e: React.KeyboardEvent, index: number) => {
+    let nextIdx = -1;
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      nextIdx = (index + 1) % STUDENT_STEPS.length;
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      nextIdx = (index - 1 + STUDENT_STEPS.length) % STUDENT_STEPS.length;
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      nextIdx = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      nextIdx = STUDENT_STEPS.length - 1;
+    }
+
+    if (nextIdx !== -1) {
+      const nextStep = STUDENT_STEPS[nextIdx];
+      onTabChange(nextStep.id);
+      stepRefs.current[nextIdx]?.focus({ preventScroll: true });
+    }
+  };
 
   // Kiểm tra bước đã hoàn thành từ dữ liệu thật trong StorageModel / currentStudent
   const checkStepDone = (stepId: string): boolean => {
@@ -253,40 +290,49 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header 
-      className={`app-header ${isHeaderHidden ? 'header-hidden' : ''} ${isSearchOpen ? 'is-search-open' : ''}`}
+      className={`app-header ${isHeaderHidden ? 'header-hidden' : ''} ${isCompact ? 'is-compact' : ''} ${scrollProgress > 1 ? 'has-scrolled' : ''} ${isSearchOpen ? 'is-search-open' : ''}`}
     >
       {/* ===================================================================
-          HÀNG 1: BRAND KHỐI MỚI (EYEBROW + TIÊU ĐỀ 1 DÒNG), SEARCH, PROFILE, THEME
+          HÀNG 1: BRAND BÊN TRÁI · SEARCH Ở GIỮA · THEME & PROFILE BÊN PHẢI
           =================================================================== */}
       <div className="header-top-row">
-        {/* Brand Section: Logo + Eyebrow 1 dòng + Tiêu đề vừa 1 dòng */}
+        {/* Brand Section: Logo + Eyebrow đầy đủ + Tiêu đề 1 dòng */}
         <div className="header-brand-section">
           <div className="brand-logo-badge">
             <GraduationCap size={22} className="brand-icon" />
-            <div className="brand-logo-glow"></div>
+            <div className="brand-logo-glow" aria-hidden="true" />
           </div>
           <div className="brand-text">
-            {/* Eyebrow nhỏ, giãn chữ, muted, 1 dòng (ẩn ở mobile) */}
+            {/* Dòng eyebrow đầy đủ tên trường, không viết tắt "ĐH", ẩn khi compact/mobile */}
             <div className="university-badge">
               <Sparkles size={11} className="badge-sparkle-icon" />
-              <span>VIỆN CNTT – TRƯỜNG ĐH TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)</span>
+              <span>TRƯỜNG ĐẠI HỌC TÀI CHÍNH – NGÂN HÀNG HÀ NỘI (FBU)</span>
             </div>
-            {/* Tiêu đề ngắn gọn, vừa vặn 1 dòng trên desktop */}
+            {/* Tiêu đề đề tài NCKH, vừa 1 dòng trên desktop */}
             <h1 className="project-title">
               Đánh giá Khoảng cách Kỹ năng Frontend
             </h1>
           </div>
         </div>
 
-        {/* Cụm hành động bên phải: Search #027, Profile #037, Theme Icon */}
-        <div className="header-right-actions">
-          {/* Ô tìm kiếm LucianLabs #027 */}
+        {/* Ô Tìm Kiếm Ở Giữa Hàng 1 (LucianLabs #027) */}
+        <div className="header-center-search">
           <ExpandingSearch
             onNavigate={(targetTab) => {
               onTabChange(targetTab);
               setIsSearchOpen(false);
             }}
             onOpenChange={setIsSearchOpen}
+            isCompact={isCompact}
+          />
+        </div>
+
+        {/* Cụm nút bên phải: ThemeToggle #219 + ProfileDropdown #037 (Không có chuông) */}
+        <div className="header-right-actions">
+          {/* Nút đổi theme Circular-reveal #219 */}
+          <ThemeToggle
+            theme={theme}
+            onToggleTheme={setTheme}
           />
 
           {/* ProfileDropdown LucianLabs #037 */}
@@ -300,38 +346,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             variant="navbar"
             currentTab={currentTab}
           />
-
-          {/* Nút đổi theme chỉ còn icon */}
-          <button
-            onClick={toggleTheme}
-            className="theme-toggle-btn icon-only"
-            title={`Chuyển sang chế độ ${theme === 'dark' ? 'Sáng' : 'Tối'}`}
-            aria-label={`Chuyển sang chế độ ${theme === 'dark' ? 'Sáng' : 'Tối'}`}
-          >
-            {theme === 'dark' ? (
-              <Sun size={17} color="#f59e0b" className="theme-icon spin-on-hover" />
-            ) : (
-              <Moon size={17} color="var(--accent)" className="theme-icon spin-on-hover" />
-            )}
-          </button>
         </div>
       </div>
 
       {/* ===================================================================
-          HÀNG 2: STEPPER 6 BƯỚC CHO SINH VIÊN + MEGA-MENU NGHIÊN CỨU #354
+          HÀNG 2 (NAV ROW): STEPPER 6 BƯỚC BÊN TRÁI · NGHIÊN CỨU & GIẢNG VIÊN BÊN PHẢI
           =================================================================== */}
       <div className="navbar-bottom-row">
-        {/* Stepper 6 bước cho sinh viên */}
+        {/* Stepper 6 bước sinh viên (LucianLabs #039 Sliding Pill Tabs) */}
         <nav 
-          className="student-stepper-container" 
+          className="u039-tabs" 
+          role="tablist" 
           aria-label="Hành trình đánh giá và học bổ sung của sinh viên"
         >
-          {/* Active Sliding Pill */}
-          <div 
-            className="stepper-sliding-pill"
+          {/* Sliding pill indicator chuyển động spring */}
+          <span 
+            className="u039-pill"
             style={{
-              left: `${pillStyle.left}px`,
-              width: `${pillStyle.width}px`,
+              transform: `translateX(${pillStyle.x}px)`,
+              width: `${pillStyle.w}px`,
               opacity: pillStyle.opacity
             }}
             aria-hidden="true"
@@ -345,27 +378,33 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={step.id}
                 ref={(el) => { stepRefs.current[idx] = el; }}
-                className={`student-step-btn ${isActive ? 'active' : ''}`}
+                type="button"
+                role="tab"
+                id={`tab-step-${step.id}`}
+                aria-controls={`panel-step-${step.id}`}
+                aria-selected={isActive}
+                tabIndex={isActive ? 0 : -1}
+                className={`u039-tab ${isActive ? 'active' : ''}`}
                 onClick={() => {
                   onTabChange(step.id);
                   setIsMegaOpen(false);
                 }}
-                aria-current={isActive ? 'step' : undefined}
+                onKeyDown={(e) => handleTabKeyDown(e, idx)}
               >
-                <span className={`step-indicator ${isDone ? 'done' : ''}`}>
+                <span className={`u039-step-badge ${isDone ? 'is-done' : ''} ${isActive ? 'is-active' : ''}`}>
                   {isDone ? (
                     <Check size={11} strokeWidth={3} aria-label="Đã hoàn thành" />
                   ) : (
                     <span>{step.stepNum}</span>
                   )}
                 </span>
-                <span className="step-label">{step.label}</span>
+                <span className="u039-tab-label">{step.label}</span>
               </button>
             );
           })}
         </nav>
 
-        {/* Nút Mega-Menu Nghiên cứu & Giảng viên (LucianLabs #354) */}
+        {/* Nút Mega-Menu Nghiên cứu & Giảng viên bên phải (LucianLabs #354) */}
         <div 
           className="research-mega-container" 
           ref={megaContainerRef}
@@ -436,6 +475,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </div>
       </div>
+
+      {/* Thanh tiến trình cuộn mỏng 2px màu accent theo LucianLabs #212 */}
+      <span 
+        className="u212-pg" 
+        style={{ width: `${scrollProgress}%` }} 
+        aria-hidden="true" 
+      />
     </header>
   );
 };
