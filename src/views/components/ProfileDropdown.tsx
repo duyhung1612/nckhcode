@@ -1,38 +1,76 @@
+/* Lucian UX/UI Prompt #037 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#037 */
 // ============================================================================
-// COMPONENT: PROFILE DROPDOWN (CHỌN HỒ SƠ SINH VIÊN MẪU NCKH)
-// Custom Dropdown Button + Div List chuẩn Dark Glassmorphism, thay thế <select> native
+// COMPONENT: PROFILE DROPDOWN (ACCOUNT SWITCHER MENU · LUCIANLABS #037)
+// Solid surface, staggered entrance, floating highlight pill & spring caret
 // ============================================================================
 import React, { useState, useRef, useEffect } from 'react';
 import { StudentProfile } from '../../models/types';
-import { UserCheck, ChevronDown, Check, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 interface ProfileDropdownProps {
   currentStudent: StudentProfile;
   students: StudentProfile[];
   onSelectStudent: (student: StudentProfile) => void;
   variant?: 'navbar' | 'inline';
+  currentTab?: string;
 }
+
+// Map màu gradient và ký tự đại diện cho hồ sơ thực nghiệm NCKH
+const STUDENT_AVATAR_CONFIG: Record<string, { initial: string; gradient: string }> = {
+  STU_001: { initial: 'A', gradient: 'linear-gradient(140deg, #38BDF8, #0284C7)' },
+  STU_002: { initial: 'B', gradient: 'linear-gradient(140deg, #10B981, #059669)' },
+  STU_003: { initial: 'C', gradient: 'linear-gradient(140deg, #F59E0B, #D97706)' }
+};
 
 export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   currentStudent,
   students,
   onSelectStudent,
-  variant = 'navbar'
+  variant = 'navbar',
+  currentTab
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const triggerBtnRef = useRef<HTMLButtonElement>(null);
+  const triggerAvatarRef = useRef<HTMLSpanElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Đóng dropdown khi nhấp chuột ra ngoài hoặc nhấn phím Escape
+  // Highlight bar position
+  const [highlightStyle, setHighlightStyle] = useState<{ y: number; h: number; opacity: number }>({
+    y: 0,
+    h: 52,
+    opacity: 0
+  });
+
+  // Tự động đóng khi cuộn trang bất kỳ của window
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isOpen]);
+
+  // Tự động đóng khi currentTab thay đổi từ nơi khác
+  useEffect(() => {
+    setIsOpen(false);
+  }, [currentTab]);
+
+  // Click outside và phím Escape
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && isOpen) {
         setIsOpen(false);
+        triggerBtnRef.current?.focus({ preventScroll: true });
       }
     };
 
@@ -47,95 +85,196 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     };
   }, [isOpen]);
 
+  // Di chuyển highlight bar theo item hover/focus
+  const setHighlight = (index: number) => {
+    const el = itemRefs.current[index];
+    if (el) {
+      setHighlightStyle({
+        y: el.offsetTop,
+        h: el.offsetHeight,
+        opacity: 1
+      });
+    }
+  };
+
+  const clearHighlight = () => {
+    setHighlightStyle(prev => ({ ...prev, opacity: 0 }));
+  };
+
+  // Chọn hồ sơ sinh viên
   const handleSelect = (student: StudentProfile) => {
     onSelectStudent(student);
     setIsOpen(false);
+    triggerBtnRef.current?.focus({ preventScroll: true });
+
+    // Hiệu ứng xoay -20deg và scale .6 rồi về lại chuẩn LucianLabs #037
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (triggerAvatarRef.current?.animate && !rm) {
+      triggerAvatarRef.current.animate(
+        [
+          { transform: 'scale(.6) rotate(-20deg)' },
+          { transform: 'none' }
+        ],
+        { duration: 450, easing: 'cubic-bezier(.34, 1.45, .64, 1)' }
+      );
+    }
   };
+
+  // Lấy avatar config của sinh viên hiện tại
+  const currentAvatar = STUDENT_AVATAR_CONFIG[currentStudent?.id] || {
+    initial: currentStudent?.name?.charAt(0) || 'S',
+    gradient: 'linear-gradient(140deg, #8B5CF6, #6366F1)'
+  };
+
+  const currentShortName = currentStudent?.name 
+    ? currentStudent.name.split('(')[0].trim() 
+    : 'Chọn hồ sơ';
+
+  const currentScore = currentStudent?.preTestReport?.totalScore ?? 0;
 
   return (
     <div
-      ref={dropdownRef}
-      className={`custom-profile-dropdown ${variant} ${isOpen ? 'is-open' : ''}`}
+      ref={containerRef}
+      className={`u037-wrapper custom-profile-dropdown ${variant} ${isOpen ? 'is-open' : ''}`}
     >
-      {/* Trigger Button thay thế cho native select */}
+      {/* Trigger chip theo phong cách LucianLabs #037 */}
       <button
+        ref={triggerBtnRef}
         type="button"
-        className="profile-dropdown-trigger"
-        onClick={() => setIsOpen(!isOpen)}
+        className="u037-chip"
+        onClick={() => setIsOpen(prev => !prev)}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            setIsOpen(true);
+            setTimeout(() => {
+              itemRefs.current[0]?.focus({ preventScroll: true });
+            }, 60);
+          }
+        }}
         aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        aria-label="Chọn hồ sơ thực nghiệm sinh viên"
+        aria-haspopup="menu"
+        aria-label={`Hồ sơ sinh viên hiện tại: ${currentStudent?.code} - ${currentShortName}`}
       >
-        <div className="trigger-left-content">
-          <UserCheck size={15} className="trigger-user-icon" />
-          <span className="trigger-label">Hồ sơ:</span>
-          <span className="trigger-student-code">{currentStudent?.code || '---'}</span>
-          <span className="trigger-student-name">
-            - {currentStudent?.name ? currentStudent.name.split('(')[0].trim() : 'Chọn hồ sơ'}
-          </span>
-        </div>
-        <ChevronDown
-          size={14}
-          className={`trigger-chevron ${isOpen ? 'rotated' : ''}`}
-        />
+        <span 
+          ref={triggerAvatarRef}
+          className="u037-ws" 
+          style={{ background: currentAvatar.gradient }}
+          aria-hidden="true"
+        >
+          {currentAvatar.initial}
+        </span>
+        <span className="u037-chip-texts">
+          <b>{currentShortName}</b>
+          <small>{currentStudent?.code || '---'} · {currentScore}/100đ</small>
+        </span>
+        {/* Caret xoay 180 độ khi mở */}
+        <svg 
+          className={`u037-car ${isOpen ? 'rotate-180' : ''}`} 
+          viewBox="0 0 20 20" 
+          aria-hidden="true"
+        >
+          <path d="M6 8l4 4 4-4" />
+        </svg>
       </button>
 
-      {/* Danh sách Dropdown Popover chuẩn Glassmorphism */}
+      {/* Menu xổ xuống nền đặc theo mẫu LucianLabs #037 */}
       {isOpen && (
-        <div className="profile-dropdown-menu" role="listbox">
-          <div className="dropdown-menu-header">
-            <Sparkles size={12} color="var(--accent)" />
-            <span>HỒ SƠ THỰC NGHIỆM ĐỐI CHỨNG NCKH</span>
+        <div 
+          className="u037-menu" 
+          role="menu"
+          aria-label="Danh sách hồ sơ thực nghiệm sinh viên NCKH"
+        >
+          <div className="u037-sec">
+            <Sparkles size={11} className="u037-sec-icon" aria-hidden="true" />
+            <span>HỒ SƠ THỰC NGHIỆM ĐỐI CHỨNG</span>
           </div>
 
-          <div className="dropdown-items-list">
-            {(students || []).map((student) => {
+          <ul 
+            ref={listRef}
+            className={`u037-list ${highlightStyle.opacity > 0 ? 'is-hl' : ''}`}
+            onPointerLeave={clearHighlight}
+          >
+            {/* Thanh highlight di chuyển theo item hover/focus */}
+            <li 
+              className="u037-hl" 
+              role="presentation"
+              style={{
+                transform: `translateY(${highlightStyle.y}px)`,
+                height: `${highlightStyle.h}px`,
+                opacity: highlightStyle.opacity
+              }}
+            />
+
+            {(students || []).map((student, index) => {
               const isSelected = student.id === currentStudent?.id;
+              const avatar = STUDENT_AVATAR_CONFIG[student.id] || {
+                initial: student.name?.charAt(0) || 'S',
+                gradient: 'linear-gradient(140deg, #8B5CF6, #6366F1)'
+              };
               const score = student.preTestReport?.totalScore ?? 0;
 
               return (
-                <div
-                  key={student.id}
-                  role="option"
-                  aria-selected={isSelected}
-                  tabIndex={0}
-                  className={`profile-dropdown-item ${isSelected ? 'selected' : ''}`}
-                  onClick={() => handleSelect(student)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleSelect(student);
-                    }
-                  }}
-                >
-                  <div className="item-meta">
-                    <div className="item-title-row">
-                      <span className={`item-code-badge ${isSelected ? 'badge-blue' : ''}`}>
-                        {student.code}
+                <li key={student.id} role="none">
+                  <button
+                    ref={(el) => { itemRefs.current[index] = el; }}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={isSelected}
+                    className={`u037-it ${isSelected ? 'selected' : ''}`}
+                    style={{ '--i': index } as React.CSSProperties}
+                    onPointerEnter={() => setHighlight(index)}
+                    onFocus={() => setHighlight(index)}
+                    onClick={() => handleSelect(student)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const nextIdx = (index + 1) % students.length;
+                        itemRefs.current[nextIdx]?.focus({ preventScroll: true });
+                        setHighlight(nextIdx);
+                      } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const prevIdx = (index - 1 + students.length) % students.length;
+                        itemRefs.current[prevIdx]?.focus({ preventScroll: true });
+                        setHighlight(prevIdx);
+                      } else if (e.key === 'Escape') {
+                        e.preventDefault();
+                        setIsOpen(false);
+                        triggerBtnRef.current?.focus({ preventScroll: true });
+                      } else if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSelect(student);
+                      }
+                    }}
+                  >
+                    <span 
+                      className="u037-ws" 
+                      style={{ background: avatar.gradient }}
+                      aria-hidden="true"
+                    >
+                      {avatar.initial}
+                    </span>
+                    <span className="u037-it-info">
+                      <span className="u037-it-name">
+                        <span className="u037-code-badge">{student.code}</span>
+                        <strong>{student.name}</strong>
                       </span>
-                      <strong className="item-name">{student.name}</strong>
-                    </div>
+                      <small className="u037-it-sub">
+                        {student.targetRole} · Pre-test: <strong>{score}/100</strong>
+                      </small>
+                    </span>
 
-                    <div className="item-sub-row">
-                      <span className="item-role">{student.targetRole}</span>
-                      <span className="item-score-pill">
-                        Điểm Pre-test: <strong>{score}/100</strong>
-                      </span>
-                    </div>
-                  </div>
-
-                  {isSelected && (
-                    <div className="selected-check-icon">
-                      <Check size={16} />
-                    </div>
-                  )}
-                </div>
+                    {/* Dấu tick SVG với scale .4 -> 1 chuẩn #037 */}
+                    <svg className="u037-ck" viewBox="0 0 18 18" aria-hidden="true">
+                      <path d="M4 9.5l3.5 3.5L14 6" />
+                    </svg>
+                  </button>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       )}
     </div>
   );
 };
-

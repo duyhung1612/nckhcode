@@ -291,3 +291,4 @@ export const ExpandingSearch: React.FC<ExpandingSearchProps> = ({
     </div>
   );
 };
+
