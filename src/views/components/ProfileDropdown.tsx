@@ -2,10 +2,12 @@
 // ============================================================================
 // COMPONENT: PROFILE DROPDOWN (ACCOUNT SWITCHER MENU · LUCIANLABS #037)
 // Solid surface, staggered entrance, floating highlight pill & spring caret
+// Cải tiến hiển thị: Mỗi mục đúng 2 dòng chuẩn, không ngắt quãng giữa chừng
 // ============================================================================
 import React, { useState, useRef, useEffect } from 'react';
 import { StudentProfile } from '../../models/types';
 import { Sparkles } from 'lucide-react';
+import './Navbar.css';
 
 interface ProfileDropdownProps {
   currentStudent: StudentProfile;
@@ -137,7 +139,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       ref={containerRef}
       className={`u037-wrapper custom-profile-dropdown ${variant} ${isOpen ? 'is-open' : ''}`}
     >
-      {/* Trigger chip theo phong cách LucianLabs #037 */}
+      {/* Trigger chip theo phong cách LucianLabs #037 (ô vuông bo tròn 32x32) */}
       <button
         ref={triggerBtnRef}
         type="button"
@@ -213,6 +215,8 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                 gradient: 'linear-gradient(140deg, #8B5CF6, #6366F1)'
               };
               const score = student.preTestReport?.totalScore ?? 0;
+              // Rút gọn tên trước dấu "(" (ví dụ: "Nguyễn Văn A" thay vì "Nguyễn Văn A (Hồ sơ A)")
+              const shortName = student.name ? student.name.split('(')[0].trim() : 'Sinh viên';
 
               return (
                 <li key={student.id} role="none">
@@ -247,6 +251,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                       }
                     }}
                   >
+                    {/* Ô vuông bo tròn 32x32 theo #037 */}
                     <span 
                       className="u037-ws" 
                       style={{ background: avatar.gradient }}
@@ -254,14 +259,26 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
                     >
                       {avatar.initial}
                     </span>
+
+                    {/* Khối chứa 2 dòng thông tin (min-width: 0 đảm bảo ellipsis hoạt động) */}
                     <span className="u037-it-info">
+                      {/* Dòng 1: Mã hồ sơ + Tên (chỉ đúng 1 dòng, không ngắt) */}
                       <span className="u037-it-name">
                         <span className="u037-code-badge">{student.code}</span>
-                        <strong>{student.name}</strong>
+                        <strong className="u037-it-fullname" title={student.name}>
+                          {shortName}
+                        </strong>
                       </span>
-                      <small className="u037-it-sub">
-                        {student.targetRole} · Pre-test: <strong>{score}/100</strong>
-                      </small>
+
+                      {/* Dòng 2: Vai trò + Điểm Pre-test (chỉ đúng 1 dòng, không ngắt) */}
+                      <span className="u037-it-sub">
+                        <span className="u037-it-role" title={student.targetRole}>
+                          {student.targetRole}
+                        </span>
+                        <span className="u037-it-score">
+                          Pre-test: {score}/100
+                        </span>
+                      </span>
                     </span>
 
                     {/* Dấu tick SVG với scale .4 -> 1 chuẩn #037 */}
