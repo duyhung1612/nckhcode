@@ -2,14 +2,24 @@
 // VIEW: ASSESSMENT VIEW (GIAO DIỆN LÀM BÀI ĐÁNH GIÁ TRẮC NGHIỆM)
 // Thiết kế thích ứng theo ma trận Bloom (Bảng 4 trong đề cương)
 // ============================================================================
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Question, ExamAnswer, StudentProfile } from '../../models/types';
-import { ALL_QUESTIONS } from '../../models/seedQuestions';
 import { ExamController } from '../../controllers/ExamController';
 import { GapDiagnosticController } from '../../controllers/GapDiagnosticController';
 import { RoadmapEngineController } from '../../controllers/RoadmapEngineController';
 import { StorageModel } from '../../models/storage';
-import { Clock, CheckCircle2, AlertCircle, Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
+import { 
+  Clock, 
+  CheckCircle2, 
+  Sparkles, 
+  ArrowRight, 
+  ArrowLeft, 
+  Layers, 
+  BarChart, 
+  Zap, 
+  Code 
+} from 'lucide-react';
+import { animatePageEntrance } from '../../utils/motion';
 
 interface AssessmentViewProps {
   student: StudentProfile;
@@ -25,15 +35,18 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<ExamAnswer[]>([]);
   const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 phút
+  const questionCardRef = useRef<HTMLDivElement | null>(null);
 
-  // Tải danh sách câu hỏi khi đổi đề
+  // Tải danh sách câu hỏi và reset trạng thái bài thi khi đổi sinh viên hoặc đổi đề
   useEffect(() => {
     const qList = ExamController.getQuestionsForExam(examSet);
     setQuestions(qList);
     setCurrentIndex(0);
-    // Khởi tạo danh sách câu trả lời
+    // Khởi tạo lại danh sách câu trả lời trắng
     setAnswers(qList.map(q => ({ questionId: q.id, selectedOption: null })));
-  }, [examSet]);
+    // Khôi phục đồng hồ 45 phút cho sinh viên
+    setTimeLeft(45 * 60);
+  }, [student?.id, examSet]);
 
   // Bộ đếm ngược thời gian
   useEffect(() => {
@@ -42,6 +55,13 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Smooth animate on changing question
+  useEffect(() => {
+    if (questionCardRef.current) {
+      animatePageEntrance(questionCardRef.current);
+    }
+  }, [currentIndex]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -105,15 +125,18 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
   };
 
   const answeredCount = answers.filter(a => a.selectedOption !== null).length;
+  const progressPercent = questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
 
   if (!currentQ) return <div className="loading-box">Đang tải ngân hàng đề...</div>;
 
   return (
     <div className="assessment-container">
       {/* Top Header Controls */}
-      <div className="assessment-header-card">
+      <div className="assessment-header-card spatial-card">
         <div className="exam-info">
-          <div className="badge-pill exam-badge">Bộ đề: Đề {examSet} ({questions.length} câu)</div>
+          <div className="badge-pill exam-badge">
+            <Layers size={13} /> Bộ đề: Đề {examSet} ({questions.length} câu)
+          </div>
           <div className="exam-selection-group">
             <label>Đổi đề:</label>
             <button
@@ -131,15 +154,17 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
           </div>
         </div>
 
-        {/* Timer */}
-        <div className="timer-box">
-          <Clock size={18} color="var(--color-warning-text)" />
+        {/* Timer with subtle warning glow if under 5 minutes */}
+        <div className={`timer-box ${timeLeft < 300 ? 'timer-urgent' : ''}`}>
+          <Clock size={18} className="timer-icon" />
           <span className="timer-text">{formatTime(timeLeft)}</span>
         </div>
 
         {/* Quick Simulation Buttons for Research Verification */}
         <div className="quick-sim-tools">
-          <span className="sim-label">⚡ Nạp nhanh dữ liệu NCKH:</span>
+          <span className="sim-label">
+            <Zap size={13} color="var(--accent)" /> Nạp nhanh dữ liệu NCKH:
+          </span>
           <button
             className="sim-btn sim-btn-a"
             title="Sinh viên khá HTML/CSS nhưng hổng nặng JavaScript & React (Bảng 6)"
@@ -159,9 +184,19 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
 
       <div className="assessment-workspace">
         {/* Main Question Area */}
-        <div className="question-main-card">
+        <div className="question-main-card spatial-card" ref={questionCardRef}>
+          {/* Linear Exam Progress Line */}
+          <div className="question-progress-track">
+            <div 
+              className="question-progress-bar"
+              style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+
           <div className="question-meta-bar">
-            <span className="question-number-tag">Câu {currentIndex + 1} / {questions.length}</span>
+            <span className="question-number-tag">
+              Câu {currentIndex + 1} / {questions.length}
+            </span>
             <span className="badge-pill bloom-badge">Mức Bloom: {currentQ.bloomLevel}</span>
             <span className="badge-pill diff-badge">Độ khó: {currentQ.difficulty}</span>
             <span className="badge-pill group-badge">Mã nhóm: {currentQ.skillGroupId}</span>
@@ -170,9 +205,21 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
           <div className="question-content-box">
             <p className="question-text">{currentQ.content}</p>
             {currentQ.codeSnippet && (
-              <pre className="code-snippet-box">
-                <code>{currentQ.codeSnippet}</code>
-              </pre>
+              <div className="terminal-code-wrapper">
+                <div className="terminal-topbar">
+                  <div className="terminal-dots">
+                    <span className="dot dot-red"></span>
+                    <span className="dot dot-yellow"></span>
+                    <span className="dot dot-green"></span>
+                  </div>
+                  <span className="terminal-title">
+                    <Code size={12} /> snippet.js
+                  </span>
+                </div>
+                <pre className="code-snippet-box">
+                  <code>{currentQ.codeSnippet}</code>
+                </pre>
+              </div>
             )}
           </div>
 
@@ -203,7 +250,7 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
               <ArrowLeft size={16} /> Câu trước
             </button>
             <div className="answered-stats">
-              Đã trả lời: <strong>{answeredCount}</strong> / {questions.length} câu
+              Đã trả lời: <strong>{answeredCount}</strong> / {questions.length} câu ({progressPercent}%)
             </div>
             {currentIndex < questions.length - 1 ? (
               <button
@@ -224,7 +271,7 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
         </div>
 
         {/* Question Matrix Navigator */}
-        <div className="question-matrix-sidebar">
+        <div className="question-matrix-sidebar spatial-card">
           <h3 className="matrix-title">Ma trận 60 câu hỏi</h3>
           <p className="matrix-sub">Nhấp vào ô số để chuyển nhanh tới câu hỏi</p>
 
@@ -237,6 +284,7 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
                   key={q.id}
                   className={`matrix-node ${isCurrent ? 'current' : ''} ${isAnswered ? 'answered' : ''}`}
                   onClick={() => setCurrentIndex(idx)}
+                  title={`Câu ${idx + 1}: ${isAnswered ? 'Đã làm' : 'Chưa làm'}`}
                 >
                   {idx + 1}
                 </button>
@@ -245,9 +293,15 @@ export const AssessmentView: React.FC<AssessmentViewProps> = ({
           </div>
 
           <div className="matrix-legend">
-            <span className="legend-item"><span className="legend-dot answered"></span> Đã trả lời</span>
-            <span className="legend-item"><span className="legend-dot current"></span> Đang xem</span>
-            <span className="legend-item"><span className="legend-dot"></span> Chưa làm</span>
+            <span className="legend-item">
+              <span className="legend-dot answered"></span> Đã trả lời
+            </span>
+            <span className="legend-item">
+              <span className="legend-dot current"></span> Đang xem
+            </span>
+            <span className="legend-item">
+              <span className="legend-dot"></span> Chưa làm
+            </span>
           </div>
 
           <button

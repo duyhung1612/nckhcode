@@ -75,7 +75,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
   return (
     <div className="admin-view-container">
       {/* Header */}
-      <div className="admin-header-card">
+      <div className="admin-header-card spatial-card">
         <div>
           <div className="badge-pill admin-badge">PHÂN TÍCH ĐỘ NHẠY HỌC THUẬT (MỤC 7.2)</div>
           <h2>Kiểm tra Độ nhạy Tham số & Điều chỉnh Trọng số</h2>
@@ -96,7 +96,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
       )}
 
       {/* Threshold Selection Cards */}
-      <div className="card-panel threshold-control-panel">
+      <div className="card-panel threshold-control-panel spatial-card">
         <div className="panel-header">
           <Sliders size={18} color="var(--accent)" />
           <h3>1. Thiết lập Ngưỡng đạt yêu cầu R(s) cho vị trí Thực tập sinh</h3>
@@ -111,7 +111,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
             return (
               <div
                 key={val}
-                className={`threshold-card ${isSelected ? 'active' : ''}`}
+                className={`threshold-card tilt-card ${isSelected ? 'active' : ''}`}
                 onClick={() => handleSaveThreshold(val)}
               >
                 <div className="thresh-val">{val}%</div>
@@ -138,7 +138,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
 
       {/* Sensitivity Results Table on Current Student */}
       {scores.length > 0 && (
-        <div className="card-panel sensitivity-panel">
+        <div className="card-panel sensitivity-panel spatial-card">
           <div className="panel-header">
             <Info size={18} color="var(--color-warning-text)" />
             <h3>2. Kết quả Báo cáo Độ nhạy trên Hồ sơ: {student?.name}</h3>
@@ -171,7 +171,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
       )}
 
       {/* Weight Adjustment Sliders */}
-      <div className="card-panel weights-panel">
+      <div className="card-panel weights-panel spatial-card">
         <div className="panel-header">
           <Sliders size={18} color="var(--accent)" />
           <h3>3. Trọng số 6 Nhóm Kỹ năng w(s) (Cho phép tinh chỉnh trong khoảng ±5%)</h3>
@@ -181,7 +181,7 @@ export const ParameterSettingsView: React.FC<ParameterSettingsViewProps> = ({
           {skillGroups.map(group => {
             const currentPct = Math.round(group.initialWeight * 100);
             return (
-              <div key={group.id} className="weight-slider-card">
+              <div key={group.id} className="weight-slider-card spatial-card">
                 <div className="weight-meta">
                   <strong>{group.code} - {group.name}</strong>
                   <span className="weight-number-tag">{currentPct}%</span>

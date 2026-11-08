@@ -40,7 +40,7 @@ export const ResearchDashboardView: React.FC = () => {
   return (
     <div className="admin-view-container">
       {/* Top Banner */}
-      <div className="admin-header-card">
+      <div className="admin-header-card spatial-card">
         <div>
           <div className="badge-pill admin-badge">BÁO CÁO THỰC NGHIỆM ĐỀ TÀI NCKH FBU</div>
           <h2>Bảng Thống kê & Kiểm chứng 3 Câu hỏi Nghiên cứu (Bảng 7)</h2>
@@ -62,7 +62,7 @@ export const ResearchDashboardView: React.FC = () => {
 
       {/* Overview Stat Counters */}
       <div className="metrics-summary-grid">
-        <div className="metric-card">
+        <div className="metric-card spatial-card tilt-card">
           <div className="metric-icon blue"><Users size={20} /></div>
           <div className="metric-info">
             <span className="metric-title">Tổng sinh viên tham gia</span>
@@ -71,7 +71,7 @@ export const ResearchDashboardView: React.FC = () => {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="metric-card spatial-card tilt-card">
           <div className="metric-icon green"><ShieldCheck size={20} /></div>
           <div className="metric-info">
             <span className="metric-title">Tuân thủ Tiên quyết (CH3)</span>
@@ -80,7 +80,7 @@ export const ResearchDashboardView: React.FC = () => {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="metric-card spatial-card tilt-card">
           <div className="metric-icon amber"><Award size={20} /></div>
           <div className="metric-info">
             <span className="metric-title">Thống nhất Chuyên gia (CH2)</span>
@@ -89,7 +89,7 @@ export const ResearchDashboardView: React.FC = () => {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="metric-card spatial-card tilt-card">
           <div className="metric-icon sky"><TrendingUp size={20} /></div>
           <div className="metric-info">
             <span className="metric-title">Điểm Pre-test trung bình</span>
@@ -105,7 +105,7 @@ export const ResearchDashboardView: React.FC = () => {
 
         <div className="qa-cards-grid">
           {/* CH1 Card */}
-          <div className="card-panel qa-card">
+          <div className="card-panel qa-card spatial-card">
             <div className="qa-card-header">
               <span className="qa-badge">CÂU HỎI 1 (CH1)</span>
               <h4>Khung kỹ năng & Mức yêu cầu thực tập sinh Frontend</h4>
@@ -130,7 +130,7 @@ export const ResearchDashboardView: React.FC = () => {
           </div>
 
           {/* CH2 Card */}
-          <div className="card-panel qa-card">
+          <div className="card-panel qa-card spatial-card">
             <div className="qa-card-header">
               <span className="qa-badge">CÂU HỎI 2 (CH2)</span>
               <h4>Độ chuẩn xác của Công cụ Chẩn đoán Điểm yếu</h4>
@@ -155,7 +155,7 @@ export const ResearchDashboardView: React.FC = () => {
           </div>
 
           {/* CH3 Card */}
-          <div className="card-panel qa-card">
+          <div className="card-panel qa-card spatial-card">
             <div className="qa-card-header">
               <span className="qa-badge">CÂU HỎI 3 (CH3)</span>
               <h4>Mức phù hợp của Lộ trình & Quan hệ Tiên quyết</h4>
@@ -182,7 +182,7 @@ export const ResearchDashboardView: React.FC = () => {
       </div>
 
       {/* Cronbach's Alpha Reliability Table */}
-      <div className="card-panel cronbach-panel">
+      <div className="card-panel cronbach-panel spatial-card">
         <div className="panel-header">
           <Layers size={18} color="var(--accent)" />
           <h3>Độ tin cậy thang đo (Hệ số Cronbach's Alpha cho 6 nhóm kỹ năng)</h3>

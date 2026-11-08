@@ -2,7 +2,7 @@
 // VIEW: INTERACTIVE ROADMAP VIEW (LỘ TRÌNH HỌC BỔ SUNG CÁ NHÂN HÓA NÂNG CẤP)
 // Tích hợp: 1. Đồ thị Tiên quyết DAG | 2. Lịch học 7-10 Ngày | 3. Thử thách Code
 // ============================================================================
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StudentProfile } from '../../models/types';
 import { RoadmapEngineController } from '../../controllers/RoadmapEngineController';
 import { 
@@ -19,8 +19,11 @@ import {
   Calendar,
   Code2,
   Play,
-  Award
+  Award,
+  Terminal,
+  Zap
 } from 'lucide-react';
+import { animatePageEntrance } from '../../utils/motion';
 
 interface InteractiveRoadmapViewProps {
   student: StudentProfile;
@@ -31,10 +34,11 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
   student,
   onStartPostTest
 }) => {
-  const report = student.preTestReport;
+  const report = student?.preTestReport;
   const [viewMode, setViewMode] = useState<'timeline' | 'schedule' | 'challenges'>('timeline');
   const [completedSteps, setCompletedSteps] = useState<Record<number, boolean>>({});
   const [completedDays, setCompletedDays] = useState<Record<number, boolean>>({});
+  const contentAreaRef = useRef<HTMLDivElement | null>(null);
   
   // State cho thử thách code mini-sandbox
   const [activeChallengeIdx, setActiveChallengeIdx] = useState<number>(0);
@@ -43,10 +47,27 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
   );
   const [challengeResult, setChallengeResult] = useState<string | null>(null);
 
+  // Reset trạng thái tiến độ khi đổi hồ sơ sinh viên
+  useEffect(() => {
+    setCompletedSteps({});
+    setCompletedDays({});
+    setActiveChallengeIdx(0);
+    setChallengeResult(null);
+  }, [student?.id]);
+
+  // Trigger entrance when switching view modes
+  useEffect(() => {
+    if (contentAreaRef.current) {
+      animatePageEntrance(contentAreaRef.current);
+    }
+  }, [viewMode]);
+
   if (!report || !report.roadmap || report.roadmap.length === 0) {
     return (
-      <div className="empty-state-card">
-        <Sparkles size={48} color="var(--color-success)" />
+      <div className="empty-state-card spatial-card">
+        <div className="empty-icon-glow">
+          <Sparkles size={48} color="var(--color-success)" />
+        </div>
         <h2>Chúc mừng! Bạn đã đạt chuẩn đầu vào</h2>
         <p>Không phát hiện lỗ hổng kỹ năng nào dưới ngưỡng 70%. Bạn đã sẵn sàng ứng tuyển vị trí Thực tập sinh Frontend.</p>
       </div>
@@ -114,10 +135,12 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
   return (
     <div className="roadmap-view-container">
       {/* Top Header Card */}
-      <div className="roadmap-header-card">
+      <div className="roadmap-header-card spatial-card">
         <div className="roadmap-title-row">
           <div>
-            <div className="badge-pill roadmap-badge">LỘ TRÌNH ĐỀ XUẤT CÁ NHÂN HÓA</div>
+            <div className="badge-pill roadmap-badge">
+              <Sparkles size={12} /> LỘ TRÌNH ĐỀ XUẤT CÁ NHÂN HÓA
+            </div>
             <h2>Kế hoạch Học Bổ sung: {student.name}</h2>
             <p className="roadmap-desc">
               Được tối ưu hóa theo Đồ thị Tiên quyết (DAG) và mức độ thiếu hụt thực tế. Tổng thời lượng ước tính: 
@@ -126,7 +149,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
           </div>
 
           {/* Academic Verification Badge */}
-          <div className="academic-badge-card">
+          <div className="academic-badge-card tilt-card">
             <div className="badge-status">
               <ShieldCheck size={20} color="var(--color-success)" />
               <span>Kiểm định Sư phạm: <strong>HỢP LỆ</strong></span>
@@ -136,7 +159,7 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
         </div>
 
         {/* View Mode Switcher */}
-        <div className="roadmap-mode-tabs" style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
+        <div className="roadmap-mode-tabs" style={{ display: 'flex', gap: '10px', marginTop: '18px', flexWrap: 'wrap' }}>
           <button
             className={`pill-btn ${viewMode === 'timeline' ? 'active' : ''}`}
             onClick={() => setViewMode('timeline')}
@@ -162,270 +185,298 @@ export const InteractiveRoadmapView: React.FC<InteractiveRoadmapViewProps> = ({
         </div>
 
         {/* Progress Tracker */}
-        <div className="roadmap-progress-bar-box" style={{ marginTop: '16px' }}>
+        <div className="roadmap-progress-bar-box" style={{ marginTop: '18px' }}>
           <div className="progress-header">
             <span>Tiến độ hoàn thành lộ trình bổ sung:</span>
             <strong>{doneCount}/{totalSteps} chặng ({progressPercent}%)</strong>
           </div>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: `${progressPercent}%`, background: '#10b981' }}></div>
+            <div 
+              className="progress-fill" 
+              style={{ 
+                width: `${progressPercent}%`, 
+                background: 'linear-gradient(90deg, #0284c7 0%, #10b981 100%)',
+                boxShadow: '0 0 12px rgba(16, 185, 129, 0.4)' 
+              }}
+            ></div>
           </div>
         </div>
       </div>
 
-      {/* VIEW 1: DAG TIMELINE */}
-      {viewMode === 'timeline' && (
-        <div className="timeline-container">
-          {report.roadmap.map((step, idx) => {
-            const isDone = !!completedSteps[step.stepNumber];
-            return (
-              <div key={step.stepNumber} className={`timeline-card ${isDone ? 'step-completed' : ''}`}>
-                <div className="timeline-spine">
-                  <div className={`step-badge-circle ${isDone ? 'done' : ''}`}>
-                    {isDone ? <CheckCircle2 size={20} /> : step.stepNumber}
-                  </div>
-                  {idx < report.roadmap.length - 1 && <div className="timeline-line"></div>}
-                </div>
-
-                <div className="step-card-content">
-                  <div className="step-header">
-                    <div>
-                      <div className="step-meta-row">
-                        <span className="tier-tag">
-                          <Layers size={13} /> Tầng tiên quyết {step.prerequisiteTier}
-                        </span>
-                        <span className="gap-tag">
-                          Thiếu hụt: -{step.gap} điểm
-                        </span>
-                        <span className="priority-tag">
-                          Độ ưu tiên: {step.weightedGap}
-                        </span>
-                      </div>
-                      <h3 className="step-title">
-                        Bước {step.stepNumber}: Củng cố {step.skillName}
-                      </h3>
+      <div ref={contentAreaRef}>
+        {/* VIEW 1: DAG TIMELINE */}
+        {viewMode === 'timeline' && (
+          <div className="timeline-container">
+            {report.roadmap.map((step, idx) => {
+              const isDone = !!completedSteps[step.stepNumber];
+              return (
+                <div key={step.stepNumber} className={`timeline-card spatial-card ${isDone ? 'step-completed' : ''}`}>
+                  <div className="timeline-spine">
+                    <div className={`step-badge-circle ${isDone ? 'done' : ''}`}>
+                      {isDone ? <CheckCircle2 size={20} /> : step.stepNumber}
                     </div>
-
-                    <div className="step-time-box">
-                      <Clock size={16} color="var(--color-warning-text)" />
-                      <span>Ước tính: <strong>~{step.estimatedHours} giờ</strong></span>
-                    </div>
+                    {idx < report.roadmap.length - 1 && <div className="timeline-line"></div>}
                   </div>
 
-                  <div className="step-reason-box">
-                    <strong>Căn cứ sắp xếp:</strong> {step.reason}
-                  </div>
-
-                  <div className="step-section">
-                    <h4 className="section-title">
-                      <BookOpen size={15} /> 1. Học liệu & Tài nguyên chọn lọc:
-                    </h4>
-                    <div className="resources-grid">
-                      {step.learningMaterials.map(res => (
-                        <a
-                          key={res.id}
-                          href={res.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="resource-item-link"
-                        >
-                          <div className="res-icon-type">{res.type.toUpperCase()}</div>
-                          <div className="res-details">
-                            <strong className="res-title">{res.title}</strong>
-                            <p className="res-summary">{res.summary}</p>
-                            <span className="res-duration">Thời lượng: ~{res.durationMinutes} phút</span>
-                          </div>
-                          <ExternalLink size={16} className="ext-icon" />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="step-section">
-                    <h4 className="section-title">
-                      <Flame size={15} /> 2. Bài tập thực hành củng cố:
-                    </h4>
-                    <div className="exercises-list">
-                      {step.practiceExercises.map((ex, exIdx) => (
-                        <div key={exIdx} className="exercise-item-box">
-                          <strong className="ex-title">⚡ {ex.title}</strong>
-                          <p className="ex-desc">{ex.description}</p>
-                          <div className="ex-reqs">
-                            <span className="req-title">Tiêu chí hoàn thành:</span>
-                            <ul>
-                              {ex.requirements.map((req, rIdx) => (
-                                <li key={rIdx}>{req}</li>
-                              ))}
-                            </ul>
-                          </div>
+                  <div className="step-card-content">
+                    <div className="step-header">
+                      <div>
+                        <div className="step-meta-row">
+                          <span className="tier-tag">
+                            <Layers size={13} /> Tầng tiên quyết {step.prerequisiteTier}
+                          </span>
+                          <span className="gap-tag">
+                            Thiếu hụt: -{step.gap} điểm
+                          </span>
+                          <span className="priority-tag">
+                            Độ ưu tiên: {step.weightedGap}
+                          </span>
                         </div>
-                      ))}
+                        <h3 className="step-title">
+                          Bước {step.stepNumber}: Củng cố {step.skillName}
+                        </h3>
+                      </div>
+
+                      <div className="step-time-box">
+                        <Clock size={16} color="var(--color-warning-text)" />
+                        <span>Ước tính: <strong>~{step.estimatedHours} giờ</strong></span>
+                      </div>
+                    </div>
+
+                    <div className="step-reason-box">
+                      <strong>Căn cứ sắp xếp:</strong> {step.reason}
+                    </div>
+
+                    <div className="step-section">
+                      <h4 className="section-title">
+                        <BookOpen size={15} /> 1. Học liệu & Tài nguyên chọn lọc:
+                      </h4>
+                      <div className="resources-grid">
+                        {step.learningMaterials.map(res => (
+                          <a
+                            key={res.id}
+                            href={res.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="resource-item-link"
+                          >
+                            <div className="res-icon-type">{res.type.toUpperCase()}</div>
+                            <div className="res-details">
+                              <strong className="res-title">{res.title}</strong>
+                              <p className="res-summary">{res.summary}</p>
+                              <span className="res-duration">Thời lượng: ~{res.durationMinutes} phút</span>
+                            </div>
+                            <ExternalLink size={16} className="ext-icon" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="step-section">
+                      <h4 className="section-title">
+                        <Flame size={15} /> 2. Bài tập thực hành củng cố:
+                      </h4>
+                      <div className="exercises-list">
+                        {step.practiceExercises.map((ex, exIdx) => (
+                          <div key={exIdx} className="exercise-item-box">
+                            <strong className="ex-title">⚡ {ex.title}</strong>
+                            <p className="ex-desc">{ex.description}</p>
+                            <div className="ex-reqs">
+                              <span className="req-title">Tiêu chí hoàn thành:</span>
+                              <ul>
+                                {ex.requirements.map((req, rIdx) => (
+                                  <li key={rIdx}>{req}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="step-footer-actions">
+                      <button
+                        className={`step-complete-btn ${isDone ? 'is-done' : ''}`}
+                        onClick={() => toggleComplete(step.stepNumber)}
+                      >
+                        {isDone ? (
+                          <>
+                            <CheckCircle2 size={16} /> Đã hoàn thành chặng này
+                          </>
+                        ) : (
+                          <>
+                            <Circle size={16} /> Đánh dấu đã học xong chặng này
+                          </>
+                        )}
+                      </button>
                     </div>
                   </div>
-
-                  <div className="step-footer-actions">
-                    <button
-                      className={`step-complete-btn ${isDone ? 'is-done' : ''}`}
-                      onClick={() => toggleComplete(step.stepNumber)}
-                    >
-                      {isDone ? (
-                        <>
-                          <CheckCircle2 size={16} /> Đã hoàn thành chặng này
-                        </>
-                      ) : (
-                        <>
-                          <Circle size={16} /> Đánh dấu đã học xong chặng này
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        )}
 
-      {/* VIEW 2: 7-DAY SCHEDULE PLANNER */}
-      {viewMode === 'schedule' && (
-        <div className="daily-schedule-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
-          {dailySchedule.map(dayItem => {
-            const isDayDone = !!completedDays[dayItem.day];
-            return (
-              <div
-                key={dayItem.day}
-                className={`card-panel day-schedule-card ${isDayDone ? 'day-done' : ''}`}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  borderLeft: isDayDone ? '4px solid #10b981' : '4px solid #38bdf8'
-                }}
-              >
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <span className="badge-pill group-badge" style={{ fontSize: '10px' }}>
-                      {dayItem.skillGroupName}
-                    </span>
-                    <span style={{ fontSize: '12px', color: '#fbbf24', fontWeight: '700' }}>
-                      ⏱️ {dayItem.targetHours}h / ngày
-                    </span>
-                  </div>
-                  <h4 style={{ fontSize: '15px', color: 'var(--text-main)', marginBottom: '8px' }}>
-                    {dayItem.title}
-                  </h4>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.5' }}>
-                    {dayItem.taskDescription}
-                  </p>
-                  
-                  <div style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)', padding: '10px', borderRadius: '6px', fontSize: '12px' }}>
-                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>Trọng tâm bài học:</strong>
-                    <ul style={{ paddingLeft: '16px', color: 'var(--text-muted)' }}>
-                      {dayItem.focusTopics.map((top, tIdx) => (
-                        <li key={tIdx}>{top}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--border-subtle)' }}>
-                  <button
-                    className={`step-complete-btn ${isDayDone ? 'is-done' : ''}`}
-                    style={{ width: '100%', justifyContent: 'center' }}
-                    onClick={() => toggleDayComplete(dayItem.day)}
-                  >
-                    {isDayDone ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-                    {isDayDone ? 'Đã hoàn thành mục tiêu ngày' : 'Đánh dấu hoàn thành ngày'}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* VIEW 3: INTERACTIVE CODE CHALLENGES */}
-      {viewMode === 'challenges' && (
-        <div className="challenges-workspace card-panel" style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '18px' }}>
-          <div className="challenges-sidebar">
-            <h4 style={{ color: 'var(--accent)', marginBottom: '12px', fontSize: '14px', textTransform: 'uppercase' }}>
-              Danh sách Bài tập Thực chiến:
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {codingChallenges.map((ch, idx) => (
-                <button
-                  key={idx}
-                  className={`matrix-node ${activeChallengeIdx === idx ? 'current' : ''}`}
+        {/* VIEW 2: 7-DAY SCHEDULE PLANNER */}
+        {viewMode === 'schedule' && (
+          <div className="daily-schedule-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
+            {dailySchedule.map(dayItem => {
+              const isDayDone = !!completedDays[dayItem.day];
+              return (
+                <div
+                  key={dayItem.day}
+                  className={`card-panel day-schedule-card spatial-card ${isDayDone ? 'day-done' : ''}`}
                   style={{
-                    height: 'auto',
-                    padding: '12px',
-                    textAlign: 'left',
-                    justifyContent: 'flex-start',
-                    fontSize: '13px'
-                  }}
-                  onClick={() => {
-                    setActiveChallengeIdx(idx);
-                    setUserCode(ch.initialCode);
-                    setChallengeResult(null);
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    borderLeft: isDayDone ? '4px solid #10b981' : '4px solid #38bdf8'
                   }}
                 >
                   <div>
-                    <strong>{ch.title}</strong>
-                    <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{ch.skill}</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <span className="badge-pill group-badge" style={{ fontSize: '10px' }}>
+                        {dayItem.skillGroupName}
+                      </span>
+                      <span style={{ fontSize: '12px', color: '#fbbf24', fontWeight: '700' }}>
+                        ⏱️ {dayItem.targetHours}h / ngày
+                      </span>
+                    </div>
+                    <h4 style={{ fontSize: '15px', color: 'var(--text-main)', marginBottom: '8px', fontWeight: '700' }}>
+                      {dayItem.title}
+                    </h4>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.5' }}>
+                      {dayItem.taskDescription}
+                    </p>
+                    
+                    <div style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)', padding: '12px', borderRadius: '8px', fontSize: '12px' }}>
+                      <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>Trọng tâm bài học:</strong>
+                      <ul style={{ paddingLeft: '16px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                        {dayItem.focusTopics.map((top, tIdx) => (
+                          <li key={tIdx}>{top}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </button>
-              ))}
+
+                  <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--border-subtle)' }}>
+                    <button
+                      className={`step-complete-btn ${isDayDone ? 'is-done' : ''}`}
+                      style={{ width: '100%', justifyContent: 'center' }}
+                      onClick={() => toggleDayComplete(dayItem.day)}
+                    >
+                      {isDayDone ? <CheckCircle2 size={16} /> : <Circle size={16} />}
+                      {isDayDone ? 'Đã hoàn thành mục tiêu ngày' : 'Đánh dấu hoàn thành ngày'}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* VIEW 3: INTERACTIVE CODE CHALLENGES */}
+        {viewMode === 'challenges' && (
+          <div className="challenges-workspace card-panel spatial-card" style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 320px) 1fr', gap: '20px' }}>
+            <div className="challenges-sidebar">
+              <h4 style={{ color: 'var(--accent)', marginBottom: '14px', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
+                Danh sách Bài tập Thực chiến:
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {codingChallenges.map((ch, idx) => (
+                  <button
+                    key={idx}
+                    className={`matrix-node ${activeChallengeIdx === idx ? 'current' : ''}`}
+                    style={{
+                      height: 'auto',
+                      padding: '12px 14px',
+                      textAlign: 'left',
+                      justifyContent: 'flex-start',
+                      fontSize: '13px',
+                      borderRadius: '8px'
+                    }}
+                    onClick={() => {
+                      setActiveChallengeIdx(idx);
+                      setUserCode(ch.initialCode);
+                      setChallengeResult(null);
+                    }}
+                  >
+                    <div>
+                      <strong>{ch.title}</strong>
+                      <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginTop: '3px' }}>{ch.skill}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="challenge-code-area">
+              <h3 style={{ color: 'var(--text-main)', marginBottom: '8px', fontSize: '17px', fontWeight: '700' }}>
+                {codingChallenges[activeChallengeIdx].title}
+              </h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '13.5px', marginBottom: '16px', lineHeight: '1.5' }}>
+                {codingChallenges[activeChallengeIdx].description}
+              </p>
+
+              <div className="terminal-code-wrapper" style={{ marginBottom: '16px' }}>
+                <div className="terminal-topbar">
+                  <div className="terminal-dots">
+                    <span className="dot dot-red"></span>
+                    <span className="dot dot-yellow"></span>
+                    <span className="dot dot-green"></span>
+                  </div>
+                  <span className="terminal-title">
+                    <Terminal size={12} /> challenge-sandbox.js
+                  </span>
+                </div>
+                <textarea
+                  rows={8}
+                  value={userCode}
+                  onChange={e => setUserCode(e.target.value)}
+                  style={{
+                    width: '100%',
+                    background: 'var(--code-box-bg)',
+                    border: 'none',
+                    padding: '14px',
+                    color: '#38bdf8',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '13px',
+                    outline: 'none',
+                    resize: 'vertical',
+                    lineHeight: '1.6'
+                  }}
+                />
+              </div>
+
+              <button className="primary-action-btn" onClick={handleRunChallenge}>
+                <Play size={16} /> Kiểm tra đoạn mã của bạn
+              </button>
+
+              {challengeResult && (
+                <div
+                  style={{
+                    marginTop: '16px',
+                    padding: '14px 16px',
+                    borderRadius: '8px',
+                    background: challengeResult.startsWith('✓') ? 'rgba(16, 185, 129, 0.15)' : 'rgba(244, 63, 94, 0.15)',
+                    border: challengeResult.startsWith('✓') ? '1px solid #10b981' : '1px solid #f43f5e',
+                    color: challengeResult.startsWith('✓') ? '#34d399' : '#f87171',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    lineHeight: '1.5',
+                    animation: 'fadeIn 0.3s ease'
+                  }}
+                >
+                  {challengeResult}
+                </div>
+              )}
             </div>
           </div>
-
-          <div className="challenge-code-area">
-            <h3 style={{ color: 'var(--text-main)', marginBottom: '8px' }}>{codingChallenges[activeChallengeIdx].title}</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '13px', marginBottom: '16px' }}>{codingChallenges[activeChallengeIdx].description}</p>
-
-            <textarea
-              rows={8}
-              value={userCode}
-              onChange={e => setUserCode(e.target.value)}
-              style={{
-                width: '100%',
-                background: 'var(--code-box-bg)',
-                border: '1px solid var(--code-box-border)',
-                borderRadius: '8px',
-                padding: '14px',
-                color: 'var(--accent)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '13px',
-                outline: 'none',
-                marginBottom: '14px'
-              }}
-            />
-
-            <button className="primary-action-btn" onClick={handleRunChallenge}>
-              <Play size={16} /> Kiểm tra đoạn mã của bạn
-            </button>
-
-            {challengeResult && (
-              <div
-                style={{
-                  marginTop: '16px',
-                  padding: '14px',
-                  borderRadius: '8px',
-                  background: challengeResult.startsWith('✓') ? 'rgba(16, 185, 129, 0.15)' : 'rgba(244, 63, 94, 0.15)',
-                  border: challengeResult.startsWith('✓') ? '1px solid #10b981' : '1px solid #f43f5e',
-                  color: challengeResult.startsWith('✓') ? '#34d399' : '#f87171',
-                  fontSize: '13px',
-                  fontWeight: '600'
-                }}
-              >
-                {challengeResult}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Post-Test Callout */}
-      <div className="post-test-banner">
+      <div className="post-test-banner spatial-card">
         <div>
           <h3>Sẵn sàng kiểm chứng mức tăng năng lực sau học bổ sung?</h3>
           <p>
