@@ -1,0 +1,673 @@
+/* Lucian UX/UI Prompt #027 & Navbar Stepper Styles · MIT License (c) 2026 Seokwoooo */
+/* ============================================================================
+   NAVBAR ENHANCEMENTS: EXPANDING SEARCH, STEPPER & RESEARCH MEGA-MENU
+   ============================================================================ */
+
+/* --- Token Mapping for LucianLabs #027 --- */
+:root {
+  --ux-surface: var(--bg-card);
+  --ux-surface-2: var(--bg-card-subtle);
+  --ux-line: var(--border-subtle);
+  --ux-ink: var(--text-main);
+  --ux-ink-2: var(--text-muted);
+  --ux-ink-3: var(--text-subtle);
+  --ux-accent: var(--accent);
+  --ux-shadow-strong: rgba(0, 0, 0, 0.45);
+  --ux-grad: var(--accent-gradient);
+  --ux-ease: cubic-bezier(.2, .8, .2, 1);
+  --ux-spring: cubic-bezier(.34, 1.45, .64, 1);
+}
+
+[data-theme="light"] {
+  --ux-surface: #FFFFFF;
+  --ux-surface-2: #F1F5F9;
+  --ux-line: #E2E8F0;
+  --ux-ink: #0F172A;
+  --ux-ink-2: #475569;
+  --ux-ink-3: #64748B;
+  --ux-accent: #0284C7;
+  --ux-shadow-strong: rgba(0, 0, 0, 0.15);
+  --ux-grad: linear-gradient(135deg, #0284C7, #38BDF8);
+}
+
+/* --- Sticky Header & Scroll Hide/Show --- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.app-header.header-hidden:not(.is-search-open):not(.is-mega-open) {
+  transform: translateY(-100%);
+  box-shadow: none;
+}
+
+/* --- Brand Section Animation when Search Expands --- */
+.header-brand-section {
+  transition: opacity 0.35s var(--ux-ease), transform 0.45s var(--ux-ease);
+}
+
+.app-header.is-search-open .header-brand-section {
+  opacity: 0;
+  transform: translateX(-24px);
+  pointer-events: none;
+}
+
+/* Compact theme toggle button */
+.theme-toggle-btn.icon-only {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+/* ============================================================================
+   LUCIANLABS #027 EXPANDING SEARCH COMPONENT
+   ============================================================================ */
+.u027 {
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.u027-field {
+  position: relative;
+  height: 44px;
+  width: 44px;
+  border-radius: 14px;
+  background: var(--ux-surface-2);
+  border: 1px solid var(--ux-line);
+  overflow: hidden;
+  transition: width 0.6s var(--ux-spring), background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+  z-index: 20;
+}
+
+.u027.is-open .u027-field {
+  width: 332px;
+  max-width: calc(100vw - 48px);
+  background: var(--ux-surface);
+  border-color: var(--ux-accent);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25), 0 8px 24px var(--ux-shadow-strong);
+}
+
+.u027-go {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  padding: 0;
+  border-radius: 14px;
+  background: none;
+  color: var(--ux-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.2s;
+}
+
+.u027-go:hover {
+  color: var(--ux-accent);
+}
+
+.u027-go:focus-visible {
+  outline: 2px solid var(--ux-accent);
+  outline-offset: 2px;
+}
+
+.u027-go svg,
+.u027-x svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.u027-in {
+  position: absolute;
+  left: 44px;
+  right: 44px;
+  top: 0;
+  height: 44px;
+  border: 0;
+  outline: 0;
+  background: none;
+  padding: 0 4px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--ux-ink);
+  opacity: 0;
+  transition: opacity 0.3s var(--ux-ease) 0.15s;
+}
+
+.u027.is-open .u027-in {
+  opacity: 1;
+}
+
+.u027-in::placeholder {
+  color: var(--ux-ink-3);
+  font-size: 13px;
+}
+
+.u027-x {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  padding: 0;
+  border-radius: 10px;
+  background: var(--ux-surface-2);
+  color: var(--ux-ink-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.6) rotate(-90deg);
+  transition: opacity 0.25s, transform 0.5s var(--ux-spring), background-color 0.2s;
+  z-index: 2;
+}
+
+.u027.is-open .u027-x {
+  opacity: 1;
+  transform: none;
+}
+
+.u027-x:hover {
+  color: var(--ux-ink);
+  background: var(--border-subtle);
+}
+
+.u027-x:focus-visible {
+  outline: 2px solid var(--ux-accent);
+  outline-offset: 1px;
+}
+
+.u027-pop {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  padding: 14px 10px 10px;
+  border-radius: 18px;
+  background: var(--ux-surface);
+  border: 1px solid var(--ux-line);
+  box-shadow: 0 16px 40px var(--ux-shadow-strong);
+  transform-origin: 90% 0;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.96);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ux-ease), transform 0.45s var(--ux-spring), visibility 0s 0.45s;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.u027.is-open .u027-pop {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity 0.3s var(--ux-ease) 0.1s, transform 0.55s var(--ux-spring) 0.1s;
+}
+
+.u027-sec {
+  margin: 0 8px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ux-ink-3);
+}
+
+.u027-recent {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0 6px 12px;
+}
+
+.u027-recent button {
+  height: 28px;
+  padding: 0 11px;
+  border: 1px solid var(--ux-line);
+  border-radius: 999px;
+  background: var(--ux-surface-2);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ux-ink-2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s var(--ux-ease);
+}
+
+.u027-recent button:hover {
+  color: var(--ux-ink);
+  background: var(--ux-surface);
+  border-color: var(--ux-accent);
+}
+
+.u027-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.u027-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: background-color 0.2s var(--ux-ease), opacity 0.3s var(--ux-ease), transform 0.45s var(--ux-spring);
+}
+
+.u027.is-open .u027-opt {
+  opacity: 1;
+  transform: none;
+}
+
+.u027-opt[aria-selected="true"] {
+  background: var(--ux-surface-2);
+  outline: 1px solid var(--ux-line);
+}
+
+.u027-opt i {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.u027-opt span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.u027-opt b {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ux-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.u027-mark {
+  background: none;
+  color: var(--ux-accent);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.u027-opt small {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ux-ink-3);
+}
+
+.u027-empty {
+  padding: 16px 10px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ux-ink-3);
+}
+
+/* ============================================================================
+   ROW 2: STUDENT 6-STEP JOURNEY STEPPER
+   ============================================================================ */
+.navbar-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.student-stepper-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+  max-width: fit-content;
+}
+
+.student-stepper-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sliding active pill indicator */
+.stepper-sliding-pill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.28), rgba(56, 189, 248, 0.16));
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+  z-index: 1;
+}
+
+.student-step-btn {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.student-step-btn:hover {
+  color: var(--text-main);
+}
+
+.student-step-btn:active {
+  transform: scale(0.98);
+}
+
+.student-step-btn.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Step circular badge */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 800;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-subtle);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.student-step-btn.active .step-indicator {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.student-step-btn .step-indicator.done {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+}
+
+.student-step-btn.active .step-indicator.done {
+  background: #10B981;
+  border-color: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.step-label {
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   RESEARCH & FACULTY MEGA-MENU / DROPDOWN
+   ============================================================================ */
+.research-mega-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.research-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border-radius: 10px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  white-space: nowrap;
+}
+
+.research-menu-trigger:hover,
+.research-menu-trigger.active {
+  color: var(--text-main);
+  border-color: rgba(56, 189, 248, 0.4);
+  background: var(--bg-surface);
+}
+
+.research-menu-trigger.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.1));
+}
+
+.research-menu-trigger.is-open {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+.research-chevron-icon {
+  transition: transform 0.25s ease;
+  color: var(--text-subtle);
+}
+
+.research-chevron-icon.rotate-180 {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.research-mega-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 290px;
+  padding: 8px;
+  border-radius: 16px;
+  background: var(--ux-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 18px 45px var(--ux-shadow-strong);
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: researchDropdownFadeIn 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes researchDropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.research-dropdown-header {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+  padding: 6px 10px 4px;
+}
+
+.research-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.research-dropdown-item:hover {
+  background: var(--bg-card-subtle);
+  color: var(--text-main);
+  transform: translateX(2px);
+}
+
+.research-dropdown-item.active {
+  background: var(--bg-card-subtle);
+  color: var(--accent);
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.research-item-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.research-dropdown-item:hover .research-item-icon-box {
+  transform: scale(1.08);
+}
+
+.research-item-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.research-item-title {
+  font-size: 12.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.research-item-desc {
+  font-size: 11px;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================================
+   ACCESSIBILITY & REDUCED MOTION
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .app-header,
+  .header-brand-section,
+  .u027,
+  .u027 *,
+  .stepper-sliding-pill,
+  .student-step-btn,
+  .research-mega-dropdown {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+@media (max-width: 900px) {
+  .navbar-bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .student-stepper-container {
+    max-width: 100%;
+  }
+
+  .research-mega-container {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-title {
+    font-size: 14px;
+  }
+
+  .u027.is-open .u027-field {
+    width: calc(100vw - 36px);
+  }
+
+  .u027-pop {
+    width: calc(100vw - 32px);
+  }
+}
