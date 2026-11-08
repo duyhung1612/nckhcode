@@ -1,13 +1,13 @@
 /* Lucian UX/UI Prompts #027, #037, #039, #212, #219, #354 · MIT License (c) 2026 Seokwoooo */
 /* ============================================================================
-   NAVBAR COMPREHENSIVE STYLES (LAYOUT D: SEARCH IN THE CENTER)
-   - LucianLabs #212: Hide-on-scroll header, 58px top / 46px compact, 2px progress bar
-   - LucianLabs #219: Circular-reveal dark mode button with sun/moon spin
-   - LucianLabs #039: Sliding pill tabs stepper with keyboard navigation
-   - LucianLabs #027: Expanding top-bar search with live suggestions
-   - LucianLabs #354: Morphing mega-menu for Research & Faculty
-   - LucianLabs #037: Account switcher menu for student profiles
+   NAVBAR COMPREHENSIVE STYLES (LAYOUT D: SEARCH IN THE CENTER & FULL-WIDTH STEPPER)
+   - Brand: FBU Circular Logo 44x44, Full University Name, Project Title
+   - Row 1: Brand -> Search (flex-grow) -> Theme #219 -> Profile #037 -> Research #354
+   - Row 2: Full-Width 6-Step Stepper #039 (flex 1 each pill, centered, scroll on mobile)
+   - Profile #037: 32x32 rounded square (border-radius 10px, bold white initial)
+   - Research #354: 30x30 purple gradient tile (#748FFC -> #B197FC, border-radius 9px)
    - 100% Solid Opaque Panels (var(--ux-surface)), zero backdrop-blur bleed-through
+   - Hide-on-scroll #212, 58px top / 46px compact, 2px accent scroll progress bar
    ============================================================================ */
 
 /* --- Token Mapping for LucianLabs Elements --- */
@@ -81,7 +81,7 @@
 }
 
 /* ============================================================================
-   HÀNG 1: BRAND BÊN TRÁI · SEARCH Ở GIỮA · THEME & PROFILE BÊN PHẢI
+   HÀNG 1: BRAND BÊN TRÁI · SEARCH Ở GIỮA · THEME · HỒ SƠ · NGHIÊN CỨU
    ============================================================================ */
 .header-top-row {
   display: flex;
@@ -97,7 +97,7 @@
   height: 46px;
 }
 
-/* --- Brand Section (Logo + Eyebrow + Tiêu đề) --- */
+/* --- Brand Section: Logo FBU 44x44 tròn + Eyebrow + Tiêu đề 1 dòng --- */
 .header-brand-section {
   display: flex;
   align-items: center;
@@ -107,22 +107,15 @@
   transition: opacity 0.35s var(--ux-ease), transform 0.45s var(--ux-ease);
 }
 
-.brand-logo-badge {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--ux-grad);
-  display: grid;
-  place-items: center;
-  color: #FFFFFF;
-  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
+.brand-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
   flex-shrink: 0;
-}
-
-.brand-icon {
-  position: relative;
-  z-index: 2;
+  border: 1px solid var(--ux-line);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: #FFFFFF;
 }
 
 .brand-text {
@@ -181,7 +174,7 @@
   padding: 0 12px;
 }
 
-/* --- Cụm nút bên phải: ThemeToggle + ProfileDropdown --- */
+/* --- Cụm nút bên phải: ThemeToggle -> ProfileDropdown -> Nghiên cứu & Giảng viên --- */
 .header-right-actions {
   display: flex;
   align-items: center;
@@ -193,8 +186,8 @@
    LUCIANLABS #219 CIRCULAR-REVEAL DARK MODE & VIEW TRANSITIONS
    ============================================================================ */
 .u219-tg {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   background: var(--ux-surface-2);
   border: 1px solid var(--ux-line);
@@ -543,24 +536,24 @@
 }
 
 /* ============================================================================
-   HÀNG 2 (NAV ROW): STEPPER 6 BƯỚC BÊN TRÁI · NGHIÊN CỨU & GIẢNG VIÊN BÊN PHẢI
+   HÀNG 2 (NAV ROW): STEPPER 6 BƯỚC CHIẾM HẾT CHIỀU NGANG VÀ CĂN GIỮA
    ============================================================================ */
 .navbar-bottom-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
   width: 100%;
   padding-bottom: 8px;
 }
 
 /* ============================================================================
-   LUCIANLABS #039 SLIDING PILL TABS (STEPPER 6 BƯỚC SINH VIÊN)
+   LUCIANLABS #039 SLIDING PILL TABS (STEPPER 6 BƯỚC FULL-WIDTH)
    ============================================================================ */
 .u039-tabs {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 4px;
   border-radius: 999px;
   background: var(--ux-surface-2);
@@ -568,7 +561,6 @@
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  max-width: fit-content;
 }
 
 .u039-tabs::-webkit-scrollbar {
@@ -589,14 +581,17 @@
   transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), width 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), opacity 0.25s ease;
 }
 
-/* Tab button theo #039 */
+/* 6 Pill chia đều chiều rộng (flex 1), chữ căn giữa trong pill */
 .u039-tab {
+  flex: 1;
   position: relative;
   z-index: 2;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
-  padding: 6px 13px;
+  padding: 6px 12px;
+  min-width: 135px; /* Không bóp chữ trên màn hẹp, cho cuộn ngang */
   border: 0;
   border-radius: 999px;
   background: none;
@@ -607,6 +602,7 @@
   white-space: nowrap;
   font-family: inherit;
   user-select: none;
+  text-align: center;
   transition: color 0.35s ease, transform 0.15s ease;
 }
 
@@ -664,7 +660,7 @@
 }
 
 /* ============================================================================
-   LUCIANLABS #354 MORPHING MEGA-MENU (NGHIÊN CỨU & GIẢNG VIÊN)
+   LUCIANLABS #354 MORPHING MEGA-MENU (NGHIÊN CỨU & GIẢNG VIÊN Ở HÀNG 1)
    ============================================================================ */
 .research-mega-container {
   position: relative;
@@ -674,8 +670,9 @@
 .research-menu-trigger {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 13px;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px 0 5px;
   border-radius: 999px;
   background: var(--ux-surface-2);
   border: 1px solid var(--ux-line);
@@ -698,12 +695,22 @@
 .research-menu-trigger.active {
   color: var(--ux-accent);
   border-color: var(--ux-accent);
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(56, 189, 248, 0.1));
 }
 
 .research-menu-trigger.is-open {
   border-color: var(--ux-accent);
   box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+/* Ô vuông gradient tím 30x30 theo mẫu LucianLabs #354 */
+.u354-trigger-tile {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #748FFC, #B197FC);
+  box-shadow: 0 2px 8px rgba(116, 143, 252, 0.35);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .research-chevron-icon {
@@ -863,8 +870,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 38px;
-  padding: 0 10px 0 5px;
+  height: 40px;
+  padding: 0 10px 0 4px;
   border-radius: 999px;
   background: var(--ux-surface-2);
   border: 1px solid var(--ux-line);
@@ -888,14 +895,15 @@
   outline-offset: 2px;
 }
 
+/* Ô vuông bo tròn 32x32 (border-radius: 10px) theo LucianLabs #037 */
 .u037-ws {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   flex: none;
-  border-radius: 50%;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
   color: #FFFFFF;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -1134,13 +1142,23 @@
 /* ============================================================================
    RESPONSIVE DESIGN CHO CÁC MÀN HÌNH KHÁC NHAU
    ============================================================================ */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .university-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
   .university-badge {
     display: none;
   }
   
   .u027.is-default-expanded {
-    max-width: 240px;
+    max-width: 200px;
+  }
+
+  .research-menu-trigger span:not(.u354-trigger-tile) {
+    font-size: 11.5px;
   }
 }
 
@@ -1194,18 +1212,17 @@
     font-weight: 700;
   }
 
-  /* Hàng 2: Cho phép stepper cuộn ngang mượt mà */
+  /* Hàng 2: Stepper cuộn ngang mượt mà */
   .navbar-bottom-row {
-    flex-wrap: nowrap;
-    gap: 8px;
-    overflow-x: auto;
+    justify-content: flex-start;
   }
 
   .u039-tabs {
-    flex-shrink: 0;
+    width: 100%;
   }
 
-  .research-mega-container {
-    flex-shrink: 0;
+  .u039-tab {
+    flex: 0 0 auto;
+    min-width: 140px;
   }
 }
